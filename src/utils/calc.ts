@@ -56,7 +56,7 @@ export const calculateCharacterStats = (
   level: number,
   baseStats: { str: number; dex: number; vit: number; enr: number },
   equipment: Record<string, Item>,
-  charms: Item[]
+  charms: Record<string, Item>
 ): CharacterStats => {
   let life = 50 + (level - 1) * 2 + baseStats.vit * 3;
   let mana = 25 + (level - 1) * 1.5 + baseStats.enr * 1.5;
@@ -69,6 +69,10 @@ export const calculateCharacterStats = (
 
   let res = { fire: 0, cold: 0, lightning: 0, poison: 0 };
   let defense = 0;
+
+  Object.values(equipment).forEach(item => {
+      if (item.defense) defense += item.defense;
+  });
 
   const processStat = (stat: Stat) => {
     switch (stat.id) {
@@ -99,7 +103,7 @@ export const calculateCharacterStats = (
     if (item.corruptionStat) processStat(item.corruptionStat);
   });
 
-  charms.forEach(charm => {
+  Object.values(charms).forEach(charm => {
     charm.stats.forEach(processStat);
   });
 

@@ -3,6 +3,7 @@ import { useCharacterStore } from '../store/useCharacterStore';
 import { allPossibleAffixes } from '../data/affixes';
 import { baseItems } from '../data/items';
 import type { Item, Stat, ItemRarity } from '../types';
+import { enrichItemWithBaseStats } from '../utils/itemUtils';
 
 export const RareItemEditor: React.FC = () => {
     const { setView, equipItem } = useCharacterStore();
@@ -34,7 +35,8 @@ export const RareItemEditor: React.FC = () => {
             stats: selectedStats,
             requiredLevel: 1,
         };
-        equipItem(targetSlot, newItem);
+        const enriched = enrichItemWithBaseStats(newItem);
+        equipItem(targetSlot, enriched);
         setView('planner');
     };
 

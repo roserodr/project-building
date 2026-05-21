@@ -39,6 +39,15 @@ export interface Item {
   height: number;
   stats: Stat[];
   requiredLevel: number;
+  requiredStrength?: number;
+  requiredDexterity?: number;
+  defense?: number;
+  oneHandDamage?: { min: number; max: number };
+  twoHandDamage?: { min: number; max: number };
+  missileDamage?: { min: number; max: number };
+  durability?: number;
+  baseWeaponSpeed?: number;
+  blockChance?: number;
   isCorrupted?: boolean;
   corruptionStat?: Stat;
 }
