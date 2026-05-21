@@ -8,7 +8,7 @@ interface CharacterState {
   energy: number;
   skillPoints: Record<string, number>;
   equipment: Record<string, any>;
-  charms: any[];
+  charms: Record<string, any>;
   activeView: 'planner' | 'rare-editor';
 
   setLevel: (level: number) => void;
@@ -16,6 +16,8 @@ interface CharacterState {
   allocateSkill: (skillId: string, amount: number) => void;
   equipItem: (slot: string, item: any) => void;
   unequipItem: (slot: string) => void;
+  equipCharm: (slot: string, charm: any) => void;
+  unequipCharm: (slot: string) => void;
   setView: (view: 'planner' | 'rare-editor') => void;
   loadBuild: (data: any) => void;
 }
@@ -28,7 +30,7 @@ export const useCharacterStore = create<CharacterState>((set) => ({
   energy: 15,
   skillPoints: {},
   equipment: {},
-  charms: [],
+  charms: {},
   activeView: 'planner',
 
   setLevel: (level) => set({ level: Math.max(1, Math.min(99, level)) }),
@@ -59,6 +61,17 @@ export const useCharacterStore = create<CharacterState>((set) => ({
     const newEquipment = { ...state.equipment };
     delete newEquipment[slot];
     return { equipment: newEquipment };
+  }),
+  equipCharm: (slot, charm) => set((state) => ({
+    charms: {
+        ...state.charms,
+        [slot]: charm
+    }
+  })),
+  unequipCharm: (slot) => set((state) => {
+      const newCharms = { ...state.charms };
+      delete newCharms[slot];
+      return { charms: newCharms };
   }),
   setView: (view) => set({ activeView: view }),
   loadBuild: (data) => set((state) => ({ ...state, ...data })),

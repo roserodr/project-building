@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { Item, Stat, ItemRarity } from '../types';
 import { allPossibleAffixes, allowedAffixesPerSlot } from '../data/affixes';
 import { baseItems } from '../data/items';
+import { enrichItemWithBaseStats } from '../utils/itemUtils';
 
 interface RareItemCreatorProps {
   slotId: string;
@@ -51,7 +52,8 @@ export const RareItemCreator: React.FC<RareItemCreatorProps> = ({ slotId, onSele
       stats: selectedStats,
       requiredLevel: 1,
     };
-    onSelect(newItem);
+    const enriched = enrichItemWithBaseStats(newItem);
+    onSelect(enriched);
   };
 
   const allowedAffixIds = allowedAffixesPerSlot[slotType] || allPossibleAffixes.map(a => a.id);

@@ -4,6 +4,8 @@ import { baseItems, possibleCorruptions } from '../data/items';
 import { wikiUniqueItems } from '../data/projectDiablo2Items';
 import type { Item, Stat } from '../types';
 import { RareItemCreator } from './RareItemCreator';
+import { ItemTooltip } from './ItemTooltip';
+import { enrichItemWithBaseStats } from '../utils/itemUtils';
 
 const slots = [
   { id: 'head', name: 'Head', x: 4, y: 0, w: 2, h: 2 },
@@ -19,8 +21,9 @@ const slots = [
 ];
 
 export const Equipment: React.FC = () => {
-  const { equipment, equipItem, unequipItem } = useCharacterStore();
+  const { equipment, charms, equipItem, unequipItem, equipCharm, unequipCharm } = useCharacterStore();
   const [activeSlot, setActiveSlot] = useState<string | null>(null);
+  const [activeCharmSlot, setActiveCharmSlot] = useState<string | null>(null);
 
   const slotToType: Record<string, string> = {
     head: 'Helm',
@@ -42,7 +45,8 @@ export const Equipment: React.FC = () => {
       console.warn(`Cannot equip ${item.name} to ${slot} (expects ${expected}, got ${item.slotType})`);
       return;
     }
-    equipItem(slot, item);
+    const enriched = enrichItemWithBaseStats(item);
+    equipItem(slot, enriched);
     setActiveSlot(null);
   };
 
@@ -51,6 +55,18 @@ export const Equipment: React.FC = () => {
     if (item) {
         equipItem(slot, { ...item, isCorrupted: true, corruptionStat: corruption });
     }
+  };
+
+  const charmOptions: Item[] = [
+    { id: 'sc_life', name: 'Small Charm of Life', baseType: 'Small Charm', rarity: 'Magic', width: 1, height: 1, requiredLevel: 1, stats: [{ id: 'life', name: '+20 to Life', value: 20, type: 'flat' }] },
+    { id: 'sc_res', name: 'Small Charm of Vita', baseType: 'Small Charm', rarity: 'Magic', width: 1, height: 1, requiredLevel: 1, stats: [{ id: 'all_res', name: '+5 to All Resistances', value: 5, type: 'flat' }] },
+    { id: 'lc_life', name: 'Large Charm of Life', baseType: 'Large Charm', rarity: 'Magic', width: 1, height: 2, requiredLevel: 1, stats: [{ id: 'life', name: '+35 to Life', value: 35, type: 'flat' }] },
+    { id: 'gc_skiller', name: 'Grand Charm of Vita', baseType: 'Grand Charm', rarity: 'Magic', width: 1, height: 3, requiredLevel: 1, stats: [{ id: 'assassin_skills', name: '+1 to Assassin Skills', value: 1, type: 'flat' }, { id: 'life', name: '+45 to Life', value: 45, type: 'flat' }] },
+  ];
+
+  const handleEquipCharm = (slot: string, charm: Item) => {
+      equipCharm(slot, charm);
+      setActiveCharmSlot(null);
   };
 
   return (
@@ -85,25 +101,16 @@ export const Equipment: React.FC = () => {
               )}
 
               {equipped && (
-                <div className="invisible group-hover:visible absolute z-50 top-full left-0 mt-1 w-64 p-3 bg-black border-2 border-diablo-gold text-sm shadow-2xl">
-                    <div className={`font-bold ${equipped.rarity === 'Unique' ? 'text-diablo-unique' : 'text-diablo-rare'}`}>
-                        {equipped.name}
+                <div className="invisible group-hover:visible absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-max pointer-events-none">
+                    <ItemTooltip item={equipped} />
+                    <div className="pointer-events-auto">
+                        <button
+                            className="mt-1 w-full bg-red-900/30 text-red-500 text-[10px] py-1 border border-red-900"
+                            onClick={(e) => { e.stopPropagation(); unequipItem(slot.id); }}
+                        >
+                            UNEQUIP
+                        </button>
                     </div>
-                    <div className="text-xs text-gray-400 mb-2">{equipped.baseType}</div>
-                    {equipped.stats.map((s: Stat, i: number) => (
-                        <div key={i} className="text-blue-400 text-xs">{s.name} {s.type === 'percentage' ? `${s.value}%` : `+${s.value}`}</div>
-                    ))}
-                    {equipped.corruptionStat && (
-                        <div className="text-red-500 text-xs mt-2 border-t border-red-900 pt-1">
-                            {equipped.corruptionStat.name}
-                        </div>
-                    )}
-                    <button
-                        className="mt-3 w-full bg-red-900/30 text-red-500 text-[10px] py-1 border border-red-900"
-                        onClick={(e) => { e.stopPropagation(); unequipItem(slot.id); }}
-                    >
-                        UNEQUIP
-                    </button>
                 </div>
               )}
             </div>
@@ -112,28 +119,35 @@ export const Equipment: React.FC = () => {
       </div>
 
       {activeSlot && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-          <div className="bg-diablo-panel border-2 border-diablo-gold p-6 w-[500px] max-h-[80vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80">
+          <div className="bg-diablo-panel border-2 border-diablo-gold p-6 w-[500px] max-h-[80vh] overflow-y-auto custom-scrollbar">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-diablo-gold font-bold">Select Item for {activeSlot}</h3>
-              <button onClick={() => setActiveSlot(null)} className="text-gray-500 hover:text-white">✕</button>
+              <h3 className="text-diablo-gold font-bold uppercase">Select Item for {activeSlot}</h3>
+              <button onClick={() => setActiveSlot(null)} className="text-gray-500 hover:text-white text-xl">✕</button>
             </div>
 
             <div className="space-y-4">
               <div>
                 <h4 className="text-xs font-bold text-gray-400 uppercase mb-2">Unique Items</h4>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 gap-4">
                   {wikiUniqueItems
                     .filter(i => !activeSlot || i.slotType === slotToType[activeSlot])
-                    .map(item => (
-                      <button
-                        key={item.id}
-                        onClick={() => handleEquip(activeSlot!, item)}
-                        className="text-left p-2 border border-diablo-unique/30 bg-diablo-unique/5 hover:bg-diablo-unique/20 text-diablo-unique text-xs font-serif"
-                      >
-                        {item.name}
-                      </button>
-                    ))}
+                    .map(item => {
+                        const enriched = enrichItemWithBaseStats(item);
+                        return (
+                            <div key={item.id} className="relative group">
+                                <button
+                                    onClick={() => handleEquip(activeSlot!, item)}
+                                    className="w-full text-left p-2 border border-diablo-unique/30 bg-diablo-unique/5 hover:bg-diablo-unique/20 text-diablo-unique text-xs font-serif"
+                                >
+                                    {item.name} ({item.baseType})
+                                </button>
+                                <div className="invisible group-hover:visible absolute z-[60] left-full top-0 ml-2 pointer-events-none">
+                                    <ItemTooltip item={enriched} />
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
               </div>
 
@@ -160,12 +174,63 @@ export const Equipment: React.FC = () => {
         </div>
       )}
 
+      {activeCharmSlot && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80">
+          <div className="bg-diablo-panel border-2 border-diablo-gold p-6 w-[400px] max-h-[80vh] overflow-y-auto custom-scrollbar">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-diablo-gold font-bold uppercase">Select Charm</h3>
+              <button onClick={() => setActiveCharmSlot(null)} className="text-gray-500 hover:text-white text-xl">✕</button>
+            </div>
+
+            <div className="grid grid-cols-1 gap-2">
+              {charmOptions.map(charm => (
+                <button
+                  key={charm.id}
+                  onClick={() => handleEquipCharm(activeCharmSlot, charm)}
+                  className="text-left p-3 border border-diablo-gold/30 bg-black/40 hover:bg-diablo-gold/10 transition-colors"
+                >
+                  <div className="text-blue-400 font-bold">{charm.name}</div>
+                  <div className="text-[10px] text-gray-400">{charm.baseType}</div>
+                  {charm.stats.map((s, i) => (
+                      <div key={i} className="text-blue-400 text-xs">{s.name}</div>
+                  ))}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="mt-8">
         <h3 className="text-diablo-gold text-sm mb-2 font-bold uppercase tracking-widest text-center">Charms / Inventory</h3>
-        <div className="grid grid-cols-10 grid-rows-4 w-[320px] h-[128px] border border-diablo-gold/30 bg-black/40">
-          {Array.from({ length: 40 }).map((_, i) => (
-            <div key={i} className="border border-gray-800/50"></div>
-          ))}
+        <div className="grid grid-cols-10 grid-rows-4 w-[320px] h-[128px] border border-diablo-gold/30 bg-black/40 relative">
+          {Array.from({ length: 40 }).map((_, i) => {
+              const charm = charms[`charm-${i}`];
+              return (
+                <div
+                    key={i}
+                    className="border border-gray-800/50 flex items-center justify-center cursor-pointer hover:bg-white/5 relative group"
+                    onClick={() => setActiveCharmSlot(`charm-${i}`)}
+                >
+                    {charm && (
+                        <>
+                            <div className="text-[10px] text-green-500 font-bold">C</div>
+                            <div className="invisible group-hover:visible absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-1 w-max pointer-events-none">
+                                <ItemTooltip item={charm} />
+                                <div className="pointer-events-auto">
+                                    <button
+                                        className="mt-1 w-full bg-red-900/30 text-red-500 text-[10px] py-1 border border-red-900"
+                                        onClick={(e) => { e.stopPropagation(); unequipCharm(`charm-${i}`); }}
+                                    >
+                                        REMOVE
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </div>
+              );
+          })}
         </div>
       </div>
     </div>
