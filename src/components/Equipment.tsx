@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
-import { iconicUniques, baseItems, possibleCorruptions } from '../data/items';
+import { baseItems, possibleCorruptions } from '../data/items';
+import { wikiUniqueItems } from '../data/projectDiablo2Items';
 import type { Item, Stat } from '../types';
 import { RareItemCreator } from './RareItemCreator';
 
@@ -122,7 +123,7 @@ export const Equipment: React.FC = () => {
               <div>
                 <h4 className="text-xs font-bold text-gray-400 uppercase mb-2">Unique Items</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  {iconicUniques
+                  {wikiUniqueItems
                     .filter(i => !activeSlot || i.slotType === slotToType[activeSlot])
                     .map(item => (
                       <button

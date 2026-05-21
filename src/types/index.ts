@@ -18,13 +18,15 @@ export interface Skill {
   }[];
 }
 
-export type ItemRarity = 'Normal' | 'Magic' | 'Rare' | 'Unique' | 'Set' | 'Crafted';
+export type ItemRarity = 'Normal' | 'Magic' | 'Rare' | 'Unique' | 'Set' | 'Crafted' | 'Runeword';
 
 export interface Stat {
   id: string;
   name: string;
   value: number;
   type: 'flat' | 'percentage';
+  min?: number;
+  max?: number;
 }
 
 export interface Item {

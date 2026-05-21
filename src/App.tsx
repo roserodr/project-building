@@ -4,7 +4,7 @@ import { SkillTree } from './components/SkillTree';
 import { RareItemEditor } from './components/RareItemEditor';
 import { useCharacterStore } from './store/useCharacterStore';
 import { useEffect } from 'react';
-import { iconicUniques } from './data/items';
+import { wikiUniqueItems } from './data/projectDiablo2Items';
 
 function App() {
   const { activeView, setView, ...state } = useCharacterStore();
@@ -47,7 +47,7 @@ function App() {
             energy: decoded.s?.enr || 15,
             skillPoints: decoded.sk || {},
             equipment: Object.entries(decoded.eq || {}).reduce((acc, [slot, data]: [string, any]) => {
-                let item = iconicUniques.find(i => i.id === data.id);
+                let item = wikiUniqueItems.find(i => i.id === data.id);
                 if (!item && data.r) item = data.r;
                 if (item) {
                     const finalItem = { ...item };
