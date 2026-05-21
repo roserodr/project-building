@@ -21,7 +21,26 @@ export const Equipment: React.FC = () => {
   const { equipment, equipItem, unequipItem } = useCharacterStore();
   const [activeSlot, setActiveSlot] = useState<string | null>(null);
 
+  const slotToType: Record<string, string> = {
+    head: 'Helm',
+    neck: 'Amulet',
+    body: 'Body Armor',
+    waist: 'Belt',
+    mainhand: 'Weapon',
+    offhand: 'Weapon',
+    hands: 'Gloves',
+    feet: 'Boots',
+    finger1: 'Ring',
+    finger2: 'Ring',
+  };
+
   const handleEquip = (slot: string, item: Item) => {
+    const expected = slotToType[slot];
+    // If item declares a slotType, enforce match. Otherwise allow (legacy items)
+    if (item.slotType && expected && item.slotType !== expected) {
+      console.warn(`Cannot equip ${item.name} to ${slot} (expects ${expected}, got ${item.slotType})`);
+      return;
+    }
     equipItem(slot, item);
     setActiveSlot(null);
   };
@@ -103,15 +122,17 @@ export const Equipment: React.FC = () => {
               <div>
                 <h4 className="text-xs font-bold text-gray-400 uppercase mb-2">Unique Items</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  {iconicUniques.map(item => (
-                    <button
-                      key={item.id}
-                      onClick={() => handleEquip(activeSlot, item)}
-                      className="text-left p-2 border border-diablo-unique/30 bg-diablo-unique/5 hover:bg-diablo-unique/20 text-diablo-unique text-xs font-serif"
-                    >
-                      {item.name}
-                    </button>
-                  ))}
+                  {iconicUniques
+                    .filter(i => !activeSlot || i.slotType === slotToType[activeSlot])
+                    .map(item => (
+                      <button
+                        key={item.id}
+                        onClick={() => handleEquip(activeSlot!, item)}
+                        className="text-left p-2 border border-diablo-unique/30 bg-diablo-unique/5 hover:bg-diablo-unique/20 text-diablo-unique text-xs font-serif"
+                      >
+                        {item.name}
+                      </button>
+                    ))}
                 </div>
               </div>
 
@@ -132,7 +153,7 @@ export const Equipment: React.FC = () => {
                 </div>
               )}
 
-              <RareItemCreator slotId={activeSlot} onSelect={(item) => handleEquip(activeSlot, item)} />
+              <RareItemCreator slotId={activeSlot!} onSelect={(item) => handleEquip(activeSlot!, item)} />
             </div>
           </div>
         </div>

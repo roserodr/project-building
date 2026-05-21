@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import type { Item, Stat, ItemRarity } from '../types';
-import { allPossibleAffixes } from '../data/affixes';
+import { allPossibleAffixes, allowedAffixesPerSlot } from '../data/affixes';
+import { baseItems } from '../data/items';
 
 interface RareItemCreatorProps {
   slotId: string;
   onSelect: (item: Item) => void;
 }
 
-export const RareItemCreator: React.FC<RareItemCreatorProps> = ({ onSelect }) => {
+export const RareItemCreator: React.FC<RareItemCreatorProps> = ({ slotId, onSelect }) => {
   const [name, setName] = useState('Rare Item');
   const [selectedStats, setSelectedStats] = useState<Stat[]>([]);
 
@@ -22,12 +23,28 @@ export const RareItemCreator: React.FC<RareItemCreatorProps> = ({ onSelect }) =>
   const updateStatValue = (id: string, value: number) => {
     setSelectedStats(selectedStats.map(s => s.id === id ? { ...s, value } : s));
   };
+  const slotToType: Record<string, string> = {
+    head: 'Helm',
+    neck: 'Amulet',
+    body: 'Body Armor',
+    waist: 'Belt',
+    mainhand: 'Weapon',
+    offhand: 'Weapon',
+    hands: 'Gloves',
+    feet: 'Boots',
+    finger1: 'Ring',
+    finger2: 'Ring',
+  };
+
+  const slotType = slotToType[slotId] || 'Misc';
+  const base = baseItems.find(b => b.type === slotType)?.name || 'Rare Base';
 
   const handleCreate = () => {
     const newItem: Item = {
       id: `rare-${Date.now()}`,
       name: name,
-      baseType: 'Rare Base',
+      baseType: base,
+      slotType: slotType,
       rarity: 'Rare' as ItemRarity,
       width: 2,
       height: 2,
@@ -36,6 +53,9 @@ export const RareItemCreator: React.FC<RareItemCreatorProps> = ({ onSelect }) =>
     };
     onSelect(newItem);
   };
+
+  const allowedAffixIds = allowedAffixesPerSlot[slotType] || allPossibleAffixes.map(a => a.id);
+  const allowedAffixes = allPossibleAffixes.filter(a => allowedAffixIds.includes(a.id));
 
   return (
     <div className="mt-6 border-t border-diablo-gold/20 pt-4">
@@ -49,7 +69,7 @@ export const RareItemCreator: React.FC<RareItemCreatorProps> = ({ onSelect }) =>
       />
 
       <div className="grid grid-cols-2 gap-2 mb-4 h-48 overflow-y-auto pr-2 custom-scrollbar">
-        {allPossibleAffixes.map(stat => {
+        {allowedAffixes.map(stat => {
           const isSelected = selectedStats.find(s => s.id === stat.id);
           return (
             <div key={stat.id} className="flex flex-col">

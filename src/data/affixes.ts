@@ -21,3 +21,15 @@ export const allPossibleAffixes: Stat[] = [
   { id: 'defense', name: '+ Defense', value: 0, type: 'flat' },
   { id: 'ed', name: '% Enhanced Damage', value: 0, type: 'percentage' },
 ];
+
+export const allowedAffixesPerSlot: Record<string, string[]> = {
+  Helm: ['all_skills', 'life', 'mana', 'all_res', 'fcr', 'str', 'dex'],
+  'Body Armor': ['life', 'all_res', 'defense', 'fhr', 'all_skills'],
+  Weapon: ['ed', 'ias', 'str', 'dex', 'assassin_skills'],
+  Amulet: ['all_skills', 'fcr', 'life', 'all_res', 'assassin_skills'],
+  Ring: ['life', 'mana', 'all_res'],
+  Gloves: ['ias', 'fcr', 'str', 'dex'],
+  Boots: ['fhr', 'life', 'all_res'],
+  Belt: ['life', 'str', 'dex'],
+  Misc: allPossibleAffixes.map(a => a.id),
+};

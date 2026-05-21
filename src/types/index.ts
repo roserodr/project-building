@@ -31,6 +31,7 @@ export interface Item {
   id: string;
   name: string;
   baseType: string;
+  slotType?: string;
   rarity: ItemRarity;
   width: number;
   height: number;
