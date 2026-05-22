@@ -7,19 +7,19 @@ interface CharacterState {
   vitality: number;
   energy: number;
   skillPoints: Record<string, number>;
-  equipment: Record<string, any>;
-  charms: Record<string, any>;
+  equipment: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  charms: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
   activeView: 'planner' | 'rare-editor';
 
   setLevel: (level: number) => void;
   setStat: (stat: 'strength' | 'dexterity' | 'vitality' | 'energy', value: number) => void;
   allocateSkill: (skillId: string, amount: number) => void;
-  equipItem: (slot: string, item: any) => void;
+  equipItem: (slot: string, item: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
   unequipItem: (slot: string) => void;
-  equipCharm: (slot: string, charm: any) => void;
+  equipCharm: (slot: string, charm: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
   unequipCharm: (slot: string) => void;
   setView: (view: 'planner' | 'rare-editor') => void;
-  loadBuild: (data: any) => void;
+  loadBuild: (data: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export const useCharacterStore = create<CharacterState>((set) => ({

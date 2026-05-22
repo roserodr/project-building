@@ -2,6 +2,37 @@ import React from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { calculateCharacterStats, FCR_BREAKPOINTS, FHR_BREAKPOINTS, FBR_BREAKPOINTS, getFrameFromBreakpoints, getAssassinWeaponClass, getIASBreakpoints } from '../utils/calc';
 
+const StatRow = ({ label, value, onChange }: { label: string, value: number, onChange?: (v: number) => void }) => (
+  <div className="flex justify-between items-center py-1 border-b border-diablo-gold/10">
+    <span className="text-xs text-gray-400 uppercase">{label}</span>
+    <div className="flex items-center">
+      {onChange && (
+          <button onClick={() => onChange(value - 1)} className="px-1 text-diablo-gold hover:text-white">-</button>
+      )}
+      <span className="text-sm font-bold w-12 text-center">{value}</span>
+      {onChange && (
+          <button onClick={() => onChange(value + 1)} className="px-1 text-diablo-gold hover:text-white">+</button>
+      )}
+    </div>
+  </div>
+);
+
+const BreakpointRow = ({ label, value, breakpoints, baseFrames }: { label: string, value: number, breakpoints: number[], baseFrames: number }) => {
+  const nextBp = breakpoints.find(bp => bp > value);
+  const framesIdx = getFrameFromBreakpoints(value, breakpoints);
+  return (
+    <div className="py-2">
+      <div className="flex justify-between text-xs mb-1">
+        <span>{label}</span>
+        <span className="text-diablo-gold font-bold">{value}%</span>
+      </div>
+      <div className="text-[10px] text-gray-500">
+         Frames: {baseFrames - framesIdx} | Next BP: {nextBp !== undefined ? `${nextBp}%` : 'MAX'}
+      </div>
+    </div>
+  );
+};
+
 export const CharacterSheet: React.FC = () => {
   const { level, strength, dexterity, vitality, energy, equipment, charms, setStat, setLevel } = useCharacterStore();
 
@@ -14,36 +45,9 @@ export const CharacterSheet: React.FC = () => {
     charms
   );
 
-  const StatRow = ({ label, value, onChange }: { label: string, value: number, onChange?: (v: number) => void }) => (
-    <div className="flex justify-between items-center py-1 border-b border-diablo-gold/10">
-      <span className="text-xs text-gray-400 uppercase">{label}</span>
-      <div className="flex items-center">
-        {onChange && (
-            <button onClick={() => onChange(value - 1)} className="px-1 text-diablo-gold hover:text-white">-</button>
-        )}
-        <span className="text-sm font-bold w-12 text-center">{value}</span>
-        {onChange && (
-            <button onClick={() => onChange(value + 1)} className="px-1 text-diablo-gold hover:text-white">+</button>
-        )}
-      </div>
-    </div>
-  );
 
-  const BreakpointRow = ({ label, value, breakpoints, baseFrames }: { label: string, value: number, breakpoints: number[], baseFrames: number }) => {
-    const nextBp = breakpoints.find(bp => bp > value);
-    const framesIdx = getFrameFromBreakpoints(value, breakpoints);
-    return (
-      <div className="py-2">
-        <div className="flex justify-between text-xs mb-1">
-          <span>{label}</span>
-          <span className="text-diablo-gold font-bold">{value}%</span>
-        </div>
-        <div className="text-[10px] text-gray-500">
-           Frames: {baseFrames - framesIdx} | Next BP: {nextBp !== undefined ? `${nextBp}%` : 'MAX'}
-        </div>
-      </div>
-    );
-  };
+
+
 
   return (
     <div className="w-[300px] bg-diablo-panel p-4 border-r border-diablo-gold/30 overflow-y-auto font-serif">
