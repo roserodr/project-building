@@ -31,8 +31,8 @@ export const calculateSkillDamage = (skill: Skill, skillPoints: Record<string, n
     const totalLevel = getSkillLevel(skill.id, skillPoints, equipment);
     if (totalLevel === 0) return { min: 0, max: 0 };
 
-    let baseMin = 10 + totalLevel * 5;
-    let baseMax = 20 + totalLevel * 10;
+    const baseMin = 10 + totalLevel * 5;
+    const baseMax = 20 + totalLevel * 10;
 
     let totalSynergyMultiplier = 0;
 
@@ -62,7 +62,7 @@ export const calculateCharacterStats = (
 ): CharacterStats => {
   let life = 50 + (level - 1) * 2 + baseStats.vit * 3;
   let mana = 25 + (level - 1) * 1.5 + baseStats.enr * 1.5;
-  let stamina = 95 + baseStats.vit * 1.25;
+  const stamina = 95 + baseStats.vit * 1.25;
 
   let fcr = 0;
   let fhr = 0;
@@ -76,7 +76,7 @@ export const calculateCharacterStats = (
   let maxDmgFlat = 0;
   let minDmgFlat = 0;
 
-  let res = { fire: 0, cold: 0, lightning: 0, poison: 0 };
+  const res = { fire: 0, cold: 0, lightning: 0, poison: 0 };
   let defense = 0;
   let totalStr = baseStats.str;
   let totalDex = baseStats.dex;

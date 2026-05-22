@@ -46,7 +46,7 @@ function App() {
             vitality: decoded.s?.vit || 20,
             energy: decoded.s?.enr || 15,
             skillPoints: decoded.sk || {},
-            equipment: Object.entries(decoded.eq || {}).reduce((acc, [slot, data]: [string, any]) => {
+            equipment: Object.entries(decoded.eq || {}).reduce((acc, [slot, data]: [string, any]) => { // eslint-disable-line @typescript-eslint/no-explicit-any
                 let item = wikiUniqueItems.find(i => i.id === data.id);
                 if (!item && data.r) item = data.r;
                 if (item) {
