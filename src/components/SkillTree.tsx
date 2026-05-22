@@ -69,7 +69,7 @@ export const SkillTree: React.FC = () => {
                 {points}
               </div>
 
-              <div className="invisible group-hover:visible absolute z-50 left-full ml-2 w-72 p-4 bg-black border-2 border-diablo-gold text-sm shadow-2xl pointer-events-none">
+              <div className="invisible group-hover:visible absolute z-50 left-full lg:left-auto lg:right-full lg:mr-2 ml-2 lg:ml-0 w-72 p-4 bg-black border-2 border-diablo-gold text-sm shadow-2xl pointer-events-none">
                 <div className="text-diablo-gold font-bold mb-1 uppercase tracking-tighter text-base">{skill.name}</div>
                 <div className="text-[10px] text-gray-500 mb-2 uppercase">Required Level: {skill.reqLevel}</div>
                 <div className="text-xs mb-3 text-white italic">"{skill.description}"</div>
