@@ -16,6 +16,12 @@ export interface Skill {
     valuePerLevel: number;
     type: 'damage' | 'duration' | 'other';
   }[];
+  levelData?: {
+    [level: number]: {
+      minDamage?: number;
+      maxDamage?: number;
+    }
+  };
 }
 
 export type ItemRarity = 'Normal' | 'Magic' | 'Rare' | 'Unique' | 'Set' | 'Crafted' | 'Runeword';

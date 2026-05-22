@@ -1,4 +1,5 @@
 import type { Item, Stat, CharacterStats, Skill } from '../types';
+import { skillsLevelData } from '../data/skillsLevelData';
 
 export const FCR_BREAKPOINTS = [0, 8, 16, 27, 42, 65, 102, 174];
 export const FHR_BREAKPOINTS = [0, 7, 15, 27, 48, 86, 200];
@@ -31,8 +32,30 @@ export const calculateSkillDamage = (skill: Skill, skillPoints: Record<string, n
     const totalLevel = getSkillLevel(skill.id, skillPoints, equipment);
     if (totalLevel === 0) return { min: 0, max: 0 };
 
-    const baseMin = 10 + totalLevel * 5;
-    const baseMax = 20 + totalLevel * 10;
+    let baseMin = 0;
+    let baseMax = 0;
+
+    const skillLevelData = skill.levelData || skillsLevelData[skill.name];
+
+    if (skillLevelData) {
+        const availableLevels = Object.keys(skillLevelData).map(Number).sort((a, b) => a - b);
+        let validLevel = totalLevel;
+        if (availableLevels.length > 0) {
+            const maxAvailable = availableLevels[availableLevels.length - 1];
+            if (validLevel > maxAvailable) {
+                validLevel = maxAvailable;
+            }
+        }
+
+        const data = (skillLevelData as any)[validLevel];
+        if (data) {
+            baseMin = data.minDamage || 0;
+            baseMax = data.maxDamage || 0;
+        }
+    } else {
+        baseMin = 10 + totalLevel * 5;
+        baseMax = 20 + totalLevel * 10;
+    }
 
     let totalSynergyMultiplier = 0;
 
