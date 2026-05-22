@@ -12,10 +12,12 @@ export const SkillTree: React.FC = () => {
 
   const handleSkillClick = (skill: Skill, isRightClick: boolean) => {
     const currentPoints = skillPoints[skill.id] || 0;
+    const hasRequiredDependencies = skill.dependencies.every(dep => (skillPoints[dep] || 0) > 0);
+    const isAvailable = level >= skill.reqLevel && hasRequiredDependencies;
 
     if (isRightClick) {
       if (currentPoints > 0) allocateSkill(skill.id, -1);
-    } else {
+    } else if (isAvailable) {
       if (currentPoints < skill.maxLevel) {
         if (level < skill.reqLevel) {
           setLevel(skill.reqLevel);
@@ -29,14 +31,12 @@ export const SkillTree: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full bg-diablo-dark border-l border-diablo-gold/30 p-4 w-[400px] font-serif">
-      <div className="flex justify-between mb-4">
+<div className="flex justify-between mb-4 gap-2">
         {tabs.map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-2 py-1 text-xs border ${
-              activeTab === tab ? 'bg-diablo-gold text-black border-white' : 'border-diablo-gold text-diablo-gold'
-            }`}
+            className={`diablo-tab text-xs uppercase tracking-[0.28em] ${activeTab === tab ? 'diablo-tab-active' : ''}`}
           >
             {tab}
           </button>
@@ -47,15 +47,14 @@ export const SkillTree: React.FC = () => {
         {currentTabSkills.map(skill => {
           const points = skillPoints[skill.id] || 0;
           const totalLevel = getSkillLevel(skill.id, skillPoints, equipment);
-          const isAvailable = level >= skill.reqLevel;
+          const hasRequiredDependencies = skill.dependencies.every(dep => (skillPoints[dep] || 0) > 0);
+          const isAvailable = level >= skill.reqLevel && hasRequiredDependencies;
           const damage = calculateSkillDamage(skill, skillPoints, equipment);
 
           return (
             <div
               key={skill.id}
-              className={`relative skill-slot flex items-center justify-center cursor-pointer group ${
-                !isAvailable ? 'opacity-40 grayscale' : ''
-              }`}
+              className="relative skill-slot cursor-pointer group"
               style={{ gridRow: (skill.row ?? 0) + 1, gridColumn: (skill.col ?? 0) + 1 }}
               onClick={() => handleSkillClick(skill, false)}
               onContextMenu={(e) => {
@@ -63,15 +62,30 @@ export const SkillTree: React.FC = () => {
                 handleSkillClick(skill, true);
               }}
             >
-              <div className="text-[10px] text-center leading-tight">{skill.name}</div>
+              <div className={`flex items-center justify-center h-full w-full ${!isAvailable ? 'opacity-40 grayscale' : ''}`}>
+                <div className="text-[10px] text-center leading-tight">{skill.name}</div>
 
-              <div className="absolute -bottom-2 -right-2 bg-black border border-diablo-gold text-[10px] px-1">
-                {points}
+                <div className="absolute -bottom-2 -right-2 bg-black border border-diablo-gold text-[10px] px-1">
+                  {points}
+                </div>
               </div>
 
-              <div className="invisible group-hover:visible absolute z-50 left-full lg:left-auto lg:right-full lg:mr-2 ml-2 lg:ml-0 w-72 p-4 bg-black border-2 border-diablo-gold text-sm shadow-2xl pointer-events-none">
+              <div className="invisible group-hover:visible absolute z-50 top-0 left-full lg:left-auto lg:right-full lg:mr-2 ml-2 lg:ml-0 w-72 p-4 diablo-tooltip text-sm pointer-events-none">
                 <div className="text-diablo-gold font-bold mb-1 uppercase tracking-tighter text-base">{skill.name}</div>
                 <div className="text-[10px] text-gray-500 mb-2 uppercase">Required Level: {skill.reqLevel}</div>
+                {skill.dependencies.length > 0 && (
+                  <div className="text-[10px] text-gray-400 mb-2 uppercase">
+                    Prerequisite: {skill.dependencies.map((dep, index) => {
+                      const depSkill = assassinSkills.find(s => s.id === dep);
+                      const depPoints = skillPoints[dep] || 0;
+                      return (
+                        <span key={dep} className={depPoints > 0 ? 'text-green-400' : 'text-red-400'}>
+                          {depSkill?.name || dep}{index < skill.dependencies.length - 1 ? ', ' : ''}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
                 <div className="text-xs mb-3 text-white italic">"{skill.description}"</div>
 
                 <div className="flex justify-between items-center bg-blue-900/20 p-2 mb-3 border border-blue-900/30">

@@ -16,8 +16,9 @@ const slots = [
   { id: 'offhand', name: 'Off Hand', x: 7, y: 1, w: 2, h: 3 },
   { id: 'hands', name: 'Hands', x: 1, y: 4, w: 2, h: 2 },
   { id: 'feet', name: 'Feet', x: 7, y: 4, w: 2, h: 2 },
-  { id: 'finger1', name: 'Ring 1', x: 3, y: 4, w: 1, h: 1 },
-  { id: 'finger2', name: 'Ring 2', x: 6, y: 4, w: 1, h: 1 },
+  // Place rings directly left and right of the belt (waist spans x:4-5)
+  { id: 'finger1', name: 'Ring 1', x: 3, y: 5, w: 1, h: 1 },
+  { id: 'finger2', name: 'Ring 2', x: 6, y: 5, w: 1, h: 1 },
 ];
 
 export const Equipment: React.FC = () => {
@@ -70,38 +71,38 @@ export const Equipment: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-diablo-dark p-6 border border-diablo-gold/30 rounded-lg shadow-2xl">
-      <h2 className="text-diablo-gold text-xl mb-6 font-bold uppercase tracking-widest font-serif">Inventory</h2>
+    <div className="flex flex-col items-center bg-diablo-dark p-5 border border-diablo-gold/30 rounded-xl shadow-2xl">
+      <h2 className="text-diablo-gold text-xl mb-5 font-bold uppercase tracking-widest font-serif">Inventory</h2>
 
-      <div className="relative w-[320px] h-[320px] bg-black/40 border border-diablo-gold/20 grid grid-cols-10 grid-rows-10">
+      <div className="relative w-[342px] h-[342px] bg-black/80 border border-diablo-gold/20 rounded-xl p-2 inventory-grid">
+
         {slots.map(slot => {
           const equipped = equipment[slot.id];
           return (
-            <div
+            <button
               key={slot.id}
-              className={`absolute border border-gray-700 bg-black/60 flex items-center justify-center cursor-pointer hover:border-diablo-gold transition-colors group
-                ${equipped?.rarity === 'Unique' ? 'border-diablo-unique' : ''}
-                ${equipped?.rarity === 'Rare' ? 'border-diablo-rare' : ''}
-              `}
+              className={`inventory-slot-box group hover:z-[100] ${equipped?.rarity === 'Unique' ? 'diablo-unique' : ''} ${equipped?.rarity === 'Rare' ? 'diablo-rare' : ''}`}
               style={{
-                left: `${slot.x * 10}%`,
-                top: `${slot.y * 10}%`,
-                width: `${slot.w * 10}%`,
-                height: `${slot.h * 10}%`,
+                gridColumnStart: slot.x + 1,
+                gridColumnEnd: `span ${slot.w}`,
+                gridRowStart: slot.y + 1,
+                gridRowEnd: `span ${slot.h}`,
               }}
               onClick={() => setActiveSlot(slot.id)}
             >
               {equipped ? (
-                <div className="text-[10px] text-center p-1 font-bold">
+                <div className="text-[10px] text-center p-1 font-bold leading-tight">
                   {equipped.name}
                   {equipped.isCorrupted && <div className="text-red-500 font-bold uppercase">Corrupted</div>}
                 </div>
               ) : (
-                <div className="text-[8px] text-gray-500 uppercase">{slot.name}</div>
+                <div className="text-[9px] text-gray-500 uppercase tracking-[0.22em] text-center">
+                  {slot.name}
+                </div>
               )}
 
               {equipped && (
-                <div className="invisible group-hover:visible absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-max pointer-events-none">
+                <div className="invisible group-hover:visible absolute z-[100] top-full left-1/2 -translate-x-1/2 mt-1 w-max pointer-events-none">
                     <ItemTooltip item={equipped} />
                     <div className="pointer-events-auto">
                         <button
@@ -113,7 +114,7 @@ export const Equipment: React.FC = () => {
                     </div>
                 </div>
               )}
-            </div>
+            </button>
           );
         })}
       </div>
@@ -215,7 +216,7 @@ export const Equipment: React.FC = () => {
                     {charm && (
                         <>
                             <div className="text-[10px] text-green-500 font-bold">C</div>
-                            <div className="invisible group-hover:visible absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-1 w-max pointer-events-none">
+                            <div className="invisible group-hover:visible absolute z-[100] bottom-full left-1/2 -translate-x-1/2 mb-1 w-max pointer-events-none">
                                 <ItemTooltip item={charm} />
                                 <div className="pointer-events-auto">
                                     <button
