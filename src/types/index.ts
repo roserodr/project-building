@@ -57,9 +57,13 @@ export interface CharacterStats {
   mana: number;
   stamina: number;
   defense: number;
+  damage: { min: number; max: number };
   fcr: number;
   fhr: number;
   ias: number;
+  wsm: number;
+  primaryWeaponType: string;
+  skillIas: number;
   fbr: number;
   resistances: {
     fire: number;

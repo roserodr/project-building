@@ -1,13 +1,15 @@
 import React from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
-import { calculateCharacterStats, FCR_BREAKPOINTS, FHR_BREAKPOINTS, getFrameFromBreakpoints } from '../utils/calc';
+import { calculateCharacterStats, FCR_BREAKPOINTS, FHR_BREAKPOINTS, FBR_BREAKPOINTS, getFrameFromBreakpoints, getAssassinWeaponClass, getIASBreakpoints } from '../utils/calc';
 
 export const CharacterSheet: React.FC = () => {
   const { level, strength, dexterity, vitality, energy, equipment, charms, setStat, setLevel } = useCharacterStore();
 
+  const { skillPoints } = useCharacterStore();
   const stats = calculateCharacterStats(
     level,
     { str: strength, dex: dexterity, vit: vitality, enr: energy },
+    skillPoints,
     equipment,
     charms
   );
@@ -27,9 +29,9 @@ export const CharacterSheet: React.FC = () => {
     </div>
   );
 
-  const BreakpointRow = ({ label, value, breakpoints }: { label: string, value: number, breakpoints: number[] }) => {
+  const BreakpointRow = ({ label, value, breakpoints, baseFrames }: { label: string, value: number, breakpoints: number[], baseFrames: number }) => {
     const nextBp = breakpoints.find(bp => bp > value);
-    const frames = getFrameFromBreakpoints(value, breakpoints);
+    const framesIdx = getFrameFromBreakpoints(value, breakpoints);
     return (
       <div className="py-2">
         <div className="flex justify-between text-xs mb-1">
@@ -37,7 +39,7 @@ export const CharacterSheet: React.FC = () => {
           <span className="text-diablo-gold font-bold">{value}%</span>
         </div>
         <div className="text-[10px] text-gray-500">
-           Frames: {16 - frames} | Next BP: {nextBp ? `${nextBp}%` : 'MAX'}
+           Frames: {baseFrames - framesIdx} | Next BP: {nextBp !== undefined ? `${nextBp}%` : 'MAX'}
         </div>
       </div>
     );
@@ -71,16 +73,39 @@ export const CharacterSheet: React.FC = () => {
           <span>Defense</span>
           <span>{stats.defense}</span>
         </div>
+        <div className="flex justify-between text-orange-500 font-bold text-xs uppercase mt-2">
+          <span>Attack Damage</span>
+          <span>{stats.damage.min} - {stats.damage.max}</span>
+        </div>
       </div>
 
       <div className="border-t border-diablo-gold/20 pt-4">
         <h3 className="text-[10px] text-gray-500 font-bold uppercase mb-2">Breakpoints</h3>
-        <BreakpointRow label="Faster Cast Rate" value={stats.fcr} breakpoints={FCR_BREAKPOINTS} />
-        <BreakpointRow label="Faster Hit Recovery" value={stats.fhr} breakpoints={FHR_BREAKPOINTS} />
-        <div className="flex justify-between text-xs py-2">
-          <span>Increased Attack Speed</span>
-          <span className="text-diablo-gold">{stats.ias}%</span>
-        </div>
+        <BreakpointRow label="Faster Cast Rate" value={stats.fcr} breakpoints={FCR_BREAKPOINTS} baseFrames={16} />
+        <BreakpointRow label="Faster Hit Recovery" value={stats.fhr} breakpoints={FHR_BREAKPOINTS} baseFrames={9} />
+        <BreakpointRow label="Faster Block Rate" value={stats.fbr} breakpoints={FBR_BREAKPOINTS} baseFrames={5} />
+        {(() => {
+          const weaponClass = getAssassinWeaponClass(stats.primaryWeaponType);
+          const iasBreakpoints = getIASBreakpoints(stats.wsm, weaponClass.baseFrames, weaponClass.animationSpeed, stats.skillIas);
+          const currentBp = iasBreakpoints.slice().reverse().find(bp => stats.ias >= bp.ias);
+          const nextBp = iasBreakpoints.find(bp => bp.ias > stats.ias);
+
+          return (
+            <div className="py-2">
+              <div className="flex justify-between text-xs mb-1">
+                <span>Increased Attack Speed</span>
+                <span className="text-diablo-gold font-bold">{stats.ias}%</span>
+              </div>
+              <div className="text-[10px] text-gray-500">
+                Frames: {currentBp ? currentBp.fpa : weaponClass.baseFrames} | Next BP: {nextBp ? `${nextBp.ias}%` : 'MAX'}
+              </div>
+              {(stats.wsm !== 0 || stats.skillIas > 0) && (
+                  <div className="text-[9px] text-gray-600 mt-1">WSM: {stats.wsm} | Skill IAS: {stats.skillIas}%</div>
+              )}
+            </div>
+          );
+        })()}
+
       </div>
 
       <div className="border-t border-diablo-gold/20 mt-4 pt-4">
