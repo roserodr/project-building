@@ -63,7 +63,22 @@ export const SkillTree: React.FC = () => {
               }}
             >
               <div className={`flex items-center justify-center h-full w-full ${!isAvailable ? 'opacity-40 grayscale' : ''}`}>
-                <div className="text-[10px] text-center leading-tight">{skill.name}</div>
+                {skill.iconCel !== undefined ? (
+                  <img src={`/skills/paskillicon_0_${skill.iconCel}.png`} alt={skill.name} className="w-10 h-10 object-contain filter opacity-80" onError={(e) => {
+                    // Try another charclass if it fails
+                    const img = e.target as HTMLImageElement;
+                    if (img.src.includes('paskillicon')) {
+                        img.src = `/skills/amskillicon_0_${skill.iconCel}.png`;
+                    } else if (img.src.includes('amskillicon')) {
+                        img.src = `/skills/skillicon_0_${skill.iconCel}.png`;
+                    } else {
+                        img.style.display = 'none';
+                        const textDiv = img.nextElementSibling as HTMLElement;
+                        if (textDiv) textDiv.classList.remove('hidden');
+                    }
+                  }} />
+                ) : null}
+                <div className={`text-[10px] text-center leading-tight ${skill.iconCel !== undefined ? 'hidden' : ''}`}>{skill.name}</div>
 
                 <div className="absolute -bottom-2 -right-2 bg-black border border-diablo-gold text-[10px] px-1">
                   {points}

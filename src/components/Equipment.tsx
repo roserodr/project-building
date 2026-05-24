@@ -59,10 +59,10 @@ export const Equipment: React.FC = () => {
   };
 
   const charmOptions: Item[] = [
-    { id: 'sc_life', name: 'Small Charm of Life', baseType: 'Small Charm', rarity: 'Magic', width: 1, height: 1, requiredLevel: 1, stats: [{ id: 'life', name: '+20 to Life', value: 20, type: 'flat' }] },
-    { id: 'sc_res', name: 'Small Charm of Vita', baseType: 'Small Charm', rarity: 'Magic', width: 1, height: 1, requiredLevel: 1, stats: [{ id: 'all_res', name: '+5 to All Resistances', value: 5, type: 'flat' }] },
-    { id: 'lc_life', name: 'Large Charm of Life', baseType: 'Large Charm', rarity: 'Magic', width: 1, height: 2, requiredLevel: 1, stats: [{ id: 'life', name: '+35 to Life', value: 35, type: 'flat' }] },
-    { id: 'gc_skiller', name: 'Grand Charm of Vita', baseType: 'Grand Charm', rarity: 'Magic', width: 1, height: 3, requiredLevel: 1, stats: [{ id: 'assassin_skills', name: '+1 to Assassin Skills', value: 1, type: 'flat' }, { id: 'life', name: '+45 to Life', value: 45, type: 'flat' }] },
+    { id: 'sc_life', name: 'Small Charm of Life', baseType: 'Small Charm', rarity: 'Magic', width: 1, height: 1, requiredLevel: 1, imageFile: 'invcm1', stats: [{ id: 'life', name: '+20 to Life', value: 20, type: 'flat' }] },
+    { id: 'sc_res', name: 'Small Charm of Vita', baseType: 'Small Charm', rarity: 'Magic', width: 1, height: 1, requiredLevel: 1, imageFile: 'invcm1', stats: [{ id: 'all_res', name: '+5 to All Resistances', value: 5, type: 'flat' }] },
+    { id: 'lc_life', name: 'Large Charm of Life', baseType: 'Large Charm', rarity: 'Magic', width: 1, height: 2, requiredLevel: 1, imageFile: 'invcm2', stats: [{ id: 'life', name: '+35 to Life', value: 35, type: 'flat' }] },
+    { id: 'gc_skiller', name: 'Grand Charm of Vita', baseType: 'Grand Charm', rarity: 'Magic', width: 1, height: 3, requiredLevel: 1, imageFile: 'invcm3', stats: [{ id: 'assassin_skills', name: '+1 to Assassin Skills', value: 1, type: 'flat' }, { id: 'life', name: '+45 to Life', value: 45, type: 'flat' }] },
   ];
 
   const handleEquipCharm = (slot: string, charm: Item) => {
@@ -91,9 +91,21 @@ export const Equipment: React.FC = () => {
               onClick={() => setActiveSlot(slot.id)}
             >
               {equipped ? (
-                <div className="text-[10px] text-center p-1 font-bold leading-tight">
-                  {equipped.name}
-                  {equipped.isCorrupted && <div className="text-red-500 font-bold uppercase">Corrupted</div>}
+                <div className="flex flex-col items-center justify-center h-full w-full relative">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-1">
+                      <div className={`text-[10px] text-center font-bold leading-tight drop-shadow-[0_1px_1px_rgba(0,0,0,1)] ${equipped.imageFile ? 'opacity-0' : 'opacity-100'}`} style={{ transition: 'opacity 0.2s' }}>
+                        {equipped.name}
+                        {equipped.isCorrupted && <div className="text-red-500 font-bold uppercase">Corrupted</div>}
+                      </div>
+                  </div>
+                  {equipped.imageFile ? (
+                    <img src={`/items/${equipped.imageFile}.png`} alt={equipped.name} className="w-full h-full object-contain filter drop-shadow-[0_0_2px_rgba(0,0,0,0.8)] z-10" onError={(e) => {
+                       const img = e.target as HTMLImageElement;
+                       img.style.display = 'none';
+                       const textDiv = img.previousElementSibling?.firstElementChild as HTMLElement;
+                       if (textDiv) textDiv.classList.remove('opacity-0');
+                    }} />
+                  ) : null}
                 </div>
               ) : (
                 <div className="text-[9px] text-gray-500 uppercase tracking-[0.22em] text-center">
@@ -215,7 +227,13 @@ export const Equipment: React.FC = () => {
                 >
                     {charm && (
                         <>
-                            <div className="text-[10px] text-green-500 font-bold">C</div>
+                            {charm.imageFile ? (
+                              <img src={`/items/${charm.imageFile}.png`} alt={charm.name} className="w-full h-full object-contain filter drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]" onError={(e) => {
+                                 (e.target as HTMLImageElement).style.display = 'none';
+                                 (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+                              }} />
+                            ) : null}
+                            <div className={`text-[10px] text-green-500 font-bold ${charm.imageFile ? 'hidden' : ''}`}>C</div>
                             <div className="invisible group-hover:visible absolute z-[100] bottom-full left-1/2 -translate-x-1/2 mb-1 w-max pointer-events-none">
                                 <ItemTooltip item={charm} />
                                 <div className="pointer-events-auto">

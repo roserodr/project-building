@@ -4,6 +4,7 @@ export const assassinSkills: Skill[] = [
   // Traps
   {
     id: 'fire_blast',
+    iconCel: 0,
     name: 'Fire Blast',
     tab: 'Traps',
     row: 0,
@@ -23,6 +24,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'shock_web',
+    iconCel: 2,
     name: 'Shock Web',
     tab: 'Traps',
     row: 1,
@@ -34,6 +36,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'blade_sentinel',
+    iconCel: 4,
     name: 'Blade Sentinel',
     tab: 'Traps',
     row: 1,
@@ -45,6 +48,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'charged_bolt_sentry',
+    iconCel: 6,
     name: 'Charged Bolt Sentry',
     tab: 'Traps',
     row: 2,
@@ -56,6 +60,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'wake_of_fire',
+    iconCel: 8,
     name: 'Wake of Fire',
     tab: 'Traps',
     row: 2,
@@ -67,6 +72,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'blade_fury',
+    iconCel: 10,
     name: 'Blade Fury',
     tab: 'Traps',
     row: 3,
@@ -78,6 +84,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'lightning_sentry',
+    iconCel: 12,
     name: 'Lightning Sentry',
     tab: 'Traps',
     row: 4,
@@ -94,6 +101,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'wake_of_inferno',
+    iconCel: 14,
     name: 'Wake of Inferno',
     tab: 'Traps',
     row: 4,
@@ -105,6 +113,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'death_sentry',
+    iconCel: 16,
     name: 'Death Sentry',
     tab: 'Traps',
     row: 5,
@@ -116,6 +125,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'blade_shield',
+    iconCel: 18,
     name: 'Blade Shield',
     tab: 'Traps',
     row: 5,
@@ -129,6 +139,7 @@ export const assassinSkills: Skill[] = [
   // Shadow Disciplines
   {
     id: 'claw_mastery',
+    iconCel: 20,
     name: 'Claw Mastery',
     tab: 'Shadow Disciplines',
     row: 0,
@@ -140,6 +151,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'psychic_hammer',
+    iconCel: 22,
     name: 'Psychic Hammer',
     tab: 'Shadow Disciplines',
     row: 0,
@@ -151,6 +163,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'burst_of_speed',
+    iconCel: 36,
     name: 'Burst of Speed',
     tab: 'Shadow Disciplines',
     row: 1,
@@ -162,6 +175,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'cloak_of_shadows',
+    iconCel: 24,
     name: 'Cloak of Shadows',
     tab: 'Shadow Disciplines',
     row: 2,
@@ -173,6 +187,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'weapon_block',
+    iconCel: 26,
     name: 'Weapon Block',
     tab: 'Shadow Disciplines',
     row: 2,
@@ -184,6 +199,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'fade',
+    iconCel: 30,
     name: 'Fade',
     tab: 'Shadow Disciplines',
     row: 3,
@@ -195,6 +211,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'shadow_warrior',
+    iconCel: 38,
     name: 'Shadow Warrior',
     tab: 'Shadow Disciplines',
     row: 3,
@@ -206,6 +223,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'mind_blast',
+    iconCel: 34,
     name: 'Mind Blast',
     tab: 'Shadow Disciplines',
     row: 4,
@@ -217,6 +235,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'venom',
+    iconCel: 28,
     name: 'Venom',
     tab: 'Shadow Disciplines',
     row: 5,
@@ -228,6 +247,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'shadow_master',
+    iconCel: 32,
     name: 'Shadow Master',
     tab: 'Shadow Disciplines',
     row: 5,
@@ -241,6 +261,7 @@ export const assassinSkills: Skill[] = [
   // Martial Arts
   {
     id: 'tiger_strike',
+    iconCel: 40,
     name: 'Tiger Strike',
     tab: 'Martial Arts',
     row: 0,
@@ -252,6 +273,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'dragon_talon',
+    iconCel: 42,
     name: 'Dragon Talon',
     tab: 'Martial Arts',
     row: 0,
@@ -263,6 +285,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'fists_of_fire',
+    iconCel: 44,
     name: 'Fists of Fire',
     tab: 'Martial Arts',
     row: 1,
@@ -274,6 +297,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'dragon_claw',
+    iconCel: 46,
     name: 'Dragon Claw',
     tab: 'Martial Arts',
     row: 1,
@@ -285,6 +309,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'cobra_strike',
+    iconCel: 50,
     name: 'Cobra Strike',
     tab: 'Martial Arts',
     row: 2,
@@ -296,6 +321,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'claws_of_thunder',
+    iconCel: 58,
     name: 'Claws of Thunder',
     tab: 'Martial Arts',
     row: 3,
@@ -307,6 +333,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'dragon_tail',
+    iconCel: 48,
     name: 'Dragon Tail',
     tab: 'Martial Arts',
     row: 3,
@@ -318,6 +345,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'blades_of_ice',
+    iconCel: 52,
     name: 'Blades of Ice',
     tab: 'Martial Arts',
     row: 4,
@@ -329,6 +357,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'dragon_flight',
+    iconCel: 54,
     name: 'Dragon Flight',
     tab: 'Martial Arts',
     row: 4,
@@ -340,6 +369,7 @@ export const assassinSkills: Skill[] = [
   },
   {
     id: 'phoenix_strike',
+    iconCel: 56,
     name: 'Phoenix Strike',
     tab: 'Martial Arts',
     row: 5,

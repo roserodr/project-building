@@ -47,7 +47,7 @@ export const calculateSkillDamage = (skill: Skill, skillPoints: Record<string, n
             }
         }
 
-        const data = (skillLevelData as any)[validLevel];
+        const data = (skillLevelData as Record<number, { minDamage?: number; maxDamage?: number }>)[validLevel];
         if (data) {
             baseMin = data.minDamage || 0;
             baseMax = data.maxDamage || 0;
