@@ -3631,2427 +3631,1789 @@ export const skillsLevelData: Record<string, Record<number, { minDamage?: number
   },
   "Fists of Fire": {
     "1": {
-      "minDamage": 2,
-      "maxDamage": 4
+      "minDamage": 0,
+      "maxDamage": 1
     },
     "2": {
-      "minDamage": 4,
-      "maxDamage": 6
+      "minDamage": 1,
+      "maxDamage": 2
     },
     "3": {
+      "minDamage": 2,
+      "maxDamage": 2
+    },
+    "4": {
+      "minDamage": 2,
+      "maxDamage": 2
+    },
+    "5": {
+      "minDamage": 2,
+      "maxDamage": 3
+    },
+    "6": {
+      "minDamage": 3,
+      "maxDamage": 4
+    },
+    "7": {
+      "minDamage": 4,
+      "maxDamage": 4
+    },
+    "8": {
+      "minDamage": 4,
+      "maxDamage": 4
+    },
+    "9": {
+      "minDamage": 4,
+      "maxDamage": 5
+    },
+    "10": {
+      "minDamage": 6,
+      "maxDamage": 6
+    },
+    "11": {
       "minDamage": 6,
       "maxDamage": 8
     },
-    "4": {
+    "12": {
       "minDamage": 8,
       "maxDamage": 10
     },
-    "5": {
+    "13": {
+      "minDamage": 8,
+      "maxDamage": 11
+    },
+    "14": {
       "minDamage": 10,
       "maxDamage": 12
     },
-    "6": {
-      "minDamage": 12,
+    "15": {
+      "minDamage": 10,
       "maxDamage": 14
     },
-    "7": {
-      "minDamage": 14,
+    "16": {
+      "minDamage": 12,
       "maxDamage": 16
     },
-    "8": {
-      "minDamage": 16,
-      "maxDamage": 18
-    },
-    "9": {
-      "minDamage": 18,
-      "maxDamage": 22
-    },
-    "10": {
-      "minDamage": 20,
-      "maxDamage": 26
-    },
-    "11": {
-      "minDamage": 22,
-      "maxDamage": 30
-    },
-    "12": {
-      "minDamage": 24,
-      "maxDamage": 34
-    },
-    "13": {
-      "minDamage": 26,
-      "maxDamage": 38
-    },
-    "14": {
-      "minDamage": 28,
-      "maxDamage": 42
-    },
-    "15": {
-      "minDamage": 30,
-      "maxDamage": 46
-    },
-    "16": {
-      "minDamage": 32,
-      "maxDamage": 50
-    },
     "17": {
-      "minDamage": 50,
-      "maxDamage": 70
+      "minDamage": 12,
+      "maxDamage": 17
     },
     "18": {
-      "minDamage": 68,
-      "maxDamage": 90
+      "minDamage": 18,
+      "maxDamage": 24
     },
     "19": {
-      "minDamage": 86,
-      "maxDamage": 110
+      "minDamage": 22,
+      "maxDamage": 32
     },
     "20": {
-      "minDamage": 104,
+      "minDamage": 28,
+      "maxDamage": 40
+    },
+    "21": {
+      "minDamage": 32,
+      "maxDamage": 47
+    },
+    "22": {
+      "minDamage": 38,
+      "maxDamage": 54
+    },
+    "23": {
+      "minDamage": 42,
+      "maxDamage": 62
+    },
+    "24": {
+      "minDamage": 52,
+      "maxDamage": 76
+    },
+    "25": {
+      "minDamage": 60,
+      "maxDamage": 89
+    },
+    "26": {
+      "minDamage": 70,
+      "maxDamage": 102
+    },
+    "27": {
+      "minDamage": 78,
+      "maxDamage": 116
+    },
+    "28": {
+      "minDamage": 88,
       "maxDamage": 130
     },
-    "21": {
-      "minDamage": 122,
-      "maxDamage": 150
-    },
-    "22": {
-      "minDamage": 140,
-      "maxDamage": 170
-    },
-    "23": {
-      "minDamage": 176,
-      "maxDamage": 208
-    },
-    "24": {
-      "minDamage": 212,
-      "maxDamage": 246
-    },
-    "25": {
-      "minDamage": 248,
-      "maxDamage": 284
-    },
-    "26": {
-      "minDamage": 284,
-      "maxDamage": 322
-    },
-    "27": {
-      "minDamage": 320,
-      "maxDamage": 360
-    },
-    "28": {
-      "minDamage": 356,
-      "maxDamage": 398
-    },
     "29": {
-      "minDamage": 412,
-      "maxDamage": 456
-    },
-    "30": {
-      "minDamage": 468,
-      "maxDamage": 514
-    },
-    "31": {
-      "minDamage": 524,
-      "maxDamage": 572
-    },
-    "32": {
-      "minDamage": 580,
-      "maxDamage": 630
-    },
-    "33": {
-      "minDamage": 636,
-      "maxDamage": 688
-    },
-    "34": {
-      "minDamage": 692,
-      "maxDamage": 746
-    },
-    "35": {
-      "minDamage": 748,
-      "maxDamage": 804
-    },
-    "36": {
-      "minDamage": 804,
-      "maxDamage": 862
-    },
-    "37": {
-      "minDamage": 860,
-      "maxDamage": 920
-    },
-    "38": {
-      "minDamage": 916,
-      "maxDamage": 978
-    },
-    "39": {
-      "minDamage": 972,
-      "maxDamage": 1036
-    },
-    "40": {
-      "minDamage": 1028,
-      "maxDamage": 1094
-    },
-    "41": {
-      "minDamage": 1084,
-      "maxDamage": 1152
-    },
-    "42": {
-      "minDamage": 1140,
-      "maxDamage": 1210
-    },
-    "43": {
-      "minDamage": 1196,
-      "maxDamage": 1268
-    },
-    "44": {
-      "minDamage": 1252,
-      "maxDamage": 1326
-    },
-    "45": {
-      "minDamage": 1308,
-      "maxDamage": 1384
-    },
-    "46": {
-      "minDamage": 1364,
-      "maxDamage": 1442
-    },
-    "47": {
-      "minDamage": 1420,
-      "maxDamage": 1500
-    },
-    "48": {
-      "minDamage": 1476,
-      "maxDamage": 1558
-    },
-    "49": {
-      "minDamage": 1532,
-      "maxDamage": 1616
-    },
-    "50": {
-      "minDamage": 1588,
-      "maxDamage": 1674
-    },
-    "51": {
-      "minDamage": 1644,
-      "maxDamage": 1732
-    },
-    "52": {
-      "minDamage": 1700,
-      "maxDamage": 1790
-    },
-    "53": {
-      "minDamage": 1756,
-      "maxDamage": 1848
-    },
-    "54": {
-      "minDamage": 1812,
-      "maxDamage": 1906
-    },
-    "55": {
-      "minDamage": 1868,
-      "maxDamage": 1964
-    },
-    "56": {
-      "minDamage": 1924,
-      "maxDamage": 2022
-    },
-    "57": {
-      "minDamage": 1980,
-      "maxDamage": 2080
-    },
-    "58": {
-      "minDamage": 2036,
-      "maxDamage": 2138
-    },
-    "59": {
-      "minDamage": 2092,
-      "maxDamage": 2196
-    },
-    "60": {
-      "minDamage": 2148,
-      "maxDamage": 2254
-    }
-  },
-  "Cobra Strike": {
-    "1": {
-      "minDamage": 6,
-      "maxDamage": 18
-    },
-    "2": {
-      "minDamage": 15,
-      "maxDamage": 28
-    },
-    "3": {
-      "minDamage": 25,
-      "maxDamage": 37
-    },
-    "4": {
-      "minDamage": 34,
-      "maxDamage": 46
-    },
-    "5": {
-      "minDamage": 43,
-      "maxDamage": 56
-    },
-    "6": {
-      "minDamage": 53,
-      "maxDamage": 65
-    },
-    "7": {
-      "minDamage": 62,
-      "maxDamage": 75
-    },
-    "8": {
-      "minDamage": 71,
-      "maxDamage": 84
-    },
-    "9": {
       "minDamage": 96,
-      "maxDamage": 109
-    },
-    "10": {
-      "minDamage": 121,
-      "maxDamage": 134
-    },
-    "11": {
-      "minDamage": 146,
-      "maxDamage": 159
-    },
-    "12": {
-      "minDamage": 171,
-      "maxDamage": 184
-    },
-    "13": {
-      "minDamage": 196,
-      "maxDamage": 209
-    },
-    "14": {
-      "minDamage": 221,
-      "maxDamage": 234
-    },
-    "15": {
-      "minDamage": 246,
-      "maxDamage": 259
-    },
-    "16": {
-      "minDamage": 271,
-      "maxDamage": 284
-    },
-    "17": {
-      "minDamage": 309,
-      "maxDamage": 321
-    },
-    "18": {
-      "minDamage": 346,
-      "maxDamage": 359
-    },
-    "19": {
-      "minDamage": 384,
-      "maxDamage": 396
-    },
-    "20": {
-      "minDamage": 421,
-      "maxDamage": 434
-    },
-    "21": {
-      "minDamage": 459,
-      "maxDamage": 471
-    },
-    "22": {
-      "minDamage": 496,
-      "maxDamage": 509
-    },
-    "23": {
-      "minDamage": 590,
-      "maxDamage": 603
-    },
-    "24": {
-      "minDamage": 684,
-      "maxDamage": 696
-    },
-    "25": {
-      "minDamage": 778,
-      "maxDamage": 790
-    },
-    "26": {
-      "minDamage": 871,
-      "maxDamage": 884
-    },
-    "27": {
-      "minDamage": 965,
-      "maxDamage": 978
-    },
-    "28": {
-      "minDamage": 1059,
-      "maxDamage": 1071
-    },
-    "29": {
-      "minDamage": 1265,
-      "maxDamage": 1278
+      "maxDamage": 143
     },
     "30": {
-      "minDamage": 1471,
-      "maxDamage": 1484
+      "minDamage": 110,
+      "maxDamage": 162
     },
     "31": {
-      "minDamage": 1678,
-      "maxDamage": 1690
+      "minDamage": 122,
+      "maxDamage": 182
     },
     "32": {
-      "minDamage": 1884,
-      "maxDamage": 1896
+      "minDamage": 136,
+      "maxDamage": 202
     },
     "33": {
-      "minDamage": 2090,
-      "maxDamage": 2103
+      "minDamage": 148,
+      "maxDamage": 221
     },
     "34": {
-      "minDamage": 2296,
-      "maxDamage": 2309
+      "minDamage": 162,
+      "maxDamage": 240
     },
     "35": {
-      "minDamage": 2503,
-      "maxDamage": 2515
+      "minDamage": 174,
+      "maxDamage": 260
     },
     "36": {
-      "minDamage": 2709,
-      "maxDamage": 2721
+      "minDamage": 188,
+      "maxDamage": 280
     },
     "37": {
-      "minDamage": 2915,
-      "maxDamage": 2928
+      "minDamage": 200,
+      "maxDamage": 299
     },
     "38": {
-      "minDamage": 3121,
-      "maxDamage": 3134
+      "minDamage": 214,
+      "maxDamage": 318
     },
     "39": {
-      "minDamage": 3328,
-      "maxDamage": 3340
+      "minDamage": 226,
+      "maxDamage": 338
     },
     "40": {
-      "minDamage": 3534,
-      "maxDamage": 3546
-    },
-    "41": {
-      "minDamage": 3740,
-      "maxDamage": 3753
-    },
-    "42": {
-      "minDamage": 3946,
-      "maxDamage": 3959
-    },
-    "43": {
-      "minDamage": 4153,
-      "maxDamage": 4165
-    },
-    "44": {
-      "minDamage": 4359,
-      "maxDamage": 4371
-    },
-    "45": {
-      "minDamage": 4565,
-      "maxDamage": 4578
-    },
-    "46": {
-      "minDamage": 4771,
-      "maxDamage": 4784
-    },
-    "47": {
-      "minDamage": 4978,
-      "maxDamage": 4990
-    },
-    "48": {
-      "minDamage": 5184,
-      "maxDamage": 5196
-    },
-    "49": {
-      "minDamage": 5390,
-      "maxDamage": 5403
-    },
-    "50": {
-      "minDamage": 5596,
-      "maxDamage": 5609
-    },
-    "51": {
-      "minDamage": 5803,
-      "maxDamage": 5815
-    },
-    "52": {
-      "minDamage": 6009,
-      "maxDamage": 6021
-    },
-    "53": {
-      "minDamage": 6215,
-      "maxDamage": 6228
-    },
-    "54": {
-      "minDamage": 6421,
-      "maxDamage": 6434
-    },
-    "55": {
-      "minDamage": 6628,
-      "maxDamage": 6640
-    },
-    "56": {
-      "minDamage": 6834,
-      "maxDamage": 6846
-    },
-    "57": {
-      "minDamage": 7040,
-      "maxDamage": 7053
-    },
-    "58": {
-      "minDamage": 7246,
-      "maxDamage": 7259
-    },
-    "59": {
-      "minDamage": 7453,
-      "maxDamage": 7465
-    },
-    "60": {
-      "minDamage": 7659,
-      "maxDamage": 7671
+      "minDamage": 240,
+      "maxDamage": 358
     }
   },
   "Claws of Thunder": {
     "1": {
-      "minDamage": 10,
+      "minDamage": 0,
       "maxDamage": 40
     },
     "2": {
-      "minDamage": 15,
-      "maxDamage": 60
+      "minDamage": 0,
+      "maxDamage": 50
     },
     "3": {
-      "minDamage": 20,
-      "maxDamage": 80
+      "minDamage": 0,
+      "maxDamage": 60
     },
     "4": {
-      "minDamage": 25,
-      "maxDamage": 100
+      "minDamage": 0,
+      "maxDamage": 70
     },
     "5": {
-      "minDamage": 30,
-      "maxDamage": 120
+      "minDamage": 0,
+      "maxDamage": 80
     },
     "6": {
-      "minDamage": 35,
-      "maxDamage": 140
+      "minDamage": 0,
+      "maxDamage": 90
     },
     "7": {
-      "minDamage": 40,
-      "maxDamage": 160
+      "minDamage": 0,
+      "maxDamage": 100
     },
     "8": {
-      "minDamage": 45,
-      "maxDamage": 180
+      "minDamage": 0,
+      "maxDamage": 110
     },
     "9": {
-      "minDamage": 55,
-      "maxDamage": 220
+      "minDamage": 0,
+      "maxDamage": 120
     },
     "10": {
-      "minDamage": 65,
-      "maxDamage": 260
+      "minDamage": 0,
+      "maxDamage": 140
     },
     "11": {
-      "minDamage": 75,
-      "maxDamage": 300
+      "minDamage": 0,
+      "maxDamage": 160
     },
     "12": {
-      "minDamage": 85,
-      "maxDamage": 340
+      "minDamage": 0,
+      "maxDamage": 180
     },
     "13": {
-      "minDamage": 95,
-      "maxDamage": 380
+      "minDamage": 0,
+      "maxDamage": 200
     },
     "14": {
-      "minDamage": 105,
-      "maxDamage": 420
+      "minDamage": 0,
+      "maxDamage": 220
     },
     "15": {
-      "minDamage": 115,
-      "maxDamage": 460
+      "minDamage": 0,
+      "maxDamage": 240
     },
     "16": {
-      "minDamage": 125,
-      "maxDamage": 500
+      "minDamage": 0,
+      "maxDamage": 260
     },
     "17": {
-      "minDamage": 140,
-      "maxDamage": 560
+      "minDamage": 0,
+      "maxDamage": 280
     },
     "18": {
-      "minDamage": 155,
-      "maxDamage": 620
+      "minDamage": 0,
+      "maxDamage": 310
     },
     "19": {
-      "minDamage": 170,
-      "maxDamage": 680
+      "minDamage": 0,
+      "maxDamage": 340
     },
     "20": {
-      "minDamage": 185,
-      "maxDamage": 740
+      "minDamage": 0,
+      "maxDamage": 370
     },
     "21": {
-      "minDamage": 200,
-      "maxDamage": 800
+      "minDamage": 0,
+      "maxDamage": 400
     },
     "22": {
-      "minDamage": 215,
-      "maxDamage": 860
+      "minDamage": 0,
+      "maxDamage": 430
     },
     "23": {
-      "minDamage": 235,
-      "maxDamage": 940
+      "minDamage": 0,
+      "maxDamage": 460
     },
     "24": {
-      "minDamage": 255,
-      "maxDamage": 1020
+      "minDamage": 0,
+      "maxDamage": 500
     },
     "25": {
-      "minDamage": 275,
-      "maxDamage": 1100
+      "minDamage": 0,
+      "maxDamage": 540
     },
     "26": {
-      "minDamage": 295,
-      "maxDamage": 1180
+      "minDamage": 0,
+      "maxDamage": 580
     },
     "27": {
-      "minDamage": 315,
-      "maxDamage": 1260
+      "minDamage": 0,
+      "maxDamage": 620
     },
     "28": {
-      "minDamage": 335,
-      "maxDamage": 1340
+      "minDamage": 0,
+      "maxDamage": 660
     },
     "29": {
-      "minDamage": 360,
-      "maxDamage": 1440
+      "minDamage": 0,
+      "maxDamage": 700
     },
     "30": {
-      "minDamage": 385,
-      "maxDamage": 1540
+      "minDamage": 0,
+      "maxDamage": 750
     },
     "31": {
-      "minDamage": 410,
-      "maxDamage": 1640
+      "minDamage": 0,
+      "maxDamage": 800
     },
     "32": {
-      "minDamage": 435,
-      "maxDamage": 1740
+      "minDamage": 0,
+      "maxDamage": 850
     },
     "33": {
-      "minDamage": 460,
-      "maxDamage": 1840
+      "minDamage": 0,
+      "maxDamage": 900
     },
     "34": {
-      "minDamage": 485,
-      "maxDamage": 1940
+      "minDamage": 0,
+      "maxDamage": 950
     },
     "35": {
-      "minDamage": 510,
-      "maxDamage": 2040
+      "minDamage": 0,
+      "maxDamage": 1000
     },
     "36": {
-      "minDamage": 535,
-      "maxDamage": 2140
+      "minDamage": 0,
+      "maxDamage": 1050
     },
     "37": {
-      "minDamage": 560,
-      "maxDamage": 2240
+      "minDamage": 0,
+      "maxDamage": 1100
     },
     "38": {
-      "minDamage": 585,
-      "maxDamage": 2340
+      "minDamage": 0,
+      "maxDamage": 1150
     },
     "39": {
-      "minDamage": 610,
-      "maxDamage": 2440
+      "minDamage": 0,
+      "maxDamage": 1200
     },
     "40": {
-      "minDamage": 635,
-      "maxDamage": 2540
-    },
-    "41": {
-      "minDamage": 660,
-      "maxDamage": 2640
-    },
-    "42": {
-      "minDamage": 685,
-      "maxDamage": 2740
-    },
-    "43": {
-      "minDamage": 710,
-      "maxDamage": 2840
-    },
-    "44": {
-      "minDamage": 735,
-      "maxDamage": 2940
-    },
-    "45": {
-      "minDamage": 760,
-      "maxDamage": 3040
-    },
-    "46": {
-      "minDamage": 785,
-      "maxDamage": 3140
-    },
-    "47": {
-      "minDamage": 810,
-      "maxDamage": 3240
-    },
-    "48": {
-      "minDamage": 835,
-      "maxDamage": 3340
-    },
-    "49": {
-      "minDamage": 860,
-      "maxDamage": 3440
-    },
-    "50": {
-      "minDamage": 885,
-      "maxDamage": 3540
-    },
-    "51": {
-      "minDamage": 910,
-      "maxDamage": 3640
-    },
-    "52": {
-      "minDamage": 935,
-      "maxDamage": 3740
-    },
-    "53": {
-      "minDamage": 960,
-      "maxDamage": 3840
-    },
-    "54": {
-      "minDamage": 985,
-      "maxDamage": 3940
-    },
-    "55": {
-      "minDamage": 1010,
-      "maxDamage": 4040
-    },
-    "56": {
-      "minDamage": 1035,
-      "maxDamage": 4140
-    },
-    "57": {
-      "minDamage": 1060,
-      "maxDamage": 4240
-    },
-    "58": {
-      "minDamage": 1085,
-      "maxDamage": 4340
-    },
-    "59": {
-      "minDamage": 1110,
-      "maxDamage": 4440
-    },
-    "60": {
-      "minDamage": 1135,
-      "maxDamage": 4540
+      "minDamage": 0,
+      "maxDamage": 1250
     }
   },
   "Blades of Ice": {
     "1": {
-      "minDamage": 24,
-      "maxDamage": 32
+      "minDamage": 6,
+      "maxDamage": 15
     },
     "2": {
-      "minDamage": 32,
-      "maxDamage": 44
+      "minDamage": 10,
+      "maxDamage": 20
     },
     "3": {
-      "minDamage": 40,
-      "maxDamage": 56
+      "minDamage": 14,
+      "maxDamage": 24
     },
     "4": {
-      "minDamage": 48,
-      "maxDamage": 68
+      "minDamage": 17,
+      "maxDamage": 28
     },
     "5": {
-      "minDamage": 56,
-      "maxDamage": 80
+      "minDamage": 20,
+      "maxDamage": 33
     },
     "6": {
-      "minDamage": 64,
-      "maxDamage": 92
+      "minDamage": 24,
+      "maxDamage": 38
     },
     "7": {
-      "minDamage": 72,
-      "maxDamage": 104
+      "minDamage": 28,
+      "maxDamage": 42
     },
     "8": {
-      "minDamage": 80,
-      "maxDamage": 116
+      "minDamage": 31,
+      "maxDamage": 46
     },
     "9": {
-      "minDamage": 93,
-      "maxDamage": 133
+      "minDamage": 34,
+      "maxDamage": 51
     },
     "10": {
-      "minDamage": 106,
-      "maxDamage": 150
+      "minDamage": 40,
+      "maxDamage": 57
     },
     "11": {
-      "minDamage": 119,
-      "maxDamage": 167
+      "minDamage": 44,
+      "maxDamage": 63
     },
     "12": {
-      "minDamage": 132,
-      "maxDamage": 184
+      "minDamage": 50,
+      "maxDamage": 69
     },
     "13": {
-      "minDamage": 145,
-      "maxDamage": 201
+      "minDamage": 54,
+      "maxDamage": 75
     },
     "14": {
-      "minDamage": 158,
-      "maxDamage": 218
+      "minDamage": 60,
+      "maxDamage": 81
     },
     "15": {
-      "minDamage": 171,
-      "maxDamage": 235
+      "minDamage": 64,
+      "maxDamage": 87
     },
     "16": {
-      "minDamage": 184,
-      "maxDamage": 252
+      "minDamage": 70,
+      "maxDamage": 93
     },
     "17": {
-      "minDamage": 211,
-      "maxDamage": 288
+      "minDamage": 74,
+      "maxDamage": 99
     },
     "18": {
-      "minDamage": 238,
-      "maxDamage": 324
+      "minDamage": 86,
+      "maxDamage": 112
     },
     "19": {
-      "minDamage": 265,
-      "maxDamage": 360
-    },
-    "20": {
-      "minDamage": 292,
-      "maxDamage": 396
-    },
-    "21": {
-      "minDamage": 319,
-      "maxDamage": 432
-    },
-    "22": {
-      "minDamage": 346,
-      "maxDamage": 468
-    },
-    "23": {
-      "minDamage": 379,
-      "maxDamage": 512
-    },
-    "24": {
-      "minDamage": 412,
-      "maxDamage": 556
-    },
-    "25": {
-      "minDamage": 445,
-      "maxDamage": 600
-    },
-    "26": {
-      "minDamage": 478,
-      "maxDamage": 644
-    },
-    "27": {
-      "minDamage": 511,
-      "maxDamage": 688
-    },
-    "28": {
-      "minDamage": 544,
-      "maxDamage": 732
-    },
-    "29": {
-      "minDamage": 588,
-      "maxDamage": 791
-    },
-    "30": {
-      "minDamage": 632,
-      "maxDamage": 850
-    },
-    "31": {
-      "minDamage": 676,
-      "maxDamage": 909
-    },
-    "32": {
-      "minDamage": 720,
-      "maxDamage": 968
-    },
-    "33": {
-      "minDamage": 764,
-      "maxDamage": 1027
-    },
-    "34": {
-      "minDamage": 808,
-      "maxDamage": 1086
-    },
-    "35": {
-      "minDamage": 852,
-      "maxDamage": 1145
-    },
-    "36": {
-      "minDamage": 896,
-      "maxDamage": 1204
-    },
-    "37": {
-      "minDamage": 940,
-      "maxDamage": 1263
-    },
-    "38": {
-      "minDamage": 984,
-      "maxDamage": 1322
-    },
-    "39": {
-      "minDamage": 1028,
-      "maxDamage": 1381
-    },
-    "40": {
-      "minDamage": 1072,
-      "maxDamage": 1440
-    },
-    "41": {
-      "minDamage": 1116,
-      "maxDamage": 1499
-    },
-    "42": {
-      "minDamage": 1160,
-      "maxDamage": 1558
-    },
-    "43": {
-      "minDamage": 1204,
-      "maxDamage": 1617
-    },
-    "44": {
-      "minDamage": 1248,
-      "maxDamage": 1676
-    },
-    "45": {
-      "minDamage": 1292,
-      "maxDamage": 1735
-    },
-    "46": {
-      "minDamage": 1336,
-      "maxDamage": 1794
-    },
-    "47": {
-      "minDamage": 1380,
-      "maxDamage": 1853
-    },
-    "48": {
-      "minDamage": 1424,
-      "maxDamage": 1912
-    },
-    "49": {
-      "minDamage": 1468,
-      "maxDamage": 1971
-    },
-    "50": {
-      "minDamage": 1512,
-      "maxDamage": 2030
-    },
-    "51": {
-      "minDamage": 1556,
-      "maxDamage": 2089
-    },
-    "52": {
-      "minDamage": 1600,
-      "maxDamage": 2148
-    },
-    "53": {
-      "minDamage": 1644,
-      "maxDamage": 2207
-    },
-    "54": {
-      "minDamage": 1688,
-      "maxDamage": 2266
-    },
-    "55": {
-      "minDamage": 1732,
-      "maxDamage": 2325
-    },
-    "56": {
-      "minDamage": 1776,
-      "maxDamage": 2384
-    },
-    "57": {
-      "minDamage": 1820,
-      "maxDamage": 2443
-    },
-    "58": {
-      "minDamage": 1864,
-      "maxDamage": 2502
-    },
-    "59": {
-      "minDamage": 1908,
-      "maxDamage": 2561
-    },
-    "60": {
-      "minDamage": 1952,
-      "maxDamage": 2620
-    }
-  },
-  "Phoenix Strike": {
-    "1": {
-      "minDamage": 16,
-      "maxDamage": 32
-    },
-    "2": {
-      "minDamage": 20,
-      "maxDamage": 36
-    },
-    "3": {
-      "minDamage": 24,
-      "maxDamage": 40
-    },
-    "4": {
-      "minDamage": 28,
-      "maxDamage": 44
-    },
-    "5": {
-      "minDamage": 32,
-      "maxDamage": 48
-    },
-    "6": {
-      "minDamage": 36,
-      "maxDamage": 52
-    },
-    "7": {
-      "minDamage": 40,
-      "maxDamage": 56
-    },
-    "8": {
-      "minDamage": 44,
-      "maxDamage": 60
-    },
-    "9": {
-      "minDamage": 52,
-      "maxDamage": 68
-    },
-    "10": {
-      "minDamage": 60,
-      "maxDamage": 76
-    },
-    "11": {
-      "minDamage": 68,
-      "maxDamage": 84
-    },
-    "12": {
-      "minDamage": 76,
-      "maxDamage": 92
-    },
-    "13": {
-      "minDamage": 84,
-      "maxDamage": 100
-    },
-    "14": {
-      "minDamage": 92,
-      "maxDamage": 108
-    },
-    "15": {
-      "minDamage": 100,
-      "maxDamage": 116
-    },
-    "16": {
-      "minDamage": 108,
+      "minDamage": 98,
       "maxDamage": 124
     },
-    "17": {
-      "minDamage": 120,
-      "maxDamage": 137
-    },
-    "18": {
-      "minDamage": 132,
-      "maxDamage": 150
-    },
-    "19": {
-      "minDamage": 144,
-      "maxDamage": 163
-    },
     "20": {
-      "minDamage": 156,
-      "maxDamage": 176
+      "minDamage": 109,
+      "maxDamage": 136
     },
     "21": {
-      "minDamage": 168,
-      "maxDamage": 189
+      "minDamage": 120,
+      "maxDamage": 149
     },
     "22": {
-      "minDamage": 180,
-      "maxDamage": 202
+      "minDamage": 132,
+      "maxDamage": 162
     },
     "23": {
-      "minDamage": 200,
-      "maxDamage": 223
+      "minDamage": 144,
+      "maxDamage": 174
     },
     "24": {
-      "minDamage": 220,
-      "maxDamage": 244
+      "minDamage": 162,
+      "maxDamage": 192
     },
     "25": {
-      "minDamage": 240,
-      "maxDamage": 265
+      "minDamage": 180,
+      "maxDamage": 211
     },
     "26": {
-      "minDamage": 260,
-      "maxDamage": 286
+      "minDamage": 199,
+      "maxDamage": 230
     },
     "27": {
-      "minDamage": 280,
-      "maxDamage": 307
+      "minDamage": 218,
+      "maxDamage": 248
     },
     "28": {
-      "minDamage": 300,
-      "maxDamage": 328
+      "minDamage": 236,
+      "maxDamage": 266
     },
     "29": {
-      "minDamage": 328,
-      "maxDamage": 357
+      "minDamage": 254,
+      "maxDamage": 285
     },
     "30": {
-      "minDamage": 356,
-      "maxDamage": 386
+      "minDamage": 279,
+      "maxDamage": 310
     },
     "31": {
-      "minDamage": 384,
-      "maxDamage": 415
+      "minDamage": 304,
+      "maxDamage": 335
     },
     "32": {
-      "minDamage": 412,
-      "maxDamage": 444
+      "minDamage": 328,
+      "maxDamage": 360
     },
     "33": {
-      "minDamage": 440,
-      "maxDamage": 473
+      "minDamage": 352,
+      "maxDamage": 385
     },
     "34": {
-      "minDamage": 468,
-      "maxDamage": 502
+      "minDamage": 377,
+      "maxDamage": 410
     },
     "35": {
-      "minDamage": 496,
-      "maxDamage": 531
+      "minDamage": 402,
+      "maxDamage": 435
     },
     "36": {
-      "minDamage": 524,
-      "maxDamage": 560
+      "minDamage": 426,
+      "maxDamage": 460
     },
     "37": {
-      "minDamage": 552,
-      "maxDamage": 589
+      "minDamage": 450,
+      "maxDamage": 485
     },
     "38": {
-      "minDamage": 580,
-      "maxDamage": 618
+      "minDamage": 475,
+      "maxDamage": 510
     },
     "39": {
-      "minDamage": 608,
-      "maxDamage": 647
+      "minDamage": 500,
+      "maxDamage": 535
     },
     "40": {
-      "minDamage": 636,
-      "maxDamage": 676
-    },
-    "41": {
-      "minDamage": 664,
-      "maxDamage": 705
-    },
-    "42": {
-      "minDamage": 692,
-      "maxDamage": 734
-    },
-    "43": {
-      "minDamage": 720,
-      "maxDamage": 763
-    },
-    "44": {
-      "minDamage": 748,
-      "maxDamage": 792
-    },
-    "45": {
-      "minDamage": 776,
-      "maxDamage": 821
-    },
-    "46": {
-      "minDamage": 804,
-      "maxDamage": 850
-    },
-    "47": {
-      "minDamage": 832,
-      "maxDamage": 879
-    },
-    "48": {
-      "minDamage": 860,
-      "maxDamage": 908
-    },
-    "49": {
-      "minDamage": 888,
-      "maxDamage": 937
-    },
-    "50": {
-      "minDamage": 916,
-      "maxDamage": 966
-    },
-    "51": {
-      "minDamage": 944,
-      "maxDamage": 995
-    },
-    "52": {
-      "minDamage": 972,
-      "maxDamage": 1024
-    },
-    "53": {
-      "minDamage": 1000,
-      "maxDamage": 1053
-    },
-    "54": {
-      "minDamage": 1028,
-      "maxDamage": 1082
-    },
-    "55": {
-      "minDamage": 1056,
-      "maxDamage": 1111
-    },
-    "56": {
-      "minDamage": 1084,
-      "maxDamage": 1140
-    },
-    "57": {
-      "minDamage": 1112,
-      "maxDamage": 1169
-    },
-    "58": {
-      "minDamage": 1140,
-      "maxDamage": 1198
-    },
-    "59": {
-      "minDamage": 1168,
-      "maxDamage": 1227
-    },
-    "60": {
-      "minDamage": 1196,
-      "maxDamage": 1256
+      "minDamage": 524,
+      "maxDamage": 560
     }
   },
   "Psychic Hammer": {
     "1": {
-      "minDamage": 4,
-      "maxDamage": 6
+      "minDamage": 2,
+      "maxDamage": 3
     },
     "2": {
-      "minDamage": 7,
-      "maxDamage": 10
+      "minDamage": 4,
+      "maxDamage": 5
     },
     "3": {
-      "minDamage": 10,
-      "maxDamage": 14
+      "minDamage": 5,
+      "maxDamage": 7
     },
     "4": {
-      "minDamage": 13,
-      "maxDamage": 18
+      "minDamage": 6,
+      "maxDamage": 9
     },
     "5": {
-      "minDamage": 16,
-      "maxDamage": 22
+      "minDamage": 8,
+      "maxDamage": 11
     },
     "6": {
-      "minDamage": 19,
-      "maxDamage": 26
+      "minDamage": 10,
+      "maxDamage": 13
     },
     "7": {
-      "minDamage": 22,
-      "maxDamage": 30
+      "minDamage": 11,
+      "maxDamage": 15
     },
     "8": {
-      "minDamage": 25,
-      "maxDamage": 34
+      "minDamage": 12,
+      "maxDamage": 17
     },
     "9": {
-      "minDamage": 31,
-      "maxDamage": 42
+      "minDamage": 14,
+      "maxDamage": 19
     },
     "10": {
-      "minDamage": 37,
-      "maxDamage": 50
+      "minDamage": 17,
+      "maxDamage": 23
     },
     "11": {
-      "minDamage": 43,
-      "maxDamage": 58
+      "minDamage": 20,
+      "maxDamage": 27
     },
     "12": {
-      "minDamage": 49,
-      "maxDamage": 66
+      "minDamage": 23,
+      "maxDamage": 31
     },
     "13": {
-      "minDamage": 55,
-      "maxDamage": 74
+      "minDamage": 26,
+      "maxDamage": 35
     },
     "14": {
-      "minDamage": 61,
-      "maxDamage": 82
+      "minDamage": 29,
+      "maxDamage": 39
     },
     "15": {
-      "minDamage": 67,
-      "maxDamage": 90
+      "minDamage": 32,
+      "maxDamage": 43
     },
     "16": {
-      "minDamage": 73,
-      "maxDamage": 98
+      "minDamage": 35,
+      "maxDamage": 47
     },
     "17": {
-      "minDamage": 85,
-      "maxDamage": 112
+      "minDamage": 38,
+      "maxDamage": 51
     },
     "18": {
-      "minDamage": 97,
-      "maxDamage": 126
+      "minDamage": 44,
+      "maxDamage": 58
     },
     "19": {
-      "minDamage": 109,
-      "maxDamage": 140
+      "minDamage": 50,
+      "maxDamage": 65
     },
     "20": {
-      "minDamage": 121,
-      "maxDamage": 154
+      "minDamage": 56,
+      "maxDamage": 72
     },
     "21": {
-      "minDamage": 133,
-      "maxDamage": 168
+      "minDamage": 62,
+      "maxDamage": 79
     },
     "22": {
-      "minDamage": 145,
-      "maxDamage": 182
+      "minDamage": 68,
+      "maxDamage": 86
     },
     "23": {
-      "minDamage": 169,
-      "maxDamage": 208
+      "minDamage": 74,
+      "maxDamage": 93
     },
     "24": {
-      "minDamage": 193,
-      "maxDamage": 234
+      "minDamage": 86,
+      "maxDamage": 106
     },
     "25": {
-      "minDamage": 217,
-      "maxDamage": 260
+      "minDamage": 98,
+      "maxDamage": 119
     },
     "26": {
-      "minDamage": 241,
-      "maxDamage": 286
+      "minDamage": 110,
+      "maxDamage": 132
     },
     "27": {
-      "minDamage": 265,
-      "maxDamage": 312
+      "minDamage": 122,
+      "maxDamage": 145
     },
     "28": {
-      "minDamage": 289,
-      "maxDamage": 338
+      "minDamage": 134,
+      "maxDamage": 158
     },
     "29": {
-      "minDamage": 325,
-      "maxDamage": 376
+      "minDamage": 146,
+      "maxDamage": 171
     },
     "30": {
-      "minDamage": 361,
-      "maxDamage": 414
+      "minDamage": 164,
+      "maxDamage": 190
     },
     "31": {
-      "minDamage": 397,
-      "maxDamage": 452
+      "minDamage": 182,
+      "maxDamage": 209
     },
     "32": {
-      "minDamage": 433,
-      "maxDamage": 490
+      "minDamage": 200,
+      "maxDamage": 228
     },
     "33": {
-      "minDamage": 469,
-      "maxDamage": 528
+      "minDamage": 218,
+      "maxDamage": 247
     },
     "34": {
-      "minDamage": 505,
-      "maxDamage": 566
+      "minDamage": 236,
+      "maxDamage": 266
     },
     "35": {
-      "minDamage": 541,
-      "maxDamage": 604
+      "minDamage": 254,
+      "maxDamage": 285
     },
     "36": {
-      "minDamage": 577,
-      "maxDamage": 642
+      "minDamage": 272,
+      "maxDamage": 304
     },
     "37": {
-      "minDamage": 613,
-      "maxDamage": 680
+      "minDamage": 290,
+      "maxDamage": 323
     },
     "38": {
-      "minDamage": 649,
-      "maxDamage": 718
+      "minDamage": 308,
+      "maxDamage": 342
     },
     "39": {
-      "minDamage": 685,
-      "maxDamage": 756
+      "minDamage": 326,
+      "maxDamage": 361
     },
     "40": {
-      "minDamage": 721,
-      "maxDamage": 794
-    },
-    "41": {
-      "minDamage": 757,
-      "maxDamage": 832
-    },
-    "42": {
-      "minDamage": 793,
-      "maxDamage": 870
-    },
-    "43": {
-      "minDamage": 829,
-      "maxDamage": 908
-    },
-    "44": {
-      "minDamage": 865,
-      "maxDamage": 946
-    },
-    "45": {
-      "minDamage": 901,
-      "maxDamage": 984
-    },
-    "46": {
-      "minDamage": 937,
-      "maxDamage": 1022
-    },
-    "47": {
-      "minDamage": 973,
-      "maxDamage": 1060
-    },
-    "48": {
-      "minDamage": 1009,
-      "maxDamage": 1098
-    },
-    "49": {
-      "minDamage": 1045,
-      "maxDamage": 1136
-    },
-    "50": {
-      "minDamage": 1081,
-      "maxDamage": 1174
-    },
-    "51": {
-      "minDamage": 1117,
-      "maxDamage": 1212
-    },
-    "52": {
-      "minDamage": 1153,
-      "maxDamage": 1250
-    },
-    "53": {
-      "minDamage": 1189,
-      "maxDamage": 1288
-    },
-    "54": {
-      "minDamage": 1225,
-      "maxDamage": 1326
-    },
-    "55": {
-      "minDamage": 1261,
-      "maxDamage": 1364
-    },
-    "56": {
-      "minDamage": 1297,
-      "maxDamage": 1402
-    },
-    "57": {
-      "minDamage": 1333,
-      "maxDamage": 1440
-    },
-    "58": {
-      "minDamage": 1369,
-      "maxDamage": 1478
-    },
-    "59": {
-      "minDamage": 1405,
-      "maxDamage": 1516
-    },
-    "60": {
-      "minDamage": 1441,
-      "maxDamage": 1554
+      "minDamage": 344,
+      "maxDamage": 380
     }
   },
   "Mind Blast": {
     "1": {
-      "minDamage": 10,
-      "maxDamage": 20
+      "minDamage": 5,
+      "maxDamage": 10
     },
     "2": {
-      "minDamage": 13,
-      "maxDamage": 23
+      "minDamage": 6,
+      "maxDamage": 12
     },
     "3": {
-      "minDamage": 16,
-      "maxDamage": 26
+      "minDamage": 8,
+      "maxDamage": 13
     },
     "4": {
-      "minDamage": 19,
-      "maxDamage": 29
+      "minDamage": 10,
+      "maxDamage": 14
     },
     "5": {
-      "minDamage": 22,
-      "maxDamage": 32
+      "minDamage": 11,
+      "maxDamage": 16
     },
     "6": {
-      "minDamage": 25,
-      "maxDamage": 35
+      "minDamage": 12,
+      "maxDamage": 18
     },
     "7": {
-      "minDamage": 28,
-      "maxDamage": 38
+      "minDamage": 14,
+      "maxDamage": 19
     },
     "8": {
-      "minDamage": 31,
-      "maxDamage": 41
+      "minDamage": 16,
+      "maxDamage": 20
     },
     "9": {
-      "minDamage": 38,
-      "maxDamage": 48
+      "minDamage": 17,
+      "maxDamage": 22
     },
     "10": {
-      "minDamage": 45,
-      "maxDamage": 55
+      "minDamage": 20,
+      "maxDamage": 26
     },
     "11": {
-      "minDamage": 52,
-      "maxDamage": 62
+      "minDamage": 24,
+      "maxDamage": 29
     },
     "12": {
-      "minDamage": 59,
-      "maxDamage": 69
+      "minDamage": 28,
+      "maxDamage": 32
     },
     "13": {
-      "minDamage": 66,
-      "maxDamage": 76
+      "minDamage": 31,
+      "maxDamage": 36
     },
     "14": {
-      "minDamage": 73,
-      "maxDamage": 83
+      "minDamage": 34,
+      "maxDamage": 40
     },
     "15": {
-      "minDamage": 80,
-      "maxDamage": 90
+      "minDamage": 38,
+      "maxDamage": 43
     },
     "16": {
-      "minDamage": 87,
-      "maxDamage": 97
+      "minDamage": 42,
+      "maxDamage": 46
     },
     "17": {
-      "minDamage": 104,
-      "maxDamage": 114
+      "minDamage": 45,
+      "maxDamage": 50
     },
     "18": {
-      "minDamage": 121,
-      "maxDamage": 131
+      "minDamage": 54,
+      "maxDamage": 58
     },
     "19": {
-      "minDamage": 138,
-      "maxDamage": 148
+      "minDamage": 62,
+      "maxDamage": 67
     },
     "20": {
-      "minDamage": 155,
-      "maxDamage": 165
+      "minDamage": 70,
+      "maxDamage": 76
     },
     "21": {
-      "minDamage": 172,
-      "maxDamage": 182
+      "minDamage": 79,
+      "maxDamage": 84
     },
     "22": {
-      "minDamage": 189,
-      "maxDamage": 199
+      "minDamage": 88,
+      "maxDamage": 92
     },
     "23": {
-      "minDamage": 223,
-      "maxDamage": 233
+      "minDamage": 96,
+      "maxDamage": 101
     },
     "24": {
-      "minDamage": 257,
-      "maxDamage": 267
+      "minDamage": 113,
+      "maxDamage": 118
     },
     "25": {
-      "minDamage": 291,
-      "maxDamage": 301
+      "minDamage": 130,
+      "maxDamage": 135
     },
     "26": {
-      "minDamage": 325,
-      "maxDamage": 335
+      "minDamage": 147,
+      "maxDamage": 152
     },
     "27": {
-      "minDamage": 359,
-      "maxDamage": 369
+      "minDamage": 164,
+      "maxDamage": 169
     },
     "28": {
-      "minDamage": 393,
-      "maxDamage": 403
+      "minDamage": 181,
+      "maxDamage": 186
     },
     "29": {
-      "minDamage": 444,
-      "maxDamage": 454
+      "minDamage": 198,
+      "maxDamage": 203
     },
     "30": {
-      "minDamage": 495,
-      "maxDamage": 505
+      "minDamage": 224,
+      "maxDamage": 228
     },
     "31": {
-      "minDamage": 546,
-      "maxDamage": 556
+      "minDamage": 249,
+      "maxDamage": 254
     },
     "32": {
-      "minDamage": 597,
-      "maxDamage": 607
+      "minDamage": 274,
+      "maxDamage": 280
     },
     "33": {
-      "minDamage": 648,
-      "maxDamage": 658
+      "minDamage": 300,
+      "maxDamage": 305
     },
     "34": {
-      "minDamage": 699,
-      "maxDamage": 709
+      "minDamage": 326,
+      "maxDamage": 330
     },
     "35": {
-      "minDamage": 750,
-      "maxDamage": 760
+      "minDamage": 351,
+      "maxDamage": 356
     },
     "36": {
-      "minDamage": 801,
-      "maxDamage": 811
+      "minDamage": 376,
+      "maxDamage": 382
     },
     "37": {
-      "minDamage": 852,
-      "maxDamage": 862
+      "minDamage": 402,
+      "maxDamage": 407
     },
     "38": {
-      "minDamage": 903,
-      "maxDamage": 913
+      "minDamage": 428,
+      "maxDamage": 432
     },
     "39": {
-      "minDamage": 954,
-      "maxDamage": 964
+      "minDamage": 453,
+      "maxDamage": 458
     },
     "40": {
-      "minDamage": 1005,
-      "maxDamage": 1015
-    },
-    "41": {
-      "minDamage": 1056,
-      "maxDamage": 1066
-    },
-    "42": {
-      "minDamage": 1107,
-      "maxDamage": 1117
-    },
-    "43": {
-      "minDamage": 1158,
-      "maxDamage": 1168
-    },
-    "44": {
-      "minDamage": 1209,
-      "maxDamage": 1219
-    },
-    "45": {
-      "minDamage": 1260,
-      "maxDamage": 1270
-    },
-    "46": {
-      "minDamage": 1311,
-      "maxDamage": 1321
-    },
-    "47": {
-      "minDamage": 1362,
-      "maxDamage": 1372
-    },
-    "48": {
-      "minDamage": 1413,
-      "maxDamage": 1423
-    },
-    "49": {
-      "minDamage": 1464,
-      "maxDamage": 1474
-    },
-    "50": {
-      "minDamage": 1515,
-      "maxDamage": 1525
-    },
-    "51": {
-      "minDamage": 1566,
-      "maxDamage": 1576
-    },
-    "52": {
-      "minDamage": 1617,
-      "maxDamage": 1627
-    },
-    "53": {
-      "minDamage": 1668,
-      "maxDamage": 1678
-    },
-    "54": {
-      "minDamage": 1719,
-      "maxDamage": 1729
-    },
-    "55": {
-      "minDamage": 1770,
-      "maxDamage": 1780
-    },
-    "56": {
-      "minDamage": 1821,
-      "maxDamage": 1831
-    },
-    "57": {
-      "minDamage": 1872,
-      "maxDamage": 1882
-    },
-    "58": {
-      "minDamage": 1923,
-      "maxDamage": 1933
-    },
-    "59": {
-      "minDamage": 1974,
-      "maxDamage": 1984
-    },
-    "60": {
-      "minDamage": 2025,
-      "maxDamage": 2035
+      "minDamage": 478,
+      "maxDamage": 484
     }
   },
   "Venom": {
     "1": {
-      "minDamage": 75,
-      "maxDamage": 100
+      "minDamage": 2,
+      "maxDamage": 2
     },
     "2": {
-      "minDamage": 93,
-      "maxDamage": 118
+      "minDamage": 2,
+      "maxDamage": 2
     },
     "3": {
-      "minDamage": 112,
-      "maxDamage": 137
+      "minDamage": 2,
+      "maxDamage": 3
     },
     "4": {
-      "minDamage": 131,
-      "maxDamage": 156
+      "minDamage": 3,
+      "maxDamage": 3
     },
     "5": {
-      "minDamage": 150,
-      "maxDamage": 175
+      "minDamage": 3,
+      "maxDamage": 4
     },
     "6": {
-      "minDamage": 168,
-      "maxDamage": 193
+      "minDamage": 3,
+      "maxDamage": 4
     },
     "7": {
-      "minDamage": 187,
-      "maxDamage": 212
+      "minDamage": 4,
+      "maxDamage": 4
     },
     "8": {
-      "minDamage": 206,
-      "maxDamage": 231
+      "minDamage": 4,
+      "maxDamage": 5
     },
     "9": {
-      "minDamage": 237,
-      "maxDamage": 262
+      "minDamage": 4,
+      "maxDamage": 5
     },
     "10": {
-      "minDamage": 268,
-      "maxDamage": 293
+      "minDamage": 5,
+      "maxDamage": 6
     },
     "11": {
-      "minDamage": 299,
-      "maxDamage": 324
+      "minDamage": 6,
+      "maxDamage": 6
     },
     "12": {
-      "minDamage": 331,
-      "maxDamage": 356
+      "minDamage": 6,
+      "maxDamage": 7
     },
     "13": {
-      "minDamage": 362,
-      "maxDamage": 387
+      "minDamage": 7,
+      "maxDamage": 8
     },
     "14": {
-      "minDamage": 393,
-      "maxDamage": 418
+      "minDamage": 8,
+      "maxDamage": 8
     },
     "15": {
-      "minDamage": 424,
-      "maxDamage": 449
+      "minDamage": 8,
+      "maxDamage": 9
     },
     "16": {
-      "minDamage": 456,
-      "maxDamage": 481
+      "minDamage": 9,
+      "maxDamage": 9
     },
     "17": {
-      "minDamage": 499,
-      "maxDamage": 524
+      "minDamage": 10,
+      "maxDamage": 10
     },
     "18": {
-      "minDamage": 543,
-      "maxDamage": 568
+      "minDamage": 10,
+      "maxDamage": 11
     },
     "19": {
-      "minDamage": 587,
-      "maxDamage": 612
+      "minDamage": 11,
+      "maxDamage": 12
     },
     "20": {
-      "minDamage": 631,
-      "maxDamage": 656
+      "minDamage": 12,
+      "maxDamage": 13
     },
     "21": {
-      "minDamage": 674,
-      "maxDamage": 699
+      "minDamage": 13,
+      "maxDamage": 14
     },
     "22": {
-      "minDamage": 718,
-      "maxDamage": 743
+      "minDamage": 14,
+      "maxDamage": 14
     },
     "23": {
-      "minDamage": 774,
-      "maxDamage": 799
+      "minDamage": 15,
+      "maxDamage": 15
     },
     "24": {
-      "minDamage": 831,
-      "maxDamage": 856
+      "minDamage": 16,
+      "maxDamage": 16
     },
     "25": {
-      "minDamage": 887,
-      "maxDamage": 912
+      "minDamage": 17,
+      "maxDamage": 18
     },
     "26": {
-      "minDamage": 943,
-      "maxDamage": 968
+      "minDamage": 18,
+      "maxDamage": 19
     },
     "27": {
-      "minDamage": 999,
-      "maxDamage": 1024
+      "minDamage": 19,
+      "maxDamage": 20
     },
     "28": {
-      "minDamage": 1056,
-      "maxDamage": 1081
+      "minDamage": 20,
+      "maxDamage": 21
     },
     "29": {
-      "minDamage": 1124,
-      "maxDamage": 1149
+      "minDamage": 22,
+      "maxDamage": 22
     },
     "30": {
-      "minDamage": 1193,
-      "maxDamage": 1218
+      "minDamage": 23,
+      "maxDamage": 23
     },
     "31": {
-      "minDamage": 1262,
-      "maxDamage": 1287
+      "minDamage": 24,
+      "maxDamage": 25
     },
     "32": {
-      "minDamage": 1331,
-      "maxDamage": 1356
+      "minDamage": 26,
+      "maxDamage": 26
     },
     "33": {
-      "minDamage": 1399,
-      "maxDamage": 1424
+      "minDamage": 27,
+      "maxDamage": 28
     },
     "34": {
-      "minDamage": 1468,
-      "maxDamage": 1493
+      "minDamage": 28,
+      "maxDamage": 29
     },
     "35": {
-      "minDamage": 1537,
-      "maxDamage": 1562
+      "minDamage": 30,
+      "maxDamage": 30
     },
     "36": {
-      "minDamage": 1606,
-      "maxDamage": 1631
+      "minDamage": 31,
+      "maxDamage": 32
     },
     "37": {
-      "minDamage": 1674,
-      "maxDamage": 1699
+      "minDamage": 32,
+      "maxDamage": 33
     },
     "38": {
-      "minDamage": 1743,
-      "maxDamage": 1768
+      "minDamage": 34,
+      "maxDamage": 34
     },
     "39": {
-      "minDamage": 1812,
-      "maxDamage": 1837
+      "minDamage": 35,
+      "maxDamage": 36
     },
     "40": {
-      "minDamage": 1881,
-      "maxDamage": 1906
-    },
-    "41": {
-      "minDamage": 1949,
-      "maxDamage": 1974
-    },
-    "42": {
-      "minDamage": 2018,
-      "maxDamage": 2043
-    },
-    "43": {
-      "minDamage": 2087,
-      "maxDamage": 2112
-    },
-    "44": {
-      "minDamage": 2156,
-      "maxDamage": 2181
-    },
-    "45": {
-      "minDamage": 2224,
-      "maxDamage": 2249
-    },
-    "46": {
-      "minDamage": 2293,
-      "maxDamage": 2318
-    },
-    "47": {
-      "minDamage": 2362,
-      "maxDamage": 2387
-    },
-    "48": {
-      "minDamage": 2431,
-      "maxDamage": 2456
-    },
-    "49": {
-      "minDamage": 2499,
-      "maxDamage": 2524
-    },
-    "50": {
-      "minDamage": 2568,
-      "maxDamage": 2593
-    },
-    "51": {
-      "minDamage": 2637,
-      "maxDamage": 2662
-    },
-    "52": {
-      "minDamage": 2706,
-      "maxDamage": 2731
-    },
-    "53": {
-      "minDamage": 2774,
-      "maxDamage": 2799
-    },
-    "54": {
-      "minDamage": 2843,
-      "maxDamage": 2868
-    },
-    "55": {
-      "minDamage": 2912,
-      "maxDamage": 2937
-    },
-    "56": {
-      "minDamage": 2981,
-      "maxDamage": 3006
-    },
-    "57": {
-      "minDamage": 3049,
-      "maxDamage": 3074
-    },
-    "58": {
-      "minDamage": 3118,
-      "maxDamage": 3143
-    },
-    "59": {
-      "minDamage": 3187,
-      "maxDamage": 3212
-    },
-    "60": {
-      "minDamage": 3256,
-      "maxDamage": 3281
+      "minDamage": 37,
+      "maxDamage": 37
     }
   },
   "Fire Blast": {
     "1": {
+      "minDamage": 1,
+      "maxDamage": 2
+    },
+    "2": {
+      "minDamage": 2,
+      "maxDamage": 2
+    },
+    "3": {
       "minDamage": 2,
       "maxDamage": 3
     },
-    "2": {
+    "4": {
+      "minDamage": 2,
+      "maxDamage": 4
+    },
+    "5": {
       "minDamage": 3,
       "maxDamage": 4
     },
-    "3": {
+    "6": {
+      "minDamage": 4,
+      "maxDamage": 5
+    },
+    "7": {
       "minDamage": 4,
       "maxDamage": 6
     },
-    "4": {
-      "minDamage": 5,
+    "8": {
+      "minDamage": 4,
       "maxDamage": 7
     },
-    "5": {
+    "9": {
+      "minDamage": 5,
+      "maxDamage": 8
+    },
+    "10": {
       "minDamage": 6,
       "maxDamage": 9
     },
-    "6": {
+    "11": {
       "minDamage": 7,
       "maxDamage": 10
     },
-    "7": {
+    "12": {
       "minDamage": 8,
+      "maxDamage": 11
+    },
+    "13": {
+      "minDamage": 9,
       "maxDamage": 12
     },
-    "8": {
-      "minDamage": 9,
-      "maxDamage": 13
+    "14": {
+      "minDamage": 10,
+      "maxDamage": 14
     },
-    "9": {
+    "15": {
       "minDamage": 11,
+      "maxDamage": 15
+    },
+    "16": {
+      "minDamage": 12,
       "maxDamage": 16
     },
-    "10": {
+    "17": {
       "minDamage": 13,
       "maxDamage": 18
     },
-    "11": {
+    "18": {
       "minDamage": 15,
-      "maxDamage": 21
+      "maxDamage": 20
     },
-    "12": {
+    "19": {
       "minDamage": 17,
-      "maxDamage": 23
+      "maxDamage": 22
     },
-    "13": {
+    "20": {
       "minDamage": 19,
-      "maxDamage": 26
+      "maxDamage": 25
     },
-    "14": {
+    "21": {
       "minDamage": 21,
       "maxDamage": 28
     },
-    "15": {
-      "minDamage": 23,
-      "maxDamage": 31
-    },
-    "16": {
-      "minDamage": 25,
-      "maxDamage": 33
-    },
-    "17": {
-      "minDamage": 29,
-      "maxDamage": 38
-    },
-    "18": {
-      "minDamage": 33,
-      "maxDamage": 43
-    },
-    "19": {
-      "minDamage": 37,
-      "maxDamage": 48
-    },
-    "20": {
-      "minDamage": 41,
-      "maxDamage": 53
-    },
-    "21": {
-      "minDamage": 45,
-      "maxDamage": 58
-    },
     "22": {
-      "minDamage": 49,
-      "maxDamage": 63
+      "minDamage": 23,
+      "maxDamage": 30
     },
     "23": {
-      "minDamage": 58,
-      "maxDamage": 73
+      "minDamage": 25,
+      "maxDamage": 32
     },
     "24": {
-      "minDamage": 67,
-      "maxDamage": 83
+      "minDamage": 30,
+      "maxDamage": 38
     },
     "25": {
-      "minDamage": 76,
-      "maxDamage": 93
+      "minDamage": 34,
+      "maxDamage": 42
     },
     "26": {
-      "minDamage": 85,
-      "maxDamage": 103
+      "minDamage": 38,
+      "maxDamage": 48
     },
     "27": {
-      "minDamage": 94,
-      "maxDamage": 113
+      "minDamage": 43,
+      "maxDamage": 52
     },
     "28": {
-      "minDamage": 103,
-      "maxDamage": 123
+      "minDamage": 48,
+      "maxDamage": 58
     },
     "29": {
-      "minDamage": 114,
-      "maxDamage": 136
+      "minDamage": 52,
+      "maxDamage": 62
     },
     "30": {
-      "minDamage": 126,
-      "maxDamage": 148
+      "minDamage": 58,
+      "maxDamage": 69
     },
     "31": {
-      "minDamage": 137,
-      "maxDamage": 161
+      "minDamage": 64,
+      "maxDamage": 75
     },
     "32": {
-      "minDamage": 149,
-      "maxDamage": 173
+      "minDamage": 69,
+      "maxDamage": 81
     },
     "33": {
-      "minDamage": 160,
-      "maxDamage": 186
+      "minDamage": 75,
+      "maxDamage": 88
     },
     "34": {
-      "minDamage": 172,
-      "maxDamage": 198
+      "minDamage": 81,
+      "maxDamage": 94
     },
     "35": {
-      "minDamage": 183,
-      "maxDamage": 211
+      "minDamage": 86,
+      "maxDamage": 100
     },
     "36": {
-      "minDamage": 195,
-      "maxDamage": 223
+      "minDamage": 92,
+      "maxDamage": 106
     },
     "37": {
-      "minDamage": 206,
-      "maxDamage": 236
+      "minDamage": 98,
+      "maxDamage": 112
     },
     "38": {
-      "minDamage": 218,
-      "maxDamage": 248
+      "minDamage": 104,
+      "maxDamage": 119
     },
     "39": {
-      "minDamage": 229,
-      "maxDamage": 261
+      "minDamage": 110,
+      "maxDamage": 125
     },
     "40": {
-      "minDamage": 241,
-      "maxDamage": 273
-    },
-    "41": {
-      "minDamage": 252,
-      "maxDamage": 286
-    },
-    "42": {
-      "minDamage": 264,
-      "maxDamage": 298
-    },
-    "43": {
-      "minDamage": 275,
-      "maxDamage": 311
-    },
-    "44": {
-      "minDamage": 287,
-      "maxDamage": 323
-    },
-    "45": {
-      "minDamage": 298,
-      "maxDamage": 336
-    },
-    "46": {
-      "minDamage": 310,
-      "maxDamage": 348
-    },
-    "47": {
-      "minDamage": 321,
-      "maxDamage": 361
-    },
-    "48": {
-      "minDamage": 333,
-      "maxDamage": 373
-    },
-    "49": {
-      "minDamage": 344,
-      "maxDamage": 386
-    },
-    "50": {
-      "minDamage": 356,
-      "maxDamage": 398
-    },
-    "51": {
-      "minDamage": 367,
-      "maxDamage": 411
-    },
-    "52": {
-      "minDamage": 379,
-      "maxDamage": 423
-    },
-    "53": {
-      "minDamage": 390,
-      "maxDamage": 436
-    },
-    "54": {
-      "minDamage": 402,
-      "maxDamage": 448
-    },
-    "55": {
-      "minDamage": 413,
-      "maxDamage": 461
-    },
-    "56": {
-      "minDamage": 425,
-      "maxDamage": 473
-    },
-    "57": {
-      "minDamage": 436,
-      "maxDamage": 486
-    },
-    "58": {
-      "minDamage": 448,
-      "maxDamage": 498
-    },
-    "59": {
-      "minDamage": 459,
-      "maxDamage": 511
-    },
-    "60": {
-      "minDamage": 471,
-      "maxDamage": 523
+      "minDamage": 115,
+      "maxDamage": 131
     }
   },
   "Shock Web": {
     "1": {
+      "minDamage": 0,
+      "maxDamage": 0
+    },
+    "2": {
+      "minDamage": 0,
+      "maxDamage": 0
+    },
+    "3": {
+      "minDamage": 0,
+      "maxDamage": 0
+    },
+    "4": {
+      "minDamage": 0,
+      "maxDamage": 1
+    },
+    "5": {
+      "minDamage": 0,
+      "maxDamage": 1
+    },
+    "6": {
+      "minDamage": 0,
+      "maxDamage": 1
+    },
+    "7": {
+      "minDamage": 0,
+      "maxDamage": 1
+    },
+    "8": {
+      "minDamage": 0,
+      "maxDamage": 1
+    },
+    "9": {
+      "minDamage": 0,
+      "maxDamage": 1
+    },
+    "10": {
+      "minDamage": 0,
+      "maxDamage": 1
+    },
+    "11": {
+      "minDamage": 0,
+      "maxDamage": 2
+    },
+    "12": {
+      "minDamage": 0,
+      "maxDamage": 2
+    },
+    "13": {
+      "minDamage": 1,
+      "maxDamage": 2
+    },
+    "14": {
+      "minDamage": 1,
+      "maxDamage": 3
+    },
+    "15": {
+      "minDamage": 1,
+      "maxDamage": 3
+    },
+    "16": {
+      "minDamage": 1,
+      "maxDamage": 3
+    },
+    "17": {
+      "minDamage": 1,
+      "maxDamage": 4
+    },
+    "18": {
+      "minDamage": 1,
+      "maxDamage": 4
+    },
+    "19": {
+      "minDamage": 1,
+      "maxDamage": 5
+    },
+    "20": {
+      "minDamage": 1,
+      "maxDamage": 5
+    },
+    "21": {
+      "minDamage": 1,
+      "maxDamage": 6
+    },
+    "22": {
+      "minDamage": 1,
+      "maxDamage": 6
+    },
+    "23": {
+      "minDamage": 1,
+      "maxDamage": 7
+    },
+    "24": {
       "minDamage": 2,
       "maxDamage": 7
     },
-    "2": {
+    "25": {
+      "minDamage": 2,
+      "maxDamage": 8
+    },
+    "26": {
+      "minDamage": 2,
+      "maxDamage": 9
+    },
+    "27": {
+      "minDamage": 2,
+      "maxDamage": 9
+    },
+    "28": {
+      "minDamage": 2,
+      "maxDamage": 10
+    },
+    "29": {
+      "minDamage": 2,
+      "maxDamage": 11
+    },
+    "30": {
+      "minDamage": 2,
+      "maxDamage": 12
+    },
+    "31": {
+      "minDamage": 2,
+      "maxDamage": 13
+    },
+    "32": {
+      "minDamage": 3,
+      "maxDamage": 13
+    },
+    "33": {
       "minDamage": 3,
       "maxDamage": 14
     },
-    "3": {
+    "34": {
+      "minDamage": 3,
+      "maxDamage": 15
+    },
+    "35": {
+      "minDamage": 3,
+      "maxDamage": 16
+    },
+    "36": {
+      "minDamage": 3,
+      "maxDamage": 17
+    },
+    "37": {
+      "minDamage": 4,
+      "maxDamage": 18
+    },
+    "38": {
+      "minDamage": 4,
+      "maxDamage": 19
+    },
+    "39": {
       "minDamage": 4,
       "maxDamage": 20
     },
-    "4": {
-      "minDamage": 5,
-      "maxDamage": 26
-    },
-    "5": {
-      "minDamage": 6,
-      "maxDamage": 32
-    },
-    "6": {
-      "minDamage": 7,
-      "maxDamage": 39
-    },
-    "7": {
-      "minDamage": 8,
-      "maxDamage": 45
-    },
-    "8": {
-      "minDamage": 9,
-      "maxDamage": 51
-    },
-    "9": {
-      "minDamage": 11,
-      "maxDamage": 67
-    },
-    "10": {
-      "minDamage": 13,
-      "maxDamage": 82
-    },
-    "11": {
-      "minDamage": 15,
-      "maxDamage": 98
-    },
-    "12": {
-      "minDamage": 17,
-      "maxDamage": 114
-    },
-    "13": {
-      "minDamage": 19,
-      "maxDamage": 129
-    },
-    "14": {
-      "minDamage": 21,
-      "maxDamage": 145
-    },
-    "15": {
-      "minDamage": 23,
-      "maxDamage": 160
-    },
-    "16": {
-      "minDamage": 25,
-      "maxDamage": 176
-    },
-    "17": {
-      "minDamage": 28,
-      "maxDamage": 201
-    },
-    "18": {
-      "minDamage": 31,
-      "maxDamage": 226
-    },
-    "19": {
-      "minDamage": 34,
-      "maxDamage": 251
-    },
-    "20": {
-      "minDamage": 37,
-      "maxDamage": 276
-    },
-    "21": {
-      "minDamage": 40,
-      "maxDamage": 301
-    },
-    "22": {
-      "minDamage": 43,
-      "maxDamage": 326
-    },
-    "23": {
-      "minDamage": 47,
-      "maxDamage": 360
-    },
-    "24": {
-      "minDamage": 51,
-      "maxDamage": 395
-    },
-    "25": {
-      "minDamage": 55,
-      "maxDamage": 429
-    },
-    "26": {
-      "minDamage": 59,
-      "maxDamage": 464
-    },
-    "27": {
-      "minDamage": 63,
-      "maxDamage": 498
-    },
-    "28": {
-      "minDamage": 67,
-      "maxDamage": 532
-    },
-    "29": {
-      "minDamage": 73,
-      "maxDamage": 576
-    },
-    "30": {
-      "minDamage": 79,
-      "maxDamage": 620
-    },
-    "31": {
-      "minDamage": 85,
-      "maxDamage": 664
-    },
-    "32": {
-      "minDamage": 91,
-      "maxDamage": 707
-    },
-    "33": {
-      "minDamage": 97,
-      "maxDamage": 751
-    },
-    "34": {
-      "minDamage": 103,
-      "maxDamage": 795
-    },
-    "35": {
-      "minDamage": 109,
-      "maxDamage": 839
-    },
-    "36": {
-      "minDamage": 115,
-      "maxDamage": 882
-    },
-    "37": {
-      "minDamage": 121,
-      "maxDamage": 926
-    },
-    "38": {
-      "minDamage": 127,
-      "maxDamage": 970
-    },
-    "39": {
-      "minDamage": 133,
-      "maxDamage": 1014
-    },
     "40": {
-      "minDamage": 139,
-      "maxDamage": 1057
-    },
-    "41": {
-      "minDamage": 145,
-      "maxDamage": 1101
-    },
-    "42": {
-      "minDamage": 151,
-      "maxDamage": 1145
-    },
-    "43": {
-      "minDamage": 157,
-      "maxDamage": 1189
-    },
-    "44": {
-      "minDamage": 163,
-      "maxDamage": 1232
-    },
-    "45": {
-      "minDamage": 169,
-      "maxDamage": 1276
-    },
-    "46": {
-      "minDamage": 175,
-      "maxDamage": 1320
-    },
-    "47": {
-      "minDamage": 181,
-      "maxDamage": 1364
-    },
-    "48": {
-      "minDamage": 187,
-      "maxDamage": 1407
-    },
-    "49": {
-      "minDamage": 193,
-      "maxDamage": 1451
-    },
-    "50": {
-      "minDamage": 199,
-      "maxDamage": 1495
-    },
-    "51": {
-      "minDamage": 205,
-      "maxDamage": 1539
-    },
-    "52": {
-      "minDamage": 211,
-      "maxDamage": 1582
-    },
-    "53": {
-      "minDamage": 217,
-      "maxDamage": 1626
-    },
-    "54": {
-      "minDamage": 223,
-      "maxDamage": 1670
-    },
-    "55": {
-      "minDamage": 229,
-      "maxDamage": 1714
-    },
-    "56": {
-      "minDamage": 235,
-      "maxDamage": 1757
-    },
-    "57": {
-      "minDamage": 241,
-      "maxDamage": 1801
-    },
-    "58": {
-      "minDamage": 247,
-      "maxDamage": 1845
-    },
-    "59": {
-      "minDamage": 253,
-      "maxDamage": 1889
-    },
-    "60": {
-      "minDamage": 259,
-      "maxDamage": 1932
+      "minDamage": 4,
+      "maxDamage": 20
     }
   },
   "Blade Sentinel": {
     "1": {
+      "minDamage": 0,
+      "maxDamage": 2
+    },
+    "2": {
       "minDamage": 1,
+      "maxDamage": 2
+    },
+    "3": {
+      "minDamage": 2,
+      "maxDamage": 2
+    },
+    "4": {
+      "minDamage": 2,
+      "maxDamage": 3
+    },
+    "5": {
+      "minDamage": 2,
+      "maxDamage": 4
+    },
+    "6": {
+      "minDamage": 3,
+      "maxDamage": 4
+    },
+    "7": {
+      "minDamage": 4,
+      "maxDamage": 4
+    },
+    "8": {
+      "minDamage": 4,
+      "maxDamage": 5
+    },
+    "9": {
+      "minDamage": 4,
+      "maxDamage": 6
+    },
+    "10": {
+      "minDamage": 5,
+      "maxDamage": 6
+    },
+    "11": {
+      "minDamage": 6,
+      "maxDamage": 6
+    },
+    "12": {
+      "minDamage": 6,
+      "maxDamage": 7
+    },
+    "13": {
+      "minDamage": 6,
+      "maxDamage": 8
+    },
+    "14": {
+      "minDamage": 7,
+      "maxDamage": 8
+    },
+    "15": {
+      "minDamage": 8,
+      "maxDamage": 8
+    },
+    "16": {
+      "minDamage": 8,
+      "maxDamage": 9
+    },
+    "17": {
+      "minDamage": 8,
+      "maxDamage": 10
+    },
+    "18": {
+      "minDamage": 10,
+      "maxDamage": 10
+    },
+    "19": {
+      "minDamage": 10,
+      "maxDamage": 12
+    },
+    "20": {
+      "minDamage": 12,
+      "maxDamage": 12
+    },
+    "21": {
+      "minDamage": 12,
+      "maxDamage": 14
+    },
+    "22": {
+      "minDamage": 14,
+      "maxDamage": 14
+    },
+    "23": {
+      "minDamage": 14,
+      "maxDamage": 16
+    },
+    "24": {
+      "minDamage": 16,
+      "maxDamage": 17
+    },
+    "25": {
+      "minDamage": 18,
+      "maxDamage": 18
+    },
+    "26": {
+      "minDamage": 19,
+      "maxDamage": 20
+    },
+    "27": {
+      "minDamage": 20,
+      "maxDamage": 22
+    },
+    "28": {
+      "minDamage": 22,
+      "maxDamage": 23
+    },
+    "29": {
+      "minDamage": 24,
+      "maxDamage": 24
+    },
+    "30": {
+      "minDamage": 26,
+      "maxDamage": 26
+    },
+    "31": {
+      "minDamage": 28,
+      "maxDamage": 28
+    },
+    "32": {
+      "minDamage": 30,
+      "maxDamage": 30
+    },
+    "33": {
+      "minDamage": 32,
+      "maxDamage": 32
+    },
+    "34": {
+      "minDamage": 34,
+      "maxDamage": 34
+    },
+    "35": {
+      "minDamage": 36,
+      "maxDamage": 36
+    },
+    "36": {
+      "minDamage": 38,
+      "maxDamage": 38
+    },
+    "37": {
+      "minDamage": 40,
+      "maxDamage": 40
+    },
+    "38": {
+      "minDamage": 42,
+      "maxDamage": 42
+    },
+    "39": {
+      "minDamage": 44,
+      "maxDamage": 44
+    },
+    "40": {
+      "minDamage": 46,
+      "maxDamage": 46
+    }
+  },
+  "Charged Bolt Sentry": {
+    "1": {
+      "minDamage": 0,
+      "maxDamage": 4
+    },
+    "2": {
+      "minDamage": 0,
+      "maxDamage": 6
+    },
+    "3": {
+      "minDamage": 0,
+      "maxDamage": 9
+    },
+    "4": {
+      "minDamage": 0,
+      "maxDamage": 12
+    },
+    "5": {
+      "minDamage": 0,
+      "maxDamage": 14
+    },
+    "6": {
+      "minDamage": 0,
+      "maxDamage": 16
+    },
+    "7": {
+      "minDamage": 0,
+      "maxDamage": 19
+    },
+    "8": {
+      "minDamage": 0,
+      "maxDamage": 22
+    },
+    "9": {
+      "minDamage": 0,
+      "maxDamage": 24
+    },
+    "10": {
+      "minDamage": 0,
+      "maxDamage": 27
+    },
+    "11": {
+      "minDamage": 0,
+      "maxDamage": 30
+    },
+    "12": {
+      "minDamage": 0,
+      "maxDamage": 32
+    },
+    "13": {
+      "minDamage": 0,
+      "maxDamage": 35
+    },
+    "14": {
+      "minDamage": 0,
+      "maxDamage": 38
+    },
+    "15": {
+      "minDamage": 0,
+      "maxDamage": 40
+    },
+    "16": {
+      "minDamage": 0,
+      "maxDamage": 43
+    },
+    "17": {
+      "minDamage": 0,
+      "maxDamage": 46
+    },
+    "18": {
+      "minDamage": 0,
+      "maxDamage": 49
+    },
+    "19": {
+      "minDamage": 0,
+      "maxDamage": 52
+    },
+    "20": {
+      "minDamage": 0,
+      "maxDamage": 55
+    },
+    "21": {
+      "minDamage": 0,
+      "maxDamage": 58
+    },
+    "22": {
+      "minDamage": 0,
+      "maxDamage": 61
+    },
+    "23": {
+      "minDamage": 0,
+      "maxDamage": 64
+    },
+    "24": {
+      "minDamage": 0,
+      "maxDamage": 67
+    },
+    "25": {
+      "minDamage": 0,
+      "maxDamage": 70
+    },
+    "26": {
+      "minDamage": 0,
+      "maxDamage": 74
+    },
+    "27": {
+      "minDamage": 0,
+      "maxDamage": 77
+    },
+    "28": {
+      "minDamage": 0,
+      "maxDamage": 80
+    },
+    "29": {
+      "minDamage": 0,
+      "maxDamage": 84
+    },
+    "30": {
+      "minDamage": 0,
+      "maxDamage": 87
+    },
+    "31": {
+      "minDamage": 0,
+      "maxDamage": 90
+    },
+    "32": {
+      "minDamage": 0,
+      "maxDamage": 94
+    },
+    "33": {
+      "minDamage": 0,
+      "maxDamage": 98
+    },
+    "34": {
+      "minDamage": 0,
+      "maxDamage": 101
+    },
+    "35": {
+      "minDamage": 0,
+      "maxDamage": 104
+    },
+    "36": {
+      "minDamage": 0,
+      "maxDamage": 108
+    },
+    "37": {
+      "minDamage": 0,
+      "maxDamage": 112
+    },
+    "38": {
+      "minDamage": 0,
+      "maxDamage": 115
+    },
+    "39": {
+      "minDamage": 0,
+      "maxDamage": 118
+    },
+    "40": {
+      "minDamage": 0,
+      "maxDamage": 122
+    }
+  },
+  "Wake of Fire": {
+    "1": {
+      "minDamage": 1,
+      "maxDamage": 2
+    },
+    "2": {
+      "minDamage": 2,
+      "maxDamage": 3
+    },
+    "3": {
+      "minDamage": 2,
+      "maxDamage": 4
+    },
+    "4": {
+      "minDamage": 2,
+      "maxDamage": 5
+    },
+    "5": {
+      "minDamage": 3,
+      "maxDamage": 6
+    },
+    "6": {
+      "minDamage": 4,
+      "maxDamage": 7
+    },
+    "7": {
+      "minDamage": 4,
+      "maxDamage": 8
+    },
+    "8": {
+      "minDamage": 4,
+      "maxDamage": 9
+    },
+    "9": {
+      "minDamage": 5,
+      "maxDamage": 10
+    },
+    "10": {
+      "minDamage": 7,
+      "maxDamage": 13
+    },
+    "11": {
+      "minDamage": 9,
+      "maxDamage": 16
+    },
+    "12": {
+      "minDamage": 11,
+      "maxDamage": 19
+    },
+    "13": {
+      "minDamage": 13,
+      "maxDamage": 22
+    },
+    "14": {
+      "minDamage": 15,
+      "maxDamage": 25
+    },
+    "15": {
+      "minDamage": 17,
+      "maxDamage": 28
+    },
+    "16": {
+      "minDamage": 19,
+      "maxDamage": 31
+    },
+    "17": {
+      "minDamage": 21,
+      "maxDamage": 34
+    },
+    "18": {
+      "minDamage": 28,
+      "maxDamage": 42
+    },
+    "19": {
+      "minDamage": 34,
+      "maxDamage": 50
+    },
+    "20": {
+      "minDamage": 40,
+      "maxDamage": 58
+    },
+    "21": {
+      "minDamage": 47,
+      "maxDamage": 66
+    },
+    "22": {
+      "minDamage": 54,
+      "maxDamage": 74
+    },
+    "23": {
+      "minDamage": 60,
+      "maxDamage": 82
+    },
+    "24": {
+      "minDamage": 71,
+      "maxDamage": 95
+    },
+    "25": {
+      "minDamage": 82,
+      "maxDamage": 108
+    },
+    "26": {
+      "minDamage": 93,
+      "maxDamage": 121
+    },
+    "27": {
+      "minDamage": 104,
+      "maxDamage": 134
+    },
+    "28": {
+      "minDamage": 115,
+      "maxDamage": 147
+    },
+    "29": {
+      "minDamage": 126,
+      "maxDamage": 160
+    },
+    "30": {
+      "minDamage": 137,
+      "maxDamage": 173
+    },
+    "31": {
+      "minDamage": 148,
+      "maxDamage": 186
+    },
+    "32": {
+      "minDamage": 159,
+      "maxDamage": 199
+    },
+    "33": {
+      "minDamage": 170,
+      "maxDamage": 212
+    },
+    "34": {
+      "minDamage": 181,
+      "maxDamage": 225
+    },
+    "35": {
+      "minDamage": 192,
+      "maxDamage": 238
+    },
+    "36": {
+      "minDamage": 203,
+      "maxDamage": 251
+    },
+    "37": {
+      "minDamage": 214,
+      "maxDamage": 264
+    },
+    "38": {
+      "minDamage": 225,
+      "maxDamage": 277
+    },
+    "39": {
+      "minDamage": 236,
+      "maxDamage": 290
+    },
+    "40": {
+      "minDamage": 247,
+      "maxDamage": 303
+    }
+  },
+  "Blade Fury": {
+    "1": {
+      "minDamage": 2,
       "maxDamage": 3
     },
     "2": {
@@ -6059,1688 +5421,642 @@ export const skillsLevelData: Record<string, Record<number, { minDamage?: number
       "maxDamage": 4
     },
     "3": {
-      "minDamage": 3,
+      "minDamage": 2,
       "maxDamage": 5
     },
     "4": {
-      "minDamage": 4,
+      "minDamage": 3,
       "maxDamage": 6
     },
     "5": {
-      "minDamage": 5,
+      "minDamage": 4,
       "maxDamage": 7
     },
     "6": {
-      "minDamage": 6,
+      "minDamage": 4,
       "maxDamage": 8
     },
     "7": {
-      "minDamage": 7,
+      "minDamage": 4,
       "maxDamage": 9
     },
     "8": {
-      "minDamage": 8,
+      "minDamage": 5,
       "maxDamage": 10
     },
     "9": {
-      "minDamage": 9,
+      "minDamage": 6,
       "maxDamage": 11
     },
     "10": {
-      "minDamage": 10,
+      "minDamage": 6,
       "maxDamage": 12
     },
     "11": {
-      "minDamage": 11,
-      "maxDamage": 13
-    },
-    "12": {
-      "minDamage": 12,
+      "minDamage": 8,
       "maxDamage": 14
     },
-    "13": {
-      "minDamage": 13,
-      "maxDamage": 15
-    },
-    "14": {
-      "minDamage": 14,
+    "12": {
+      "minDamage": 8,
       "maxDamage": 16
     },
-    "15": {
-      "minDamage": 15,
+    "13": {
+      "minDamage": 10,
       "maxDamage": 17
     },
-    "16": {
-      "minDamage": 16,
+    "14": {
+      "minDamage": 10,
       "maxDamage": 18
     },
-    "17": {
-      "minDamage": 18,
+    "15": {
+      "minDamage": 12,
       "maxDamage": 20
     },
-    "18": {
-      "minDamage": 20,
+    "16": {
+      "minDamage": 12,
       "maxDamage": 22
     },
+    "17": {
+      "minDamage": 14,
+      "maxDamage": 23
+    },
+    "18": {
+      "minDamage": 15,
+      "maxDamage": 25
+    },
     "19": {
-      "minDamage": 22,
-      "maxDamage": 24
+      "minDamage": 16,
+      "maxDamage": 27
     },
     "20": {
-      "minDamage": 24,
-      "maxDamage": 26
+      "minDamage": 18,
+      "maxDamage": 29
     },
     "21": {
-      "minDamage": 26,
-      "maxDamage": 28
+      "minDamage": 20,
+      "maxDamage": 31
     },
     "22": {
-      "minDamage": 28,
-      "maxDamage": 30
-    },
-    "23": {
-      "minDamage": 31,
+      "minDamage": 21,
       "maxDamage": 33
     },
+    "23": {
+      "minDamage": 22,
+      "maxDamage": 35
+    },
     "24": {
-      "minDamage": 34,
-      "maxDamage": 36
+      "minDamage": 24,
+      "maxDamage": 38
     },
     "25": {
-      "minDamage": 37,
-      "maxDamage": 39
+      "minDamage": 26,
+      "maxDamage": 40
     },
     "26": {
-      "minDamage": 40,
+      "minDamage": 28,
       "maxDamage": 42
     },
     "27": {
-      "minDamage": 43,
+      "minDamage": 30,
       "maxDamage": 45
     },
     "28": {
-      "minDamage": 46,
+      "minDamage": 32,
       "maxDamage": 48
     },
     "29": {
-      "minDamage": 50,
-      "maxDamage": 52
+      "minDamage": 34,
+      "maxDamage": 50
     },
     "30": {
-      "minDamage": 54,
-      "maxDamage": 56
+      "minDamage": 37,
+      "maxDamage": 53
     },
     "31": {
-      "minDamage": 58,
-      "maxDamage": 60
+      "minDamage": 40,
+      "maxDamage": 56
     },
     "32": {
-      "minDamage": 62,
-      "maxDamage": 64
-    },
-    "33": {
-      "minDamage": 66,
-      "maxDamage": 68
-    },
-    "34": {
-      "minDamage": 70,
-      "maxDamage": 72
-    },
-    "35": {
-      "minDamage": 74,
-      "maxDamage": 76
-    },
-    "36": {
-      "minDamage": 78,
-      "maxDamage": 80
-    },
-    "37": {
-      "minDamage": 82,
-      "maxDamage": 84
-    },
-    "38": {
-      "minDamage": 86,
-      "maxDamage": 88
-    },
-    "39": {
-      "minDamage": 90,
-      "maxDamage": 92
-    },
-    "40": {
-      "minDamage": 94,
-      "maxDamage": 96
-    },
-    "41": {
-      "minDamage": 98,
-      "maxDamage": 100
-    },
-    "42": {
-      "minDamage": 102,
-      "maxDamage": 104
-    },
-    "43": {
-      "minDamage": 106,
-      "maxDamage": 108
-    },
-    "44": {
-      "minDamage": 110,
-      "maxDamage": 112
-    },
-    "45": {
-      "minDamage": 114,
-      "maxDamage": 116
-    },
-    "46": {
-      "minDamage": 118,
-      "maxDamage": 120
-    },
-    "47": {
-      "minDamage": 122,
-      "maxDamage": 124
-    },
-    "48": {
-      "minDamage": 126,
-      "maxDamage": 128
-    },
-    "49": {
-      "minDamage": 130,
-      "maxDamage": 132
-    },
-    "50": {
-      "minDamage": 134,
-      "maxDamage": 136
-    },
-    "51": {
-      "minDamage": 138,
-      "maxDamage": 140
-    },
-    "52": {
-      "minDamage": 142,
-      "maxDamage": 144
-    },
-    "53": {
-      "minDamage": 146,
-      "maxDamage": 148
-    },
-    "54": {
-      "minDamage": 150,
-      "maxDamage": 152
-    },
-    "55": {
-      "minDamage": 154,
-      "maxDamage": 156
-    },
-    "56": {
-      "minDamage": 158,
-      "maxDamage": 160
-    },
-    "57": {
-      "minDamage": 162,
-      "maxDamage": 164
-    },
-    "58": {
-      "minDamage": 166,
-      "maxDamage": 168
-    },
-    "59": {
-      "minDamage": 170,
-      "maxDamage": 172
-    },
-    "60": {
-      "minDamage": 174,
-      "maxDamage": 176
-    }
-  },
-  "Charged Bolt Sentry": {
-    "1": {
-      "minDamage": 1,
-      "maxDamage": 8
-    },
-    "2": {
-      "minDamage": 1,
-      "maxDamage": 13
-    },
-    "3": {
-      "minDamage": 1,
-      "maxDamage": 18
-    },
-    "4": {
-      "minDamage": 1,
-      "maxDamage": 23
-    },
-    "5": {
-      "minDamage": 1,
-      "maxDamage": 28
-    },
-    "6": {
-      "minDamage": 1,
-      "maxDamage": 33
-    },
-    "7": {
-      "minDamage": 1,
-      "maxDamage": 38
-    },
-    "8": {
-      "minDamage": 1,
-      "maxDamage": 43
-    },
-    "9": {
-      "minDamage": 1,
-      "maxDamage": 48
-    },
-    "10": {
-      "minDamage": 1,
-      "maxDamage": 54
-    },
-    "11": {
-      "minDamage": 1,
+      "minDamage": 42,
       "maxDamage": 59
     },
-    "12": {
-      "minDamage": 1,
+    "33": {
+      "minDamage": 44,
+      "maxDamage": 62
+    },
+    "34": {
+      "minDamage": 47,
       "maxDamage": 65
     },
-    "13": {
-      "minDamage": 1,
-      "maxDamage": 70
-    },
-    "14": {
-      "minDamage": 1,
-      "maxDamage": 76
-    },
-    "15": {
-      "minDamage": 1,
-      "maxDamage": 81
-    },
-    "16": {
-      "minDamage": 1,
-      "maxDamage": 87
-    },
-    "17": {
-      "minDamage": 1,
-      "maxDamage": 93
-    },
-    "18": {
-      "minDamage": 1,
-      "maxDamage": 99
-    },
-    "19": {
-      "minDamage": 1,
-      "maxDamage": 105
-    },
-    "20": {
-      "minDamage": 1,
-      "maxDamage": 111
-    },
-    "21": {
-      "minDamage": 1,
-      "maxDamage": 117
-    },
-    "22": {
-      "minDamage": 1,
-      "maxDamage": 123
-    },
-    "23": {
-      "minDamage": 1,
-      "maxDamage": 129
-    },
-    "24": {
-      "minDamage": 1,
-      "maxDamage": 136
-    },
-    "25": {
-      "minDamage": 1,
-      "maxDamage": 142
-    },
-    "26": {
-      "minDamage": 1,
-      "maxDamage": 149
-    },
-    "27": {
-      "minDamage": 1,
-      "maxDamage": 155
-    },
-    "28": {
-      "minDamage": 1,
-      "maxDamage": 162
-    },
-    "29": {
-      "minDamage": 1,
-      "maxDamage": 169
-    },
-    "30": {
-      "minDamage": 1,
-      "maxDamage": 176
-    },
-    "31": {
-      "minDamage": 1,
-      "maxDamage": 183
-    },
-    "32": {
-      "minDamage": 1,
-      "maxDamage": 190
-    },
-    "33": {
-      "minDamage": 1,
-      "maxDamage": 197
-    },
-    "34": {
-      "minDamage": 1,
-      "maxDamage": 204
-    },
     "35": {
-      "minDamage": 1,
-      "maxDamage": 211
-    },
-    "36": {
-      "minDamage": 1,
-      "maxDamage": 218
-    },
-    "37": {
-      "minDamage": 1,
-      "maxDamage": 225
-    },
-    "38": {
-      "minDamage": 1,
-      "maxDamage": 232
-    },
-    "39": {
-      "minDamage": 1,
-      "maxDamage": 239
-    },
-    "40": {
-      "minDamage": 1,
-      "maxDamage": 246
-    },
-    "41": {
-      "minDamage": 1,
-      "maxDamage": 253
-    },
-    "42": {
-      "minDamage": 1,
-      "maxDamage": 260
-    },
-    "43": {
-      "minDamage": 1,
-      "maxDamage": 267
-    },
-    "44": {
-      "minDamage": 1,
-      "maxDamage": 274
-    },
-    "45": {
-      "minDamage": 1,
-      "maxDamage": 281
-    },
-    "46": {
-      "minDamage": 1,
-      "maxDamage": 288
-    },
-    "47": {
-      "minDamage": 1,
-      "maxDamage": 295
-    },
-    "48": {
-      "minDamage": 1,
-      "maxDamage": 302
-    },
-    "49": {
-      "minDamage": 1,
-      "maxDamage": 309
-    },
-    "50": {
-      "minDamage": 1,
-      "maxDamage": 316
-    },
-    "51": {
-      "minDamage": 1,
-      "maxDamage": 323
-    },
-    "52": {
-      "minDamage": 1,
-      "maxDamage": 330
-    },
-    "53": {
-      "minDamage": 1,
-      "maxDamage": 337
-    },
-    "54": {
-      "minDamage": 1,
-      "maxDamage": 344
-    },
-    "55": {
-      "minDamage": 1,
-      "maxDamage": 351
-    },
-    "56": {
-      "minDamage": 1,
-      "maxDamage": 358
-    },
-    "57": {
-      "minDamage": 1,
-      "maxDamage": 365
-    },
-    "58": {
-      "minDamage": 1,
-      "maxDamage": 372
-    },
-    "59": {
-      "minDamage": 1,
-      "maxDamage": 379
-    },
-    "60": {
-      "minDamage": 1,
-      "maxDamage": 386
-    }
-  },
-  "Wake of Fire": {
-    "1": {
-      "minDamage": 2,
-      "maxDamage": 4
-    },
-    "2": {
-      "minDamage": 3,
-      "maxDamage": 6
-    },
-    "3": {
-      "minDamage": 4,
-      "maxDamage": 8
-    },
-    "4": {
-      "minDamage": 5,
-      "maxDamage": 10
-    },
-    "5": {
-      "minDamage": 6,
-      "maxDamage": 12
-    },
-    "6": {
-      "minDamage": 7,
-      "maxDamage": 14
-    },
-    "7": {
-      "minDamage": 8,
-      "maxDamage": 16
-    },
-    "8": {
-      "minDamage": 9,
-      "maxDamage": 18
-    },
-    "9": {
-      "minDamage": 13,
-      "maxDamage": 24
-    },
-    "10": {
-      "minDamage": 17,
-      "maxDamage": 30
-    },
-    "11": {
-      "minDamage": 21,
-      "maxDamage": 36
-    },
-    "12": {
-      "minDamage": 25,
-      "maxDamage": 42
-    },
-    "13": {
-      "minDamage": 29,
-      "maxDamage": 48
-    },
-    "14": {
-      "minDamage": 33,
-      "maxDamage": 54
-    },
-    "15": {
-      "minDamage": 37,
-      "maxDamage": 60
-    },
-    "16": {
-      "minDamage": 41,
-      "maxDamage": 66
-    },
-    "17": {
-      "minDamage": 54,
-      "maxDamage": 82
-    },
-    "18": {
-      "minDamage": 67,
-      "maxDamage": 98
-    },
-    "19": {
-      "minDamage": 80,
-      "maxDamage": 114
-    },
-    "20": {
-      "minDamage": 93,
-      "maxDamage": 130
-    },
-    "21": {
-      "minDamage": 106,
-      "maxDamage": 146
-    },
-    "22": {
-      "minDamage": 119,
-      "maxDamage": 162
-    },
-    "23": {
-      "minDamage": 141,
-      "maxDamage": 188
-    },
-    "24": {
-      "minDamage": 163,
-      "maxDamage": 214
-    },
-    "25": {
-      "minDamage": 185,
-      "maxDamage": 240
-    },
-    "26": {
-      "minDamage": 207,
-      "maxDamage": 266
-    },
-    "27": {
-      "minDamage": 229,
-      "maxDamage": 292
-    },
-    "28": {
-      "minDamage": 251,
-      "maxDamage": 318
-    },
-    "29": {
-      "minDamage": 273,
-      "maxDamage": 344
-    },
-    "30": {
-      "minDamage": 295,
-      "maxDamage": 370
-    },
-    "31": {
-      "minDamage": 317,
-      "maxDamage": 396
-    },
-    "32": {
-      "minDamage": 339,
-      "maxDamage": 422
-    },
-    "33": {
-      "minDamage": 361,
-      "maxDamage": 448
-    },
-    "34": {
-      "minDamage": 383,
-      "maxDamage": 474
-    },
-    "35": {
-      "minDamage": 405,
-      "maxDamage": 500
-    },
-    "36": {
-      "minDamage": 427,
-      "maxDamage": 526
-    },
-    "37": {
-      "minDamage": 449,
-      "maxDamage": 552
-    },
-    "38": {
-      "minDamage": 471,
-      "maxDamage": 578
-    },
-    "39": {
-      "minDamage": 493,
-      "maxDamage": 604
-    },
-    "40": {
-      "minDamage": 515,
-      "maxDamage": 630
-    },
-    "41": {
-      "minDamage": 537,
-      "maxDamage": 656
-    },
-    "42": {
-      "minDamage": 559,
-      "maxDamage": 682
-    },
-    "43": {
-      "minDamage": 581,
-      "maxDamage": 708
-    },
-    "44": {
-      "minDamage": 603,
-      "maxDamage": 734
-    },
-    "45": {
-      "minDamage": 625,
-      "maxDamage": 760
-    },
-    "46": {
-      "minDamage": 647,
-      "maxDamage": 786
-    },
-    "47": {
-      "minDamage": 669,
-      "maxDamage": 812
-    },
-    "48": {
-      "minDamage": 691,
-      "maxDamage": 838
-    },
-    "49": {
-      "minDamage": 713,
-      "maxDamage": 864
-    },
-    "50": {
-      "minDamage": 735,
-      "maxDamage": 890
-    },
-    "51": {
-      "minDamage": 757,
-      "maxDamage": 916
-    },
-    "52": {
-      "minDamage": 779,
-      "maxDamage": 942
-    },
-    "53": {
-      "minDamage": 801,
-      "maxDamage": 968
-    },
-    "54": {
-      "minDamage": 823,
-      "maxDamage": 994
-    },
-    "55": {
-      "minDamage": 845,
-      "maxDamage": 1020
-    },
-    "56": {
-      "minDamage": 867,
-      "maxDamage": 1046
-    },
-    "57": {
-      "minDamage": 889,
-      "maxDamage": 1072
-    },
-    "58": {
-      "minDamage": 911,
-      "maxDamage": 1098
-    },
-    "59": {
-      "minDamage": 933,
-      "maxDamage": 1124
-    },
-    "60": {
-      "minDamage": 955,
-      "maxDamage": 1150
-    }
-  },
-  "Blade Fury": {
-    "1": {
-      "minDamage": 3,
-      "maxDamage": 6
-    },
-    "2": {
-      "minDamage": 4,
-      "maxDamage": 8
-    },
-    "3": {
-      "minDamage": 5,
-      "maxDamage": 10
-    },
-    "4": {
-      "minDamage": 6,
-      "maxDamage": 12
-    },
-    "5": {
-      "minDamage": 7,
-      "maxDamage": 14
-    },
-    "6": {
-      "minDamage": 8,
-      "maxDamage": 16
-    },
-    "7": {
-      "minDamage": 9,
-      "maxDamage": 18
-    },
-    "8": {
-      "minDamage": 10,
-      "maxDamage": 20
-    },
-    "9": {
-      "minDamage": 12,
-      "maxDamage": 23
-    },
-    "10": {
-      "minDamage": 14,
-      "maxDamage": 26
-    },
-    "11": {
-      "minDamage": 16,
-      "maxDamage": 29
-    },
-    "12": {
-      "minDamage": 18,
-      "maxDamage": 32
-    },
-    "13": {
-      "minDamage": 20,
-      "maxDamage": 35
-    },
-    "14": {
-      "minDamage": 22,
-      "maxDamage": 38
-    },
-    "15": {
-      "minDamage": 24,
-      "maxDamage": 41
-    },
-    "16": {
-      "minDamage": 26,
-      "maxDamage": 44
-    },
-    "17": {
-      "minDamage": 29,
-      "maxDamage": 48
-    },
-    "18": {
-      "minDamage": 32,
-      "maxDamage": 52
-    },
-    "19": {
-      "minDamage": 35,
-      "maxDamage": 56
-    },
-    "20": {
-      "minDamage": 38,
-      "maxDamage": 60
-    },
-    "21": {
-      "minDamage": 41,
-      "maxDamage": 64
-    },
-    "22": {
-      "minDamage": 44,
+      "minDamage": 50,
       "maxDamage": 68
     },
-    "23": {
-      "minDamage": 48,
-      "maxDamage": 73
-    },
-    "24": {
-      "minDamage": 52,
-      "maxDamage": 78
-    },
-    "25": {
-      "minDamage": 56,
-      "maxDamage": 83
-    },
-    "26": {
-      "minDamage": 60,
-      "maxDamage": 88
-    },
-    "27": {
-      "minDamage": 64,
-      "maxDamage": 93
-    },
-    "28": {
-      "minDamage": 68,
-      "maxDamage": 98
-    },
-    "29": {
-      "minDamage": 73,
-      "maxDamage": 104
-    },
-    "30": {
-      "minDamage": 78,
-      "maxDamage": 110
-    },
-    "31": {
-      "minDamage": 83,
-      "maxDamage": 116
-    },
-    "32": {
-      "minDamage": 88,
-      "maxDamage": 122
-    },
-    "33": {
-      "minDamage": 93,
-      "maxDamage": 128
-    },
-    "34": {
-      "minDamage": 98,
-      "maxDamage": 134
-    },
-    "35": {
-      "minDamage": 103,
-      "maxDamage": 140
-    },
     "36": {
-      "minDamage": 108,
-      "maxDamage": 146
+      "minDamage": 52,
+      "maxDamage": 71
     },
     "37": {
-      "minDamage": 113,
-      "maxDamage": 152
+      "minDamage": 54,
+      "maxDamage": 74
     },
     "38": {
-      "minDamage": 118,
-      "maxDamage": 158
+      "minDamage": 57,
+      "maxDamage": 77
     },
     "39": {
-      "minDamage": 123,
-      "maxDamage": 164
+      "minDamage": 60,
+      "maxDamage": 80
     },
     "40": {
-      "minDamage": 128,
-      "maxDamage": 170
-    },
-    "41": {
-      "minDamage": 133,
-      "maxDamage": 176
-    },
-    "42": {
-      "minDamage": 138,
-      "maxDamage": 182
-    },
-    "43": {
-      "minDamage": 143,
-      "maxDamage": 188
-    },
-    "44": {
-      "minDamage": 148,
-      "maxDamage": 194
-    },
-    "45": {
-      "minDamage": 153,
-      "maxDamage": 200
-    },
-    "46": {
-      "minDamage": 158,
-      "maxDamage": 206
-    },
-    "47": {
-      "minDamage": 163,
-      "maxDamage": 212
-    },
-    "48": {
-      "minDamage": 168,
-      "maxDamage": 218
-    },
-    "49": {
-      "minDamage": 173,
-      "maxDamage": 224
-    },
-    "50": {
-      "minDamage": 178,
-      "maxDamage": 230
-    },
-    "51": {
-      "minDamage": 183,
-      "maxDamage": 236
-    },
-    "52": {
-      "minDamage": 188,
-      "maxDamage": 242
-    },
-    "53": {
-      "minDamage": 193,
-      "maxDamage": 248
-    },
-    "54": {
-      "minDamage": 198,
-      "maxDamage": 254
-    },
-    "55": {
-      "minDamage": 203,
-      "maxDamage": 260
-    },
-    "56": {
-      "minDamage": 208,
-      "maxDamage": 266
-    },
-    "57": {
-      "minDamage": 213,
-      "maxDamage": 272
-    },
-    "58": {
-      "minDamage": 218,
-      "maxDamage": 278
-    },
-    "59": {
-      "minDamage": 223,
-      "maxDamage": 284
-    },
-    "60": {
-      "minDamage": 228,
-      "maxDamage": 290
+      "minDamage": 62,
+      "maxDamage": 83
     }
   },
   "Blade Shield": {
     "1": {
-      "minDamage": 1,
-      "maxDamage": 30
+      "minDamage": 0,
+      "maxDamage": 15
     },
     "2": {
-      "minDamage": 6,
-      "maxDamage": 35
+      "minDamage": 3,
+      "maxDamage": 18
     },
     "3": {
-      "minDamage": 11,
-      "maxDamage": 40
+      "minDamage": 6,
+      "maxDamage": 20
     },
     "4": {
-      "minDamage": 16,
-      "maxDamage": 45
+      "minDamage": 8,
+      "maxDamage": 22
     },
     "5": {
-      "minDamage": 21,
-      "maxDamage": 50
+      "minDamage": 10,
+      "maxDamage": 25
     },
     "6": {
-      "minDamage": 26,
-      "maxDamage": 55
+      "minDamage": 13,
+      "maxDamage": 28
     },
     "7": {
-      "minDamage": 31,
-      "maxDamage": 60
+      "minDamage": 16,
+      "maxDamage": 30
     },
     "8": {
-      "minDamage": 36,
-      "maxDamage": 65
+      "minDamage": 18,
+      "maxDamage": 32
     },
     "9": {
-      "minDamage": 43,
-      "maxDamage": 72
+      "minDamage": 20,
+      "maxDamage": 35
     },
     "10": {
-      "minDamage": 50,
-      "maxDamage": 79
+      "minDamage": 24,
+      "maxDamage": 38
     },
     "11": {
-      "minDamage": 57,
-      "maxDamage": 86
+      "minDamage": 28,
+      "maxDamage": 42
     },
     "12": {
-      "minDamage": 64,
-      "maxDamage": 93
+      "minDamage": 31,
+      "maxDamage": 46
     },
     "13": {
-      "minDamage": 71,
-      "maxDamage": 100
+      "minDamage": 34,
+      "maxDamage": 49
     },
     "14": {
-      "minDamage": 78,
-      "maxDamage": 107
+      "minDamage": 38,
+      "maxDamage": 52
     },
     "15": {
-      "minDamage": 85,
-      "maxDamage": 114
+      "minDamage": 42,
+      "maxDamage": 56
     },
     "16": {
-      "minDamage": 92,
-      "maxDamage": 121
+      "minDamage": 45,
+      "maxDamage": 60
     },
     "17": {
-      "minDamage": 102,
-      "maxDamage": 131
+      "minDamage": 48,
+      "maxDamage": 63
     },
     "18": {
-      "minDamage": 112,
-      "maxDamage": 141
+      "minDamage": 54,
+      "maxDamage": 68
     },
     "19": {
-      "minDamage": 122,
-      "maxDamage": 151
+      "minDamage": 58,
+      "maxDamage": 73
     },
     "20": {
-      "minDamage": 132,
-      "maxDamage": 161
+      "minDamage": 64,
+      "maxDamage": 78
     },
     "21": {
-      "minDamage": 142,
-      "maxDamage": 171
+      "minDamage": 68,
+      "maxDamage": 83
     },
     "22": {
-      "minDamage": 152,
-      "maxDamage": 181
+      "minDamage": 74,
+      "maxDamage": 88
     },
     "23": {
-      "minDamage": 165,
-      "maxDamage": 194
+      "minDamage": 78,
+      "maxDamage": 93
     },
     "24": {
-      "minDamage": 178,
-      "maxDamage": 207
+      "minDamage": 85,
+      "maxDamage": 100
     },
     "25": {
-      "minDamage": 191,
-      "maxDamage": 220
+      "minDamage": 92,
+      "maxDamage": 106
     },
     "26": {
-      "minDamage": 204,
-      "maxDamage": 233
+      "minDamage": 98,
+      "maxDamage": 112
     },
     "27": {
-      "minDamage": 217,
-      "maxDamage": 246
+      "minDamage": 104,
+      "maxDamage": 119
     },
     "28": {
-      "minDamage": 230,
-      "maxDamage": 259
+      "minDamage": 111,
+      "maxDamage": 126
     },
     "29": {
-      "minDamage": 246,
-      "maxDamage": 275
+      "minDamage": 118,
+      "maxDamage": 132
     },
     "30": {
-      "minDamage": 262,
-      "maxDamage": 291
+      "minDamage": 126,
+      "maxDamage": 140
     },
     "31": {
-      "minDamage": 278,
-      "maxDamage": 307
+      "minDamage": 134,
+      "maxDamage": 148
     },
     "32": {
-      "minDamage": 294,
-      "maxDamage": 323
+      "minDamage": 142,
+      "maxDamage": 156
     },
     "33": {
-      "minDamage": 310,
-      "maxDamage": 339
+      "minDamage": 150,
+      "maxDamage": 164
     },
     "34": {
-      "minDamage": 326,
-      "maxDamage": 355
+      "minDamage": 158,
+      "maxDamage": 172
     },
     "35": {
-      "minDamage": 342,
-      "maxDamage": 371
+      "minDamage": 166,
+      "maxDamage": 180
     },
     "36": {
-      "minDamage": 358,
-      "maxDamage": 387
+      "minDamage": 174,
+      "maxDamage": 188
     },
     "37": {
-      "minDamage": 374,
-      "maxDamage": 403
+      "minDamage": 182,
+      "maxDamage": 196
     },
     "38": {
-      "minDamage": 390,
-      "maxDamage": 419
+      "minDamage": 190,
+      "maxDamage": 204
     },
     "39": {
-      "minDamage": 406,
-      "maxDamage": 435
+      "minDamage": 198,
+      "maxDamage": 212
     },
     "40": {
-      "minDamage": 422,
-      "maxDamage": 451
-    },
-    "41": {
-      "minDamage": 438,
-      "maxDamage": 467
-    },
-    "42": {
-      "minDamage": 454,
-      "maxDamage": 483
-    },
-    "43": {
-      "minDamage": 470,
-      "maxDamage": 499
-    },
-    "44": {
-      "minDamage": 486,
-      "maxDamage": 515
-    },
-    "45": {
-      "minDamage": 502,
-      "maxDamage": 531
-    },
-    "46": {
-      "minDamage": 518,
-      "maxDamage": 547
-    },
-    "47": {
-      "minDamage": 534,
-      "maxDamage": 563
-    },
-    "48": {
-      "minDamage": 550,
-      "maxDamage": 579
-    },
-    "49": {
-      "minDamage": 566,
-      "maxDamage": 595
-    },
-    "50": {
-      "minDamage": 582,
-      "maxDamage": 611
-    },
-    "51": {
-      "minDamage": 598,
-      "maxDamage": 627
-    },
-    "52": {
-      "minDamage": 614,
-      "maxDamage": 643
-    },
-    "53": {
-      "minDamage": 630,
-      "maxDamage": 659
-    },
-    "54": {
-      "minDamage": 646,
-      "maxDamage": 675
-    },
-    "55": {
-      "minDamage": 662,
-      "maxDamage": 691
-    },
-    "56": {
-      "minDamage": 678,
-      "maxDamage": 707
-    },
-    "57": {
-      "minDamage": 694,
-      "maxDamage": 723
-    },
-    "58": {
-      "minDamage": 710,
-      "maxDamage": 739
-    },
-    "59": {
-      "minDamage": 726,
-      "maxDamage": 755
-    },
-    "60": {
-      "minDamage": 742,
-      "maxDamage": 771
+      "minDamage": 206,
+      "maxDamage": 220
     }
   },
   "Lightning Sentry": {
     "1": {
-      "minDamage": 7,
-      "maxDamage": 30
+      "minDamage": 4,
+      "maxDamage": 15
     },
     "2": {
+      "minDamage": 5,
+      "maxDamage": 22
+    },
+    "3": {
+      "minDamage": 6,
+      "maxDamage": 30
+    },
+    "4": {
+      "minDamage": 8,
+      "maxDamage": 38
+    },
+    "5": {
       "minDamage": 10,
       "maxDamage": 45
     },
-    "3": {
-      "minDamage": 13,
+    "6": {
+      "minDamage": 11,
+      "maxDamage": 52
+    },
+    "7": {
+      "minDamage": 12,
       "maxDamage": 60
     },
-    "4": {
+    "8": {
+      "minDamage": 14,
+      "maxDamage": 68
+    },
+    "9": {
       "minDamage": 16,
       "maxDamage": 75
     },
-    "5": {
-      "minDamage": 19,
-      "maxDamage": 90
-    },
-    "6": {
-      "minDamage": 22,
-      "maxDamage": 105
-    },
-    "7": {
-      "minDamage": 25,
-      "maxDamage": 120
-    },
-    "8": {
-      "minDamage": 28,
-      "maxDamage": 135
-    },
-    "9": {
-      "minDamage": 32,
-      "maxDamage": 156
-    },
     "10": {
-      "minDamage": 36,
-      "maxDamage": 177
+      "minDamage": 18,
+      "maxDamage": 86
     },
     "11": {
-      "minDamage": 40,
-      "maxDamage": 198
+      "minDamage": 20,
+      "maxDamage": 96
     },
     "12": {
-      "minDamage": 44,
-      "maxDamage": 219
+      "minDamage": 22,
+      "maxDamage": 106
     },
     "13": {
-      "minDamage": 48,
-      "maxDamage": 240
+      "minDamage": 24,
+      "maxDamage": 117
     },
     "14": {
-      "minDamage": 52,
-      "maxDamage": 261
+      "minDamage": 26,
+      "maxDamage": 128
     },
     "15": {
-      "minDamage": 56,
-      "maxDamage": 282
+      "minDamage": 28,
+      "maxDamage": 138
     },
     "16": {
-      "minDamage": 60,
-      "maxDamage": 303
+      "minDamage": 30,
+      "maxDamage": 148
     },
     "17": {
-      "minDamage": 65,
-      "maxDamage": 330
+      "minDamage": 32,
+      "maxDamage": 159
     },
     "18": {
-      "minDamage": 70,
-      "maxDamage": 357
+      "minDamage": 34,
+      "maxDamage": 172
     },
     "19": {
-      "minDamage": 75,
-      "maxDamage": 384
+      "minDamage": 36,
+      "maxDamage": 186
     },
     "20": {
-      "minDamage": 80,
-      "maxDamage": 411
+      "minDamage": 39,
+      "maxDamage": 200
     },
     "21": {
-      "minDamage": 85,
-      "maxDamage": 438
+      "minDamage": 42,
+      "maxDamage": 213
     },
     "22": {
-      "minDamage": 90,
-      "maxDamage": 465
+      "minDamage": 44,
+      "maxDamage": 226
     },
     "23": {
-      "minDamage": 97,
-      "maxDamage": 498
+      "minDamage": 46,
+      "maxDamage": 240
     },
     "24": {
-      "minDamage": 104,
-      "maxDamage": 531
+      "minDamage": 50,
+      "maxDamage": 256
     },
     "25": {
-      "minDamage": 111,
-      "maxDamage": 564
+      "minDamage": 54,
+      "maxDamage": 273
     },
     "26": {
-      "minDamage": 118,
-      "maxDamage": 597
+      "minDamage": 57,
+      "maxDamage": 290
     },
     "27": {
-      "minDamage": 125,
-      "maxDamage": 630
+      "minDamage": 60,
+      "maxDamage": 306
     },
     "28": {
-      "minDamage": 132,
-      "maxDamage": 663
+      "minDamage": 64,
+      "maxDamage": 322
     },
     "29": {
-      "minDamage": 140,
-      "maxDamage": 702
+      "minDamage": 68,
+      "maxDamage": 339
     },
     "30": {
-      "minDamage": 148,
-      "maxDamage": 741
+      "minDamage": 72,
+      "maxDamage": 358
     },
     "31": {
-      "minDamage": 156,
-      "maxDamage": 780
+      "minDamage": 76,
+      "maxDamage": 378
     },
     "32": {
-      "minDamage": 164,
-      "maxDamage": 819
+      "minDamage": 80,
+      "maxDamage": 398
     },
     "33": {
-      "minDamage": 172,
-      "maxDamage": 858
+      "minDamage": 84,
+      "maxDamage": 417
     },
     "34": {
-      "minDamage": 180,
-      "maxDamage": 897
+      "minDamage": 88,
+      "maxDamage": 436
     },
     "35": {
-      "minDamage": 188,
-      "maxDamage": 936
+      "minDamage": 92,
+      "maxDamage": 456
     },
     "36": {
-      "minDamage": 196,
-      "maxDamage": 975
+      "minDamage": 96,
+      "maxDamage": 476
     },
     "37": {
-      "minDamage": 204,
-      "maxDamage": 1014
+      "minDamage": 100,
+      "maxDamage": 495
     },
     "38": {
-      "minDamage": 212,
-      "maxDamage": 1053
+      "minDamage": 104,
+      "maxDamage": 514
     },
     "39": {
-      "minDamage": 220,
-      "maxDamage": 1092
+      "minDamage": 108,
+      "maxDamage": 534
     },
     "40": {
-      "minDamage": 228,
-      "maxDamage": 1131
-    },
-    "41": {
-      "minDamage": 236,
-      "maxDamage": 1170
-    },
-    "42": {
-      "minDamage": 244,
-      "maxDamage": 1209
-    },
-    "43": {
-      "minDamage": 252,
-      "maxDamage": 1248
-    },
-    "44": {
-      "minDamage": 260,
-      "maxDamage": 1287
-    },
-    "45": {
-      "minDamage": 268,
-      "maxDamage": 1326
-    },
-    "46": {
-      "minDamage": 276,
-      "maxDamage": 1365
-    },
-    "47": {
-      "minDamage": 284,
-      "maxDamage": 1404
-    },
-    "48": {
-      "minDamage": 292,
-      "maxDamage": 1443
-    },
-    "49": {
-      "minDamage": 300,
-      "maxDamage": 1482
-    },
-    "50": {
-      "minDamage": 308,
-      "maxDamage": 1521
-    },
-    "51": {
-      "minDamage": 316,
-      "maxDamage": 1560
-    },
-    "52": {
-      "minDamage": 324,
-      "maxDamage": 1599
-    },
-    "53": {
-      "minDamage": 332,
-      "maxDamage": 1638
-    },
-    "54": {
-      "minDamage": 340,
-      "maxDamage": 1677
-    },
-    "55": {
-      "minDamage": 348,
-      "maxDamage": 1716
-    },
-    "56": {
-      "minDamage": 356,
-      "maxDamage": 1755
-    },
-    "57": {
-      "minDamage": 364,
-      "maxDamage": 1794
-    },
-    "58": {
-      "minDamage": 372,
-      "maxDamage": 1833
-    },
-    "59": {
-      "minDamage": 380,
-      "maxDamage": 1872
-    },
-    "60": {
-      "minDamage": 388,
-      "maxDamage": 1911
+      "minDamage": 112,
+      "maxDamage": 554
     }
   },
   "Wake of Inferno": {
     "1": {
-      "minDamage": 31,
-      "maxDamage": 52
+      "minDamage": 2,
+      "maxDamage": 3
     },
     "2": {
-      "minDamage": 48,
-      "maxDamage": 72
+      "minDamage": 3,
+      "maxDamage": 4
     },
     "3": {
-      "minDamage": 66,
-      "maxDamage": 93
+      "minDamage": 4,
+      "maxDamage": 6
     },
     "4": {
-      "minDamage": 84,
-      "maxDamage": 114
+      "minDamage": 5,
+      "maxDamage": 7
     },
     "5": {
-      "minDamage": 102,
-      "maxDamage": 135
+      "minDamage": 6,
+      "maxDamage": 8
     },
     "6": {
-      "minDamage": 119,
-      "maxDamage": 156
+      "minDamage": 7,
+      "maxDamage": 9
     },
     "7": {
-      "minDamage": 137,
-      "maxDamage": 177
+      "minDamage": 8,
+      "maxDamage": 11
     },
     "8": {
-      "minDamage": 155,
-      "maxDamage": 197
+      "minDamage": 9,
+      "maxDamage": 12
     },
     "9": {
-      "minDamage": 190,
-      "maxDamage": 239
+      "minDamage": 10,
+      "maxDamage": 13
     },
     "10": {
-      "minDamage": 226,
-      "maxDamage": 281
+      "minDamage": 12,
+      "maxDamage": 16
     },
     "11": {
-      "minDamage": 261,
-      "maxDamage": 322
+      "minDamage": 15,
+      "maxDamage": 18
     },
     "12": {
-      "minDamage": 296,
-      "maxDamage": 364
+      "minDamage": 17,
+      "maxDamage": 21
     },
     "13": {
-      "minDamage": 332,
-      "maxDamage": 406
+      "minDamage": 19,
+      "maxDamage": 23
     },
     "14": {
-      "minDamage": 367,
-      "maxDamage": 447
+      "minDamage": 21,
+      "maxDamage": 26
     },
     "15": {
-      "minDamage": 403,
-      "maxDamage": 489
+      "minDamage": 23,
+      "maxDamage": 28
     },
     "16": {
-      "minDamage": 438,
-      "maxDamage": 531
+      "minDamage": 25,
+      "maxDamage": 31
     },
     "17": {
-      "minDamage": 491,
-      "maxDamage": 593
+      "minDamage": 27,
+      "maxDamage": 33
     },
     "18": {
-      "minDamage": 544,
-      "maxDamage": 656
+      "minDamage": 31,
+      "maxDamage": 37
     },
     "19": {
-      "minDamage": 597,
-      "maxDamage": 718
+      "minDamage": 34,
+      "maxDamage": 41
     },
     "20": {
-      "minDamage": 651,
-      "maxDamage": 781
+      "minDamage": 37,
+      "maxDamage": 44
     },
     "21": {
-      "minDamage": 704,
-      "maxDamage": 843
+      "minDamage": 40,
+      "maxDamage": 48
     },
     "22": {
-      "minDamage": 757,
-      "maxDamage": 906
+      "minDamage": 43,
+      "maxDamage": 52
     },
     "23": {
-      "minDamage": 828,
-      "maxDamage": 989
+      "minDamage": 46,
+      "maxDamage": 56
     },
     "24": {
-      "minDamage": 898,
-      "maxDamage": 1072
+      "minDamage": 51,
+      "maxDamage": 61
     },
     "25": {
-      "minDamage": 969,
-      "maxDamage": 1156
+      "minDamage": 55,
+      "maxDamage": 66
     },
     "26": {
-      "minDamage": 1040,
-      "maxDamage": 1239
+      "minDamage": 59,
+      "maxDamage": 71
     },
     "27": {
-      "minDamage": 1111,
-      "maxDamage": 1322
+      "minDamage": 64,
+      "maxDamage": 76
     },
     "28": {
-      "minDamage": 1182,
-      "maxDamage": 1406
+      "minDamage": 68,
+      "maxDamage": 81
     },
     "29": {
-      "minDamage": 1270,
-      "maxDamage": 1510
+      "minDamage": 72,
+      "maxDamage": 86
     },
     "30": {
-      "minDamage": 1359,
-      "maxDamage": 1614
+      "minDamage": 77,
+      "maxDamage": 92
     },
     "31": {
-      "minDamage": 1447,
-      "maxDamage": 1718
+      "minDamage": 83,
+      "maxDamage": 98
     },
     "32": {
-      "minDamage": 1536,
-      "maxDamage": 1822
+      "minDamage": 88,
+      "maxDamage": 104
     },
     "33": {
-      "minDamage": 1625,
-      "maxDamage": 1927
+      "minDamage": 93,
+      "maxDamage": 111
     },
     "34": {
-      "minDamage": 1713,
-      "maxDamage": 2031
+      "minDamage": 99,
+      "maxDamage": 117
     },
     "35": {
-      "minDamage": 1802,
-      "maxDamage": 2135
+      "minDamage": 104,
+      "maxDamage": 123
     },
     "36": {
-      "minDamage": 1890,
-      "maxDamage": 2239
+      "minDamage": 109,
+      "maxDamage": 129
     },
     "37": {
-      "minDamage": 1979,
-      "maxDamage": 2343
+      "minDamage": 114,
+      "maxDamage": 136
     },
     "38": {
-      "minDamage": 2067,
-      "maxDamage": 2447
+      "minDamage": 120,
+      "maxDamage": 142
     },
     "39": {
-      "minDamage": 2156,
-      "maxDamage": 2552
+      "minDamage": 125,
+      "maxDamage": 148
     },
     "40": {
-      "minDamage": 2244,
-      "maxDamage": 2656
-    },
-    "41": {
-      "minDamage": 2333,
-      "maxDamage": 2760
-    },
-    "42": {
-      "minDamage": 2421,
-      "maxDamage": 2864
-    },
-    "43": {
-      "minDamage": 2510,
-      "maxDamage": 2968
-    },
-    "44": {
-      "minDamage": 2598,
-      "maxDamage": 3072
-    },
-    "45": {
-      "minDamage": 2687,
-      "maxDamage": 3177
-    },
-    "46": {
-      "minDamage": 2776,
-      "maxDamage": 3281
-    },
-    "47": {
-      "minDamage": 2864,
-      "maxDamage": 3385
-    },
-    "48": {
-      "minDamage": 2953,
-      "maxDamage": 3489
-    },
-    "49": {
-      "minDamage": 3041,
-      "maxDamage": 3593
-    },
-    "50": {
-      "minDamage": 3130,
-      "maxDamage": 3697
-    },
-    "51": {
-      "minDamage": 3218,
-      "maxDamage": 3802
-    },
-    "52": {
-      "minDamage": 3307,
-      "maxDamage": 3906
-    },
-    "53": {
-      "minDamage": 3395,
-      "maxDamage": 4010
-    },
-    "54": {
-      "minDamage": 3484,
-      "maxDamage": 4114
-    },
-    "55": {
-      "minDamage": 3572,
-      "maxDamage": 4218
-    },
-    "56": {
-      "minDamage": 3661,
-      "maxDamage": 4322
-    },
-    "57": {
-      "minDamage": 3749,
-      "maxDamage": 4427
-    },
-    "58": {
-      "minDamage": 3838,
-      "maxDamage": 4531
-    },
-    "59": {
-      "minDamage": 3927,
-      "maxDamage": 4635
-    },
-    "60": {
-      "minDamage": 4015,
-      "maxDamage": 4739
+      "minDamage": 130,
+      "maxDamage": 154
     }
   },
   "Chain Lightning Sentry": {
@@ -7987,244 +6303,164 @@ export const skillsLevelData: Record<string, Record<number, { minDamage?: number
   },
   "Death Sentry": {
     "1": {
-      "minDamage": 16,
-      "maxDamage": 20
+      "minDamage": 8,
+      "maxDamage": 10
     },
     "2": {
-      "minDamage": 21,
-      "maxDamage": 26
+      "minDamage": 10,
+      "maxDamage": 13
     },
     "3": {
-      "minDamage": 26,
-      "maxDamage": 32
+      "minDamage": 13,
+      "maxDamage": 16
     },
     "4": {
-      "minDamage": 31,
-      "maxDamage": 38
+      "minDamage": 16,
+      "maxDamage": 19
     },
     "5": {
-      "minDamage": 36,
-      "maxDamage": 44
+      "minDamage": 18,
+      "maxDamage": 22
     },
     "6": {
-      "minDamage": 41,
-      "maxDamage": 50
+      "minDamage": 20,
+      "maxDamage": 25
     },
     "7": {
-      "minDamage": 46,
-      "maxDamage": 56
+      "minDamage": 23,
+      "maxDamage": 28
     },
     "8": {
-      "minDamage": 51,
-      "maxDamage": 62
+      "minDamage": 26,
+      "maxDamage": 31
     },
     "9": {
-      "minDamage": 58,
-      "maxDamage": 70
+      "minDamage": 28,
+      "maxDamage": 34
     },
     "10": {
-      "minDamage": 65,
-      "maxDamage": 78
+      "minDamage": 32,
+      "maxDamage": 38
     },
     "11": {
-      "minDamage": 72,
-      "maxDamage": 86
+      "minDamage": 35,
+      "maxDamage": 42
     },
     "12": {
-      "minDamage": 79,
-      "maxDamage": 94
+      "minDamage": 38,
+      "maxDamage": 46
     },
     "13": {
-      "minDamage": 86,
-      "maxDamage": 102
+      "minDamage": 42,
+      "maxDamage": 50
     },
     "14": {
-      "minDamage": 93,
-      "maxDamage": 110
+      "minDamage": 46,
+      "maxDamage": 54
     },
     "15": {
-      "minDamage": 100,
-      "maxDamage": 118
+      "minDamage": 49,
+      "maxDamage": 58
     },
     "16": {
-      "minDamage": 107,
-      "maxDamage": 126
+      "minDamage": 52,
+      "maxDamage": 62
     },
     "17": {
-      "minDamage": 116,
-      "maxDamage": 136
+      "minDamage": 56,
+      "maxDamage": 66
     },
     "18": {
-      "minDamage": 125,
-      "maxDamage": 146
+      "minDamage": 60,
+      "maxDamage": 71
     },
     "19": {
-      "minDamage": 134,
-      "maxDamage": 156
+      "minDamage": 65,
+      "maxDamage": 76
     },
     "20": {
-      "minDamage": 143,
-      "maxDamage": 166
+      "minDamage": 70,
+      "maxDamage": 81
     },
     "21": {
-      "minDamage": 152,
-      "maxDamage": 176
+      "minDamage": 74,
+      "maxDamage": 86
     },
     "22": {
-      "minDamage": 161,
-      "maxDamage": 186
+      "minDamage": 78,
+      "maxDamage": 91
     },
     "23": {
-      "minDamage": 172,
-      "maxDamage": 198
+      "minDamage": 83,
+      "maxDamage": 96
     },
     "24": {
-      "minDamage": 183,
-      "maxDamage": 210
+      "minDamage": 88,
+      "maxDamage": 102
     },
     "25": {
-      "minDamage": 194,
-      "maxDamage": 222
+      "minDamage": 94,
+      "maxDamage": 108
     },
     "26": {
-      "minDamage": 205,
-      "maxDamage": 234
+      "minDamage": 100,
+      "maxDamage": 114
     },
     "27": {
-      "minDamage": 216,
-      "maxDamage": 246
+      "minDamage": 105,
+      "maxDamage": 120
     },
     "28": {
-      "minDamage": 227,
-      "maxDamage": 258
+      "minDamage": 110,
+      "maxDamage": 126
     },
     "29": {
-      "minDamage": 240,
-      "maxDamage": 272
+      "minDamage": 116,
+      "maxDamage": 132
     },
     "30": {
-      "minDamage": 253,
-      "maxDamage": 286
+      "minDamage": 122,
+      "maxDamage": 139
     },
     "31": {
-      "minDamage": 266,
-      "maxDamage": 300
+      "minDamage": 129,
+      "maxDamage": 146
     },
     "32": {
-      "minDamage": 279,
-      "maxDamage": 314
+      "minDamage": 136,
+      "maxDamage": 153
     },
     "33": {
-      "minDamage": 292,
-      "maxDamage": 328
+      "minDamage": 142,
+      "maxDamage": 160
     },
     "34": {
-      "minDamage": 305,
-      "maxDamage": 342
+      "minDamage": 148,
+      "maxDamage": 167
     },
     "35": {
-      "minDamage": 318,
-      "maxDamage": 356
+      "minDamage": 155,
+      "maxDamage": 174
     },
     "36": {
-      "minDamage": 331,
-      "maxDamage": 370
+      "minDamage": 162,
+      "maxDamage": 181
     },
     "37": {
-      "minDamage": 344,
-      "maxDamage": 384
+      "minDamage": 168,
+      "maxDamage": 188
     },
     "38": {
-      "minDamage": 357,
-      "maxDamage": 398
+      "minDamage": 174,
+      "maxDamage": 195
     },
     "39": {
-      "minDamage": 370,
-      "maxDamage": 412
+      "minDamage": 181,
+      "maxDamage": 202
     },
     "40": {
-      "minDamage": 383,
-      "maxDamage": 426
-    },
-    "41": {
-      "minDamage": 396,
-      "maxDamage": 440
-    },
-    "42": {
-      "minDamage": 409,
-      "maxDamage": 454
-    },
-    "43": {
-      "minDamage": 422,
-      "maxDamage": 468
-    },
-    "44": {
-      "minDamage": 435,
-      "maxDamage": 482
-    },
-    "45": {
-      "minDamage": 448,
-      "maxDamage": 496
-    },
-    "46": {
-      "minDamage": 461,
-      "maxDamage": 510
-    },
-    "47": {
-      "minDamage": 474,
-      "maxDamage": 524
-    },
-    "48": {
-      "minDamage": 487,
-      "maxDamage": 538
-    },
-    "49": {
-      "minDamage": 500,
-      "maxDamage": 552
-    },
-    "50": {
-      "minDamage": 513,
-      "maxDamage": 566
-    },
-    "51": {
-      "minDamage": 526,
-      "maxDamage": 580
-    },
-    "52": {
-      "minDamage": 539,
-      "maxDamage": 594
-    },
-    "53": {
-      "minDamage": 552,
-      "maxDamage": 608
-    },
-    "54": {
-      "minDamage": 565,
-      "maxDamage": 622
-    },
-    "55": {
-      "minDamage": 578,
-      "maxDamage": 636
-    },
-    "56": {
-      "minDamage": 591,
-      "maxDamage": 650
-    },
-    "57": {
-      "minDamage": 604,
-      "maxDamage": 664
-    },
-    "58": {
-      "minDamage": 617,
-      "maxDamage": 678
-    },
-    "59": {
-      "minDamage": 630,
-      "maxDamage": 692
-    },
-    "60": {
-      "minDamage": 643,
-      "maxDamage": 706
+      "minDamage": 188,
+      "maxDamage": 209
     }
   },
   "War Cry": {
@@ -24439,6 +22675,168 @@ export const skillsLevelData: Record<string, Record<number, { minDamage?: number
     "60": {
       "minDamage": 1101,
       "maxDamage": 1208
+    }
+  },
+  "Weapon Block": {
+    "1": {
+      "minDamage": 8,
+      "maxDamage": 0
+    },
+    "2": {
+      "minDamage": 8,
+      "maxDamage": 1
+    },
+    "3": {
+      "minDamage": 10,
+      "maxDamage": 2
+    },
+    "4": {
+      "minDamage": 10,
+      "maxDamage": 2
+    },
+    "5": {
+      "minDamage": 12,
+      "maxDamage": 2
+    },
+    "6": {
+      "minDamage": 12,
+      "maxDamage": 3
+    },
+    "7": {
+      "minDamage": 14,
+      "maxDamage": 4
+    },
+    "8": {
+      "minDamage": 14,
+      "maxDamage": 4
+    },
+    "9": {
+      "minDamage": 16,
+      "maxDamage": 4
+    },
+    "10": {
+      "minDamage": 16,
+      "maxDamage": 4
+    },
+    "11": {
+      "minDamage": 16,
+      "maxDamage": 4
+    },
+    "12": {
+      "minDamage": 17,
+      "maxDamage": 4
+    },
+    "13": {
+      "minDamage": 18,
+      "maxDamage": 4
+    },
+    "14": {
+      "minDamage": 18,
+      "maxDamage": 4
+    },
+    "15": {
+      "minDamage": 18,
+      "maxDamage": 4
+    },
+    "16": {
+      "minDamage": 19,
+      "maxDamage": 4
+    },
+    "17": {
+      "minDamage": 20,
+      "maxDamage": 4
+    },
+    "18": {
+      "minDamage": 20,
+      "maxDamage": 4
+    },
+    "19": {
+      "minDamage": 20,
+      "maxDamage": 4
+    },
+    "20": {
+      "minDamage": 21,
+      "maxDamage": 4
+    },
+    "21": {
+      "minDamage": 22,
+      "maxDamage": 4
+    },
+    "22": {
+      "minDamage": 22,
+      "maxDamage": 4
+    },
+    "23": {
+      "minDamage": 22,
+      "maxDamage": 4
+    },
+    "24": {
+      "minDamage": 23,
+      "maxDamage": 4
+    },
+    "25": {
+      "minDamage": 24,
+      "maxDamage": 4
+    },
+    "26": {
+      "minDamage": 24,
+      "maxDamage": 4
+    },
+    "27": {
+      "minDamage": 24,
+      "maxDamage": 4
+    },
+    "28": {
+      "minDamage": 25,
+      "maxDamage": 4
+    },
+    "29": {
+      "minDamage": 26,
+      "maxDamage": 4
+    },
+    "30": {
+      "minDamage": 26,
+      "maxDamage": 4
+    },
+    "31": {
+      "minDamage": 26,
+      "maxDamage": 4
+    },
+    "32": {
+      "minDamage": 27,
+      "maxDamage": 4
+    },
+    "33": {
+      "minDamage": 28,
+      "maxDamage": 4
+    },
+    "34": {
+      "minDamage": 28,
+      "maxDamage": 4
+    },
+    "35": {
+      "minDamage": 28,
+      "maxDamage": 4
+    },
+    "36": {
+      "minDamage": 29,
+      "maxDamage": 4
+    },
+    "37": {
+      "minDamage": 30,
+      "maxDamage": 4
+    },
+    "38": {
+      "minDamage": 30,
+      "maxDamage": 4
+    },
+    "39": {
+      "minDamage": 30,
+      "maxDamage": 4
+    },
+    "40": {
+      "minDamage": 31,
+      "maxDamage": 4
     }
   }
 };

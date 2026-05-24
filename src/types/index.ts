@@ -2,6 +2,7 @@ export type SkillTab = 'Traps' | 'Shadow Disciplines' | 'Martial Arts';
 
 export interface Skill {
   id: string;
+  iconCel?: string | number;
   name: string;
   tab: SkillTab;
   row: number;
@@ -36,6 +37,7 @@ export interface Stat {
 }
 
 export interface Item {
+  imageFile?: string;
   id: string;
   name: string;
   baseType: string;

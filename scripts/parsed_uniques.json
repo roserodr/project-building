@@ -1,0 +1,289 @@
+[
+  {
+    "id": "the_gnasher",
+    "name": "The Gnasher",
+    "baseType": "Hand Axe",
+    "slotType": "Weapon",
+    "rarity": "Unique",
+    "width": 1,
+    "height": 3,
+    "requiredLevel": 5,
+    "stats": [
+      {
+        "id": "str",
+        "name": "str 8-8",
+        "value": 8,
+        "type": "flat"
+      },
+      {
+        "id": "openwounds",
+        "name": "openwounds 50-50",
+        "value": 50,
+        "type": "flat"
+      },
+      {
+        "id": "crush",
+        "name": "crush 20-20",
+        "value": 20,
+        "type": "flat"
+      },
+      {
+        "id": "dmg_",
+        "name": "dmg% 40-50",
+        "value": 40,
+        "type": "flat"
+      },
+      {
+        "id": "deep_wounds",
+        "name": "deep-wounds 2-2",
+        "value": 2,
+        "type": "flat"
+      },
+      {
+        "id": "splash",
+        "name": "splash 100-1",
+        "value": 100,
+        "type": "flat"
+      }
+    ],
+    "imageFile": "invhaxu"
+  },
+  {
+    "id": "deathspade",
+    "name": "Deathspade",
+    "baseType": "Axe",
+    "slotType": "Weapon",
+    "rarity": "Unique",
+    "width": 2,
+    "height": 3,
+    "requiredLevel": 9,
+    "stats": [
+      {
+        "id": "stupidity",
+        "name": "stupidity 1-1",
+        "value": 1,
+        "type": "flat"
+      },
+      {
+        "id": "dmg_min",
+        "name": "dmg-min 8-8",
+        "value": 8,
+        "type": "flat"
+      },
+      {
+        "id": "att_",
+        "name": "att% 15-15",
+        "value": 15,
+        "type": "flat"
+      },
+      {
+        "id": "mana_kill",
+        "name": "mana-kill 4-4",
+        "value": 4,
+        "type": "flat"
+      },
+      {
+        "id": "dmg_",
+        "name": "dmg% 60-70",
+        "value": 60,
+        "type": "flat"
+      },
+      {
+        "id": "deadly",
+        "name": "deadly 10-10",
+        "value": 10,
+        "type": "flat"
+      },
+      {
+        "id": "splash",
+        "name": "splash 100-1",
+        "value": 100,
+        "type": "flat"
+      }
+    ],
+    "imageFile": "invaxeu"
+  },
+  {
+    "id": "bladebone",
+    "name": "Bladebone",
+    "baseType": "Double Axe",
+    "slotType": "Weapon",
+    "rarity": "Unique",
+    "width": 2,
+    "height": 3,
+    "requiredLevel": 15,
+    "stats": [
+      {
+        "id": "dmg_undead",
+        "name": "dmg-undead 100-100",
+        "value": 100,
+        "type": "flat"
+      },
+      {
+        "id": "att_undead",
+        "name": "att-undead 40-40",
+        "value": 40,
+        "type": "flat"
+      },
+      {
+        "id": "swing2",
+        "name": "swing2 20-20",
+        "value": 20,
+        "type": "flat"
+      },
+      {
+        "id": "ac",
+        "name": "ac 20-60",
+        "value": 20,
+        "type": "flat"
+      },
+      {
+        "id": "hit_skill",
+        "name": "hit-skill 40-8",
+        "value": 40,
+        "type": "flat"
+      },
+      {
+        "id": "dmg_",
+        "name": "dmg% 30-50",
+        "value": 30,
+        "type": "flat"
+      },
+      {
+        "id": "splash",
+        "name": "splash 100-1",
+        "value": 100,
+        "type": "flat"
+      }
+    ],
+    "imageFile": "inv2ax"
+  },
+  {
+    "id": "mindrend",
+    "name": "Mindrend",
+    "baseType": "Military Pick",
+    "slotType": "Weapon",
+    "rarity": "Unique",
+    "width": 2,
+    "height": 3,
+    "requiredLevel": 21,
+    "stats": [
+      {
+        "id": "stupidity",
+        "name": "stupidity 2-2",
+        "value": 2,
+        "type": "flat"
+      },
+      {
+        "id": "regen_mana",
+        "name": "regen-mana 20-20",
+        "value": 20,
+        "type": "flat"
+      },
+      {
+        "id": "ltng_min",
+        "name": "ltng-min 1-1",
+        "value": 1,
+        "type": "flat"
+      },
+      {
+        "id": "ltng_max",
+        "name": "ltng-max 60-60",
+        "value": 60,
+        "type": "flat"
+      },
+      {
+        "id": "att",
+        "name": "att 50-100",
+        "value": 50,
+        "type": "flat"
+      },
+      {
+        "id": "dmg_",
+        "name": "dmg% 60-80",
+        "value": 60,
+        "type": "flat"
+      },
+      {
+        "id": "openwounds",
+        "name": "openwounds 15-15",
+        "value": 15,
+        "type": "flat"
+      },
+      {
+        "id": "deep_wounds",
+        "name": "Deep-Wounds 12-16",
+        "value": 12,
+        "type": "flat"
+      },
+      {
+        "id": "splash",
+        "name": "splash 100-1",
+        "value": 100,
+        "type": "flat"
+      }
+    ],
+    "imageFile": "invmpiu"
+  },
+  {
+    "id": "rakescar",
+    "name": "Rakescar",
+    "baseType": "War Axe",
+    "slotType": "Weapon",
+    "rarity": "Unique",
+    "width": 2,
+    "height": 3,
+    "requiredLevel": 27,
+    "stats": [
+      {
+        "id": "pois_min",
+        "name": "pois-min 194-194",
+        "value": 194,
+        "type": "flat"
+      },
+      {
+        "id": "pois_max",
+        "name": "pois-max 194-194",
+        "value": 194,
+        "type": "flat"
+      },
+      {
+        "id": "pois_len",
+        "name": "pois-len 50-50",
+        "value": 50,
+        "type": "flat"
+      },
+      {
+        "id": "att",
+        "name": "att 50-100",
+        "value": 50,
+        "type": "flat"
+      },
+      {
+        "id": "res_pois",
+        "name": "res-pois 50-50",
+        "value": 50,
+        "type": "flat"
+      },
+      {
+        "id": "dmg_",
+        "name": "dmg% 75-150",
+        "value": 75,
+        "type": "flat"
+      },
+      {
+        "id": "swing2",
+        "name": "swing2 30-30",
+        "value": 30,
+        "type": "flat"
+      },
+      {
+        "id": "splash",
+        "name": "splash 100-1",
+        "value": 100,
+        "type": "flat"
+      }
+    ],
+    "imageFile": "invwax"
+  }
+]

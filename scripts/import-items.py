@@ -1,323 +1,273 @@
-#!/usr/bin/env python3
-"""
-Import unique, set, and runeword items from the Project Diablo 2 wiki All Items page.
-This script writes a generated TypeScript file with categorized wiki items.
-"""
-
-import html
+import zipfile
+import csv
+import io
+import json
 import re
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple
-from urllib.request import Request, urlopen
 
-WIKI_URL = "https://wiki.projectdiablo2.com/wiki/All_Items"
-OUTPUT_FILE = Path(__file__).resolve().parent.parent / "src" / "data" / "projectDiablo2Items.ts"
+# Since we don't have tbl files easily readable to get "ModStr1a", let's manually map the main attributes to human readable formats for the item parser.
 
-DEFAULT_DIMENSIONS: Dict[str, Tuple[int, int]] = {
-    'Helm': (2, 2),
-    'Body Armor': (2, 3),
-    'Gloves': (2, 2),
-    'Boots': (2, 2),
-    'Belt': (2, 1),
-    'Amulet': (1, 1),
-    'Ring': (1, 1),
-    'Weapon': (2, 3),
-    'Offhand': (2, 3),
-    'Chest': (2, 3),
+prop_display_map = {
+    'ac': '+{min} to Defense',
+    'ac%': '+{min}% Enhanced Defense',
+    'str': '+{min} to Strength',
+    'dex': '+{min} to Dexterity',
+    'vit': '+{min} to Vitality',
+    'enr': '+{min} to Energy',
+    'mana': '+{min} to Mana',
+    'hp': '+{min} to Life',
+    'life': '+{min} to Life',
+    'att': '+{min} to Attack Rating',
+    'att%': '{min}% Bonus to Attack Rating',
+    'dmg%': '{min}% Enhanced Damage',
+    'dmg-min': '+{min} to Minimum Damage',
+    'dmg-max': '+{min} to Maximum Damage',
+    'dmg-norm': 'Adds {min}-{max} Damage',
+    'res-all': '+{min} to All Resistances',
+    'res-fire': '{min}% Fire Resistance',
+    'res-ltng': '{min}% Lightning Resistance',
+    'res-cold': '{min}% Cold Resistance',
+    'res-pois': '{min}% Poison Resistance',
+    'swing1': '{min}% Increased Attack Speed',
+    'swing2': '{min}% Increased Attack Speed',
+    'swing3': '{min}% Increased Attack Speed',
+    'cast1': '{min}% Faster Cast Rate',
+    'cast2': '{min}% Faster Cast Rate',
+    'cast3': '{min}% Faster Cast Rate',
+    'block1': '{min}% Faster Block Rate',
+    'block2': '{min}% Faster Block Rate',
+    'block3': '{min}% Faster Block Rate',
+    'hit1': '{min}% Faster Hit Recovery',
+    'hit2': '{min}% Faster Hit Recovery',
+    'hit3': '{min}% Faster Hit Recovery',
+    'balance1': '{min}% Faster Hit Recovery',
+    'balance2': '{min}% Faster Hit Recovery',
+    'balance3': '{min}% Faster Hit Recovery',
+    'mag%': '{min}% Better Chance of Getting Magic Items',
+    'gold%': '{min}% Extra Gold from Monsters',
+    'lifesteal': '{min}% Life Stolen Per Hit',
+    'manasteal': '{min}% Mana Stolen Per Hit',
+    'allskills': '+{min} to All Skills',
+    'skill': '+{min} to Skill',
+    'skpoints': '+{min} Skill Points',
+    'openwounds': '{min}% Chance of Open Wounds',
+    'deadly': '{min}% Deadly Strike',
+    'crush': '{min}% Chance of Crushing Blow',
+    'pierce': '{min}% Piercing Attack',
+    'red-dmg': 'Damage Reduced by {min}',
+    'red-dmg%': 'Damage Reduced by {min}%',
+    'red-mag': 'Magic Damage Reduced by {min}',
+    'regen-mana': 'Regenerate Mana {min}%',
+    'regen': 'Replenish Life +{min}',
+    'splash': 'Melee Attacks Deal Splash Damage',
+    'indestruct': 'Indestructible',
+    'light': '+{min} to Light Radius',
+    'ease': 'Requirements -{min}%',
+    'hp/lvl': '+{min} to Life (Based on Character Level)',
+    'mana/lvl': '+{min} to Mana (Based on Character Level)'
 }
 
-EXCLUDE_STAT_TEXT = [
-    'Before', 'After', 'Note:', 'Image', 'Stats', 'Base Defense', 'Base Durability',
-    'Base Maximum Sockets', 'Base Damage', 'Base Speed Modifier', 'Base Block',
-    'Base Potion Rows', 'Base Maximum Sockets', 'Required Strength',
-    'Required Dexterity', 'Required Level', 'Minimum Item Level', 'Occurrence Rate',
-]
+def format_stat_name(prop_code, min_val, max_val, param=None):
+    if min_val and str(min_val).startswith('-'):
+        pass
 
+    mapped = prop_display_map.get(prop_code.lower())
+    if mapped:
+        if '{max}' in mapped and max_val and min_val != max_val:
+            return mapped.format(min=min_val, max=max_val)
+        else:
+            return mapped.format(min=min_val, max=max_val).replace('-{max}', '')
 
-def fetch_wiki_html() -> str:
-    req = Request(WIKI_URL, headers={
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-    })
-    with urlopen(req, timeout=30) as response:
-        return response.read().decode('utf-8')
+    if prop_code.lower() == 'dmg-to-mana': return f"{min_val}% Damage Taken Goes to Mana"
+    if prop_code.lower() == 'ac-miss': return f"+{min_val} Defense vs. Missiles"
+    if prop_code.lower() == 'hit-skill': return f"{min_val}% Chance to Cast Level {max_val} Skill {param} on Striking"
+    if prop_code.lower() == 'gethit-skill': return f"{min_val}% Chance to Cast Level {max_val} Skill {param} when Struck"
+    if prop_code.lower() == 'att-skill': return f"{min_val}% Chance to Cast Level {max_val} Skill {param} on Attack"
+    if prop_code.lower() == 'cast-skill': return f"{min_val}% Chance to Cast Level {max_val} Skill {param} when you Kill an Enemy"
+    if prop_code.lower() == 'levelup-skill': return f"{min_val}% Chance to Cast Level {max_val} Skill {param} when you Level Up"
+    if prop_code.lower() == 'aura': return f"Level {min_val} Aura {param} when Equipped"
 
+    # Fallback heuristic
+    return f"{prop_code} {'[' + str(min_val) + '-' + str(max_val) + ']' if min_val and max_val and min_val != max_val else '+' + str(min_val)}"
 
-def clean_text(value: str) -> str:
-    text = re.sub(r'<[^>]+>', '', value)
-    text = html.unescape(text)
-    return re.sub(r'\s+', ' ', text).strip()
+def read_txt(zip_path, file_path):
+    with zipfile.ZipFile(zip_path, 'r') as z:
+        with z.open(file_path, 'r') as f:
+            content = f.read().decode('utf-8-sig', errors='replace')
+            reader = csv.DictReader(io.StringIO(content), delimiter='\t')
+            return list(reader)
 
+def parse_items():
+    armors = read_txt('gamedata.zip', 'gamedata/pd2data/excel/armor.txt')
+    weapons = read_txt('gamedata.zip', 'gamedata/pd2data/excel/weapons.txt')
+    misc = read_txt('gamedata.zip', 'gamedata/pd2data/excel/misc.txt')
+    unique_items = read_txt('gamedata.zip', 'gamedata/pd2data/excel/UniqueItems.txt')
+    set_items = read_txt('gamedata.zip', 'gamedata/pd2data/excel/SetItems.txt')
+    runes = read_txt('gamedata.zip', 'gamedata/pd2data/excel/Runes.txt')
 
-def get_item_slot_type(base_type: Optional[str]) -> Optional[str]:
-    if not base_type:
-        return None
-    text = base_type.lower()
-    if any(x in text for x in ['helm', 'cap', 'circlet', 'tiara', 'bonnet', 'mask']):
-        return 'Helm'
-    if any(x in text for x in ['armor', 'breast', 'robe', 'tunic', 'coat', 'plate', 'mail', 'scale', 'chain', 'leather']):
-        return 'Body Armor'
-    if any(x in text for x in ['glove', 'gauntlet', 'mitt', 'fist', 'claw']):
-        return 'Gloves'
-    if any(x in text for x in ['boot', 'greave', 'sandal']):
-        return 'Boots'
-    if any(x in text for x in ['belt', 'girdle', 'sash', 'cinch']):
-        return 'Belt'
-    if 'amulet' in text:
-        return 'Amulet'
-    if 'ring' in text:
-        return 'Ring'
-    if any(x in text for x in ['shield', 'buckler', 'tower shield', 'pavise']):
-        return 'Offhand'
-    if any(x in text for x in ['bow', 'crossbow', 'javelin', 'spear', 'club', 'mace', 'hammer', 'polearm', 'staff', 'wand', 'dagger', 'sword', 'axe', 'blade', 'thresher', 'scimitar', 'claw', 'cestus', 'scepter']):
-        return 'Weapon'
-    if 'chest' in text:
-        return 'Body Armor'
-    return None
+    base_items_by_code = {}
+    for item in armors:
+        if item.get('code'):
+            item['base_type_cat'] = 'Armor'
+            base_items_by_code[item['code']] = item
+    for item in weapons:
+        if item.get('code'):
+            item['base_type_cat'] = 'Weapon'
+            base_items_by_code[item['code']] = item
+    for item in misc:
+        if item.get('code'):
+            item['base_type_cat'] = 'Misc'
+            base_items_by_code[item['code']] = item
 
+    def get_slot_type(item_cat, itype):
+        if item_cat == 'Armor':
+            if itype == 'helm': return 'Helm'
+            if itype == 'tors': return 'Body Armor'
+            if itype == 'glov': return 'Gloves'
+            if itype == 'boot': return 'Boots'
+            if itype == 'belt': return 'Belt'
+            if itype == 'shld': return 'Offhand'
+            return 'Armor'
+        if item_cat == 'Weapon':
+            return 'Weapon'
+        if item_cat == 'Misc':
+            if itype == 'ring': return 'Ring'
+            if itype == 'amul': return 'Amulet'
+        return 'Misc'
 
-def dimensions_for(slot_type: Optional[str]) -> Tuple[int, int]:
-    if slot_type and slot_type in DEFAULT_DIMENSIONS:
-        return DEFAULT_DIMENSIONS[slot_type]
-    return (2, 2)
+    def extract_stats(props_row, prefix='prop', val_prefix='min', max_prefix='max', par_prefix='par'):
+        stats = []
+        for i in range(1, 13):
+            prop_code = props_row.get(f'{prefix}{i}')
+            if not prop_code: continue
+            par = props_row.get(f'{par_prefix}{i}', '')
+            min_val = props_row.get(f'{val_prefix}{i}', '')
+            max_val = props_row.get(f'{max_prefix}{i}', '')
 
+            stat_name = format_stat_name(prop_code, min_val, max_val, par)
 
-def extract_base_type(item_html: str) -> Optional[str]:
-    match = re.search(r'<p>\s*<b>([^<]+)</b>\s*</p>', item_html)
-    if match:
-        return clean_text(match.group(1))
-    return None
+            val = min_val if min_val else '0'
+            try:
+                val = int(val)
+            except:
+                val = 0
 
-
-def extract_required_level(item_html: str) -> int:
-    match = re.search(r'<b>Required Level:</b>\s*([0-9]+)', item_html)
-    return int(match.group(1)) if match else 1
-
-
-STAT_ID_STOPWORDS = {
-    'to', 'of', 'and', 'the', 'a', 'an', 'per', 'on', 'when', 'by', 'with', 'in',
-    'for', 'is', 'from', 'at', 'as', 'against', 'over', 'under', 'each', 'each',
-    'while', 'may', 'be', 'that', 'your', 'this', 'also', 'set', 'complete',
-}
-
-
-def normalize_stat_id(value: str) -> str:
-    value = value.lower()
-    value = re.sub(r'<[^>]+>', '', value)
-    value = re.sub(r'\[[^\]]*\]', '', value)
-    value = re.sub(r'\b\d+\s*-\s*\d+\b', '', value)
-    value = re.sub(r'[+%]', ' ', value)
-    value = re.sub(r'[()\[\]{}]', ' ', value)
-    value = re.sub(r'[^a-z0-9]+', ' ', value)
-    words = [w for w in value.split() if w not in STAT_ID_STOPWORDS]
-    return '_'.join(words).strip('_')
-
-
-def parse_stat_value(value: str) -> int:
-    match = re.search(r'(-?\d+)(?:\.\d+)?', value)
-    if not match:
-        return 0
-    try:
-        return int(match.group(1))
-    except ValueError:
-        return 0
-
-
-def parse_stat_bounds(stat_text: str) -> Dict[str, Optional[int]]:
-    range_match = re.search(r'\[\s*(-?\d+)\s*-\s*(-?\d+)\s*\]', stat_text)
-    if not range_match:
-        range_match = re.search(r'\b(-?\d+)\s*-\s*(-?\d+)\b', stat_text)
-    if range_match:
-        try:
-            return {
-                'min': int(range_match.group(1)),
-                'max': int(range_match.group(2)),
-            }
-        except ValueError:
-            return {'min': None, 'max': None}
-    number_match = re.search(r'(-?\d+)(?:\.\d+)?', stat_text)
-    if number_match:
-        try:
-            value = int(number_match.group(1))
-            return {'min': value, 'max': value}
-        except ValueError:
-            return {'min': None, 'max': None}
-    return {'min': None, 'max': None}
-
-
-def stat_from_text(stat_text: str) -> Dict:
-    stat_text = stat_text.strip()
-    stat_id = normalize_stat_id(stat_text)
-    stat_type = 'percentage' if '%' in stat_text else 'flat'
-    bounds = parse_stat_bounds(stat_text)
-    stat_value = bounds['min'] if bounds['min'] is not None else 0
-    return {
-        'id': stat_id or 'stat',
-        'name': stat_text,
-        'value': stat_value,
-        'type': stat_type,
-        'min': bounds['min'],
-        'max': bounds['max'],
-    }
-
-
-def extract_stats(item_html: str) -> List[Dict]:
-    stats: List[Dict] = []
-    table_match = re.search(r'<table[^>]*class="[^"]*wikitable[^"]*wikitable-2col[^"]*"[^>]*>(.*?)</table>', item_html, flags=re.DOTALL | re.IGNORECASE)
-    if not table_match:
+            stats.append({
+                'id': re.sub(r'[^a-z0-9_]', '_', prop_code.lower()),
+                'name': stat_name,
+                'value': val,
+                'type': 'flat',
+                'min': int(min_val) if str(min_val).lstrip('-').isdigit() else None,
+                'max': int(max_val) if str(max_val).lstrip('-').isdigit() else None,
+            })
         return stats
-    table_html = table_match.group(1)
-    for row_match in re.finditer(r'<tr[^>]*>(.*?)</tr>', table_html, flags=re.DOTALL | re.IGNORECASE):
-        row_html = row_match.group(1)
-        cells = re.findall(r'<td[^>]*>(.*?)</td>', row_html, flags=re.DOTALL | re.IGNORECASE)
-        if not cells:
-            continue
-        stat_cell = clean_text(cells[-1])
-        if not stat_cell or any(ex.lower() in stat_cell.lower() for ex in EXCLUDE_STAT_TEXT):
-            continue
-        stat_obj = stat_from_text(stat_cell)
-        if all(existing['id'] != stat_obj['id'] for existing in stats):
-            stats.append(stat_obj)
-    return stats
 
+    def serialize_stat(stat):
+        name = stat['name'].replace("'", "\\'")
+        parts = [
+            f"id: '{stat['id']}'",
+            f"name: '{name}'",
+            f"value: {stat['value']}",
+            f"type: '{stat['type']}'",
+        ]
+        if stat.get('min') is not None: parts.append(f"min: {stat['min']}")
+        if stat.get('max') is not None: parts.append(f"max: {stat['max']}")
+        return '{ ' + ', '.join(parts) + ' }'
 
-def extract_colored_items(html_text: str, color_class: str, rarity: str) -> List[Dict]:
-    pattern = re.compile(
-        r'<div class="mw-heading mw-heading4"><h4[^>]*id="([^"]+)"[^>]*>\s*(?:<span[^>]*class="' + re.escape(color_class) + r'"[^>]*>)?([^<]+)(?:</span>)?\s*</h4>',
-        flags=re.IGNORECASE,
-    )
+    def format_ts_array(items, array_name):
+        rows = []
+        for item in items:
+            name = item['name'].replace("'", "\\'")
+            base_type = (item['baseType'] or item['name']).replace("'", "\\'")
+            stats = item.get('stats', [])
+            stats_text = ', '.join(serialize_stat(stat) for stat in stats)
+            image_file = item.get('imageFile', '')
+            image_prop = f", imageFile: '{image_file}'" if image_file else ""
+            rows.append(
+                f"  {{ id: '{item['id']}', name: '{name}', baseType: '{base_type}', slotType: '{item['slotType']}', rarity: '{item['rarity']}', width: {item['width']}, height: {item['height']}, requiredLevel: {item['requiredLevel']}, stats: [{stats_text}]{image_prop} }},"
+            )
+        return f"export const {array_name}: Item[] = [\n" + "\n".join(rows) + "\n];\n"
 
-    items: List[Dict] = []
-    positions = list(pattern.finditer(html_text))
-    for idx, match in enumerate(positions):
-        item_id = match.group(1)
-        item_name = clean_text(match.group(2))
-        start = match.end()
-        end = positions[idx + 1].start() if idx + 1 < len(positions) else len(html_text)
-        item_html = html_text[start:end]
-        base_type = extract_base_type(item_html)
-        slot_type = get_item_slot_type(base_type)
-        width, height = dimensions_for(slot_type)
-        required_level = extract_required_level(item_html)
-        stats = extract_stats(item_html)
-        if slot_type:
-            items.append({
-                'id': re.sub(r'[^a-z0-9_]', '_', item_id.lower()),
-                'name': item_name,
-                'baseType': base_type or item_name,
+    def process_items(item_list, rarity):
+        processed = []
+        for item in item_list:
+            if not item.get('index'):
+                continue
+            code = item.get('item') or item.get('code')
+            base_item = base_items_by_code.get(code)
+            if not base_item:
+                continue
+
+            itype = base_item.get('type')
+            slot_type = get_slot_type(base_item.get('base_type_cat'), itype)
+
+            width = int(base_item.get('invwidth', 1))
+            height = int(base_item.get('invheight', 1))
+
+            req_lvl = item.get('lvl req', '1')
+
+            stats = extract_stats(item)
+
+            processed.append({
+                'id': re.sub(r'[^a-z0-9_]', '_', item['index'].lower()),
+                'name': item['index'],
+                'baseType': base_item.get('name', code),
                 'slotType': slot_type,
                 'rarity': rarity,
                 'width': width,
                 'height': height,
-                'requiredLevel': required_level,
+                'requiredLevel': int(req_lvl) if req_lvl.isdigit() else 1,
                 'stats': stats,
+                'imageFile': item.get('invfile') or base_item.get('invfile', '')
             })
-    return items
+        return processed
 
+    def process_runewords(item_list):
+        processed = []
+        for item in item_list:
+            if not item.get('Name') or item.get('complete') == '0':
+                continue
+            name = item.get('Rune Name') or item.get('Name')
+            t1 = item.get('itype1', '')
+            slot_type = 'Weapon'
+            if 'tors' in t1 or 'armo' in t1: slot_type = 'Body Armor'
+            elif 'helm' in t1 or 'circ' in t1 or 'phlm' in t1: slot_type = 'Helm'
+            elif 'shld' in t1 or 'pala' in t1: slot_type = 'Offhand'
 
-def extract_runeword_items(html_text: str) -> List[Dict]:
-    sections = re.split(r'<div class="mw-heading mw-heading1"><h1 id="Runeword_[^"]+">', html_text)
-    items: List[Dict] = []
-    if len(sections) < 2:
-        return items
-    runeword_html = ''.join(sections[1:])
-    pattern = re.compile(
-        r'<div class="mw-heading mw-heading3"><h3[^>]*>\s*(?:<span[^>]*>)?([^<]+)(?:</span>)?\s*</h3>',
-        flags=re.IGNORECASE,
-    )
-    positions = list(pattern.finditer(runeword_html))
-    for idx, match in enumerate(positions):
-        item_name = clean_text(match.group(1))
-        start = match.end()
-        end = positions[idx + 1].start() if idx + 1 < len(positions) else len(runeword_html)
-        item_html = runeword_html[start:end]
-        base_type = extract_base_type(item_html)
-        if not base_type:
-            # Some runewords use a single heading like "2-Socket Helms"
-            fallback = re.search(r'<p>\s*<b>([0-9]+-Socket [^<]+)</b>\s*</p>', item_html)
-            base_type = clean_text(fallback.group(1)) if fallback else None
-        if base_type and base_type.lower().endswith('s'):
-            base_type = base_type[:-1]
-        slot_type = get_item_slot_type(base_type)
-        width, height = dimensions_for(slot_type)
-        required_level = extract_required_level(item_html)
-        stats = extract_stats(item_html)
-        if slot_type:
-            items.append({
-                'id': re.sub(r'[^a-z0-9_]', '_', item_name.lower()),
-                'name': item_name,
-                'baseType': base_type or item_name,
+            stats = extract_stats(item, prefix='T1Code', val_prefix='T1Min', max_prefix='T1Max', par_prefix='T1Param')
+
+            processed.append({
+                'id': re.sub(r'[^a-z0-9_]', '_', name.lower()),
+                'name': name,
+                'baseType': item.get('Name', 'Runeword'),
                 'slotType': slot_type,
                 'rarity': 'Runeword',
-                'width': width,
-                'height': height,
-                'requiredLevel': required_level,
+                'width': 2,
+                'height': 3,
+                'requiredLevel': 1,
                 'stats': stats,
+                'imageFile': ''
             })
-    return items
+        return processed
 
+    print("Extracting uniques...")
+    uniques = [u for u in unique_items if u.get('enabled') != '0']
+    processed_uniques = process_items(uniques, 'Unique')
 
-def serialize_stat(stat: Dict) -> str:
-    name = stat['name'].replace("'", "\\'")
-    parts = [
-        "id: '%s'" % stat['id'],
-        "name: '%s'" % name,
-        "value: %s" % stat['value'],
-        "type: '%s'" % stat['type'],
-    ]
-    if stat.get('min') is not None:
-        parts.append('min: %s' % stat['min'])
-    if stat.get('max') is not None:
-        parts.append('max: %s' % stat['max'])
-    return '{ %s }' % (', '.join(parts))
+    print("Extracting sets...")
+    processed_sets = process_items(set_items, 'Set')
 
+    print("Extracting runewords...")
+    processed_runewords = process_runewords(runes)
 
-def format_ts_array(items: List[Dict], array_name: str) -> str:
-    rows = []
-    for item in items:
-        name = item['name'].replace("'", "\\'")
-        base_type = (item['baseType'] or item['name']).replace("'", "\\'")
-        stats = item.get('stats', [])
-        stats_text = ', '.join(serialize_stat(stat) for stat in stats)
-        rows.append(
-            "  { id: '%s', name: '%s', baseType: '%s', slotType: '%s', rarity: '%s', width: %s, height: %s, requiredLevel: %s, stats: [%s] }," % (
-                item['id'], name, base_type, item['slotType'], item['rarity'], item['width'], item['height'], item['requiredLevel'], stats_text
-            )
-        )
-    return f"export const {array_name}: Item[] = [\n" + "\n".join(rows) + "\n];\n"
+    out_ts = "import type { Item } from '../types';\n\n"
+    out_ts += format_ts_array(processed_uniques, 'wikiUniqueItems')
+    out_ts += "\n" + format_ts_array(processed_sets, 'wikiSetItems')
+    out_ts += "\n" + format_ts_array(processed_runewords, 'wikiRunewordItems')
 
+    with open('src/data/projectDiablo2Items.ts', 'w') as f:
+        f.write(out_ts)
 
-def generate_output(unique_items: List[Dict], set_items: List[Dict], runeword_items: List[Dict]) -> str:
-    return f"""import type {{ Item, Stat }} from '../types';
-
-export const wikiUniqueItems: Item[] = [
-{''.join(format_ts_array(unique_items, 'wikiUniqueItems').splitlines(True)[1:-1])}\n];
-
-export const wikiSetItems: Item[] = [
-{''.join(format_ts_array(set_items, 'wikiSetItems').splitlines(True)[1:-1])}\n];
-
-export const wikiRunewordItems: Item[] = [
-{''.join(format_ts_array(runeword_items, 'wikiRunewordItems').splitlines(True)[1:-1])}\n];
-"""
-
-
-def main() -> None:
-    print('Fetching wiki HTML...')
-    html_text = fetch_wiki_html()
-    print('Extracting unique items...')
-    unique_items = extract_colored_items(html_text, 'd2-gold', 'Unique')
-    print('Extracting set items...')
-    set_items = extract_colored_items(html_text, 'd2-green', 'Set')
-    print('Extracting runeword items...')
-    runeword_items = extract_runeword_items(html_text)
-
-    print(f'Found {len(unique_items)} unique items')
-    print(f'Found {len(set_items)} set items')
-    print(f'Found {len(runeword_items)} runeword items')
-
-    output = generate_output(unique_items, set_items, runeword_items)
-    OUTPUT_FILE.write_text(output, encoding='utf-8')
-    print(f'Wrote {OUTPUT_FILE}')
-
+    print(f"Generated src/data/projectDiablo2Items.ts with {len(processed_uniques)} uniques, {len(processed_sets)} set items, and {len(processed_runewords)} runewords.")
 
 if __name__ == '__main__':
-    main()
+    parse_items()

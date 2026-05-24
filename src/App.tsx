@@ -62,6 +62,7 @@ function App() {
         console.error("Failed to load build from hash", e);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
