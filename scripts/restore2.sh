@@ -1,3 +1,8 @@
+#!/bin/bash
+set -e
+
+# store/useCharacterStore.ts
+cat << 'INNEREOF' > src/store/useCharacterStore.ts
 import { create } from 'zustand';
 import type { CharacterClass } from '../types';
 
@@ -91,3 +96,4 @@ export const useCharacterStore = create<CharacterState>((set) => ({
   setView: (view) => set({ activeView: view }),
   loadBuild: (data) => set((state) => ({ ...state, ...data })),
 }));
+INNEREOF

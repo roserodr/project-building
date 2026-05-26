@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
-import { assassinSkills } from '../data/assassinSkills';
-import type { Skill, SkillTab } from '../types';
+import { allSkills } from '../data/allSkills';
+import type { Skill, SkillTab, CharacterClass } from '../types';
 import { getSkillLevel, calculateSkillDamage } from '../utils/calc';
 
 export const SkillTree: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<SkillTab>('Traps');
-  const { skillPoints, allocateSkill, equipment, level, setLevel } = useCharacterStore();
+  const { skillPoints, allocateSkill, equipment, level, setLevel, characterClass } = useCharacterStore();
+  const classSkills = allSkills[characterClass] || [];
 
-  const tabs: SkillTab[] = ['Traps', 'Shadow Disciplines', 'Martial Arts'];
+  // Extract unique tabs for the current class
+  const tabs: SkillTab[] = Array.from(new Set(classSkills.map(s => s.tab)));
+  const [activeTab, setActiveTab] = useState<SkillTab>(tabs[0] || '');
+
+  // Reset active tab if class changes
+  React.useEffect(() => {
+    setActiveTab(tabs[0] || '');
+  }, [characterClass]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSkillClick = (skill: Skill, isRightClick: boolean) => {
     const currentPoints = skillPoints[skill.id] || 0;
@@ -27,7 +34,7 @@ export const SkillTree: React.FC = () => {
     }
   };
 
-  const currentTabSkills = assassinSkills.filter(s => s.tab === activeTab);
+  const currentTabSkills = classSkills.filter(s => s.tab === activeTab);
 
   return (
     <div className="flex flex-col h-full bg-diablo-dark border-l border-diablo-gold/30 p-4 w-[400px] font-serif">
@@ -64,19 +71,22 @@ export const SkillTree: React.FC = () => {
             >
               <div className={`flex items-center justify-center h-full w-full ${!isAvailable ? 'opacity-40 grayscale' : ''}`}>
                 {skill.iconCel !== undefined ? (
-                  <img src={`/skills/paskillicon_0_${skill.iconCel}.png`} alt={skill.name} className="w-10 h-10 object-contain filter opacity-80" onError={(e) => {
-                    // Try another charclass if it fails
-                    const img = e.target as HTMLImageElement;
-                    if (img.src.includes('paskillicon')) {
-                        img.src = `/skills/amskillicon_0_${skill.iconCel}.png`;
-                    } else if (img.src.includes('amskillicon')) {
-                        img.src = `/skills/skillicon_0_${skill.iconCel}.png`;
-                    } else {
-                        img.style.display = 'none';
-                        const textDiv = img.nextElementSibling as HTMLElement;
-                        if (textDiv) textDiv.classList.remove('hidden');
-                    }
-                  }} />
+                  <img
+                    src={`/skills/${characterClass.substring(0,2).toLowerCase()}skillicon_0_${skill.iconCel}.png`}
+                    alt={skill.name}
+                    className="w-10 h-10 object-contain filter opacity-80"
+                    onError={(e) => {
+                      const img = e.target as HTMLImageElement;
+                      if (!img.dataset.fallback) {
+                          img.dataset.fallback = '1';
+                          img.src = `/skills/skillicon_0_${skill.iconCel}.png`;
+                      } else {
+                          img.style.display = 'none';
+                          const textDiv = img.nextElementSibling as HTMLElement;
+                          if (textDiv) textDiv.classList.remove('hidden');
+                      }
+                    }}
+                  />
                 ) : null}
                 <div className={`text-[10px] text-center leading-tight ${skill.iconCel !== undefined ? 'hidden' : ''}`}>{skill.name}</div>
 
@@ -91,7 +101,7 @@ export const SkillTree: React.FC = () => {
                 {skill.dependencies.length > 0 && (
                   <div className="text-[10px] text-gray-400 mb-2 uppercase">
                     Prerequisite: {skill.dependencies.map((dep, index) => {
-                      const depSkill = assassinSkills.find(s => s.id === dep);
+                      const depSkill = classSkills.find(s => s.id === dep);
                       const depPoints = skillPoints[dep] || 0;
                       return (
                         <span key={dep} className={depPoints > 0 ? 'text-green-400' : 'text-red-400'}>
@@ -122,7 +132,7 @@ export const SkillTree: React.FC = () => {
                     <div className="text-[10px] font-bold text-diablo-gold uppercase mb-2 tracking-widest">Synergies:</div>
                     <div className="space-y-1">
                         {skill.synergies.map(syn => {
-                            const synSkill = assassinSkills.find(s => s.id === syn.skillId);
+                            const synSkill = classSkills.find(s => s.id === syn.skillId);
                             const currentSynPoints = skillPoints[syn.skillId] || 0;
                             return (
                                 <div key={syn.skillId} className="text-[10px] flex justify-between items-center">
