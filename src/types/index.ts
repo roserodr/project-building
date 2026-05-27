@@ -1,4 +1,6 @@
-export type SkillTab = 'Traps' | 'Shadow Disciplines' | 'Martial Arts';
+export type CharacterClass = 'Amazon' | 'Assassin' | 'Necromancer' | 'Barbarian' | 'Paladin' | 'Sorceress' | 'Druid';
+
+export type SkillTab = string;
 
 export interface Skill {
   id: string;

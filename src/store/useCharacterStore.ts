@@ -1,6 +1,8 @@
 import { create } from 'zustand';
+import type { CharacterClass } from '../types';
 
 interface CharacterState {
+  characterClass: CharacterClass;
   level: number;
   strength: number;
   dexterity: number;
@@ -18,11 +20,13 @@ interface CharacterState {
   unequipItem: (slot: string) => void;
   equipCharm: (slot: string, charm: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
   unequipCharm: (slot: string) => void;
+  setClass: (charClass: CharacterClass, baseStats: { strength: number; dexterity: number; vitality: number; energy: number }) => void;
   setView: (view: 'planner' | 'rare-editor') => void;
   loadBuild: (data: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export const useCharacterStore = create<CharacterState>((set) => ({
+  characterClass: 'Assassin',
   level: 1,
   strength: 20,
   dexterity: 20,
@@ -72,6 +76,17 @@ export const useCharacterStore = create<CharacterState>((set) => ({
       const newCharms = { ...state.charms };
       delete newCharms[slot];
       return { charms: newCharms };
+  }),
+  setClass: (charClass, baseStats) => set({
+    characterClass: charClass,
+    level: 1,
+    strength: baseStats.strength,
+    dexterity: baseStats.dex,
+    vitality: baseStats.vitality,
+    energy: baseStats.energy,
+    skillPoints: {},
+    equipment: {},
+    charms: {}
   }),
   setView: (view) => set({ activeView: view }),
   loadBuild: (data) => set((state) => ({ ...state, ...data })),

@@ -1,9 +1,6 @@
-import type { Item, Stat, CharacterStats, Skill } from '../types';
+import type { Item, Stat, CharacterStats, Skill, CharacterClass } from '../types';
 import { skillsLevelData } from '../data/skillsLevelData';
-
-export const FCR_BREAKPOINTS = [0, 8, 16, 27, 42, 65, 102, 174];
-export const FHR_BREAKPOINTS = [0, 7, 15, 27, 48, 86, 200];
-export const FBR_BREAKPOINTS = [0, 13, 32, 86];
+import { CLASS_STATS } from '../data/classes';
 
 export const getFrameFromBreakpoints = (totalValue: number, breakpoints: number[]) => {
   const index = breakpoints.findIndex((bp, i) => totalValue >= bp && (i === breakpoints.length - 1 || totalValue < breakpoints[i+1]));
@@ -77,15 +74,18 @@ export const calculateSkillDamage = (skill: Skill, skillPoints: Record<string, n
 };
 
 export const calculateCharacterStats = (
+  charClass: CharacterClass,
   level: number,
   baseStats: { str: number; dex: number; vit: number; enr: number },
   skillPoints: Record<string, number>,
   equipment: Record<string, Item>,
   charms: Record<string, Item>
 ): CharacterStats => {
-  let life = 50 + (level - 1) * 2 + baseStats.vit * 3;
-  let mana = 25 + (level - 1) * 1.5 + baseStats.enr * 1.5;
-  const stamina = 95 + baseStats.vit * 1.25;
+  const classStats = CLASS_STATS[charClass];
+
+  let life = classStats.baseLife + (level - 1) * classStats.lifePerLevel + (baseStats.vit - classStats.vit) * classStats.lifePerVit;
+  let mana = classStats.baseMana + (level - 1) * classStats.manaPerLevel + (baseStats.enr - classStats.eng) * classStats.manaPerEng;
+  const stamina = classStats.baseStamina + (level - 1) * classStats.staminaPerLevel + (baseStats.vit - classStats.vit) * classStats.staminaPerVit;
 
   let fcr = 0;
   let fhr = 0;
@@ -216,9 +216,10 @@ export const getIASBreakpoints = (
   return breakpoints;
 };
 
-// weapon classes for assassin based on the code from pod-calc
-export const getAssassinWeaponClass = (weaponType: string) => {
-  const isTwoHandSwinging = ['Polearm', 'Staff'].includes(weaponType); // Should refine this to differentiate 1H/2H axes/swords based on item stats, but simplify for now
+export const getWeaponClass = (charClass: CharacterClass, weaponType: string) => {
+  // Simplification for all classes based on previously implemented Assassin logic,
+  // generalized. In a full implementation, this should parse game files exactly.
+  const isTwoHandSwinging = ['Polearm', 'Staff'].includes(weaponType);
   const isOneHandSwinging = ['Hand Axe', 'Axe', 'Sword', 'Mace', 'Scepter', 'Wand', 'Club', 'Hammer'].includes(weaponType) && !isTwoHandSwinging;
   const isOneHandThrusting = ['Dagger', 'Javelin'].includes(weaponType);
   const isTwoHandThrusting = ['Spear'].includes(weaponType);
@@ -226,13 +227,39 @@ export const getAssassinWeaponClass = (weaponType: string) => {
   const isBow = weaponType === 'Bow';
   const isCrossbow = weaponType === 'Crossbow';
 
-  if (isClaw) return { baseFrames: 11, animationSpeed: 208 };
-  if (isOneHandSwinging) return { baseFrames: 15, animationSpeed: 256 };
-  if (isOneHandThrusting) return { baseFrames: 15, animationSpeed: 256 };
-  if (isTwoHandSwinging) return { baseFrames: 19, animationSpeed: 256 };
-  if (isTwoHandThrusting) return { baseFrames: 23, animationSpeed: 256 };
-  if (isBow) return { baseFrames: 16, animationSpeed: 256 };
-  if (isCrossbow) return { baseFrames: 21, animationSpeed: 256 };
-
-  return { baseFrames: 11, animationSpeed: 256 }; // Default unarmed
+  if (charClass === 'Assassin') {
+    if (isClaw) return { baseFrames: 11, animationSpeed: 208 };
+    if (isOneHandSwinging) return { baseFrames: 15, animationSpeed: 256 };
+    if (isOneHandThrusting) return { baseFrames: 15, animationSpeed: 256 };
+    if (isTwoHandSwinging) return { baseFrames: 19, animationSpeed: 256 };
+    if (isTwoHandThrusting) return { baseFrames: 23, animationSpeed: 256 };
+    if (isBow) return { baseFrames: 16, animationSpeed: 256 };
+    if (isCrossbow) return { baseFrames: 21, animationSpeed: 256 };
+    return { baseFrames: 11, animationSpeed: 256 };
+  } else if (charClass === 'Amazon') {
+    if (isBow) return { baseFrames: 14, animationSpeed: 256 };
+    if (isCrossbow) return { baseFrames: 20, animationSpeed: 256 };
+    if (isOneHandThrusting || isTwoHandThrusting) return { baseFrames: 15, animationSpeed: 256 };
+    if (isOneHandSwinging || isTwoHandSwinging) return { baseFrames: 16, animationSpeed: 256 };
+    return { baseFrames: 14, animationSpeed: 256 }; // Unarmed
+  } else if (charClass === 'Barbarian') {
+    if (isOneHandSwinging) return { baseFrames: 16, animationSpeed: 256 }; // 1HS
+    if (isTwoHandSwinging) return { baseFrames: 19, animationSpeed: 256 };
+    if (isBow) return { baseFrames: 15, animationSpeed: 256 };
+    if (isCrossbow) return { baseFrames: 20, animationSpeed: 256 };
+    return { baseFrames: 12, animationSpeed: 256 }; // Fast base for Barbarian unarmed
+  } else if (charClass === 'Paladin') {
+    if (isOneHandSwinging) return { baseFrames: 15, animationSpeed: 256 };
+    if (isTwoHandSwinging) return { baseFrames: 18, animationSpeed: 256 };
+    if (isBow) return { baseFrames: 16, animationSpeed: 256 };
+    if (isCrossbow) return { baseFrames: 20, animationSpeed: 256 };
+    return { baseFrames: 14, animationSpeed: 256 };
+  } else {
+    // Default fallback for Sorc, Necro, Druid
+    if (isOneHandSwinging) return { baseFrames: 19, animationSpeed: 256 };
+    if (isTwoHandSwinging) return { baseFrames: 20, animationSpeed: 256 };
+    if (isBow) return { baseFrames: 17, animationSpeed: 256 };
+    if (isCrossbow) return { baseFrames: 20, animationSpeed: 256 };
+    return { baseFrames: 15, animationSpeed: 256 };
+  }
 }
