@@ -153,7 +153,14 @@ export const Equipment: React.FC = () => {
                                     onClick={() => handleEquip(activeSlot!, item)}
                                     className="w-full text-left p-2 border border-diablo-unique/30 bg-diablo-unique/5 hover:bg-diablo-unique/20 text-diablo-unique text-xs font-serif"
                                 >
-                                    {item.name} ({item.baseType})
+                                    <div className="font-bold">{item.name} ({item.baseType})</div>
+                                    <div className="mt-1 flex flex-col gap-0.5">
+                                        {enriched.stats.map((s, i) => (
+                                            <div key={i} className="text-blue-400 text-[10px]">
+                                                {s.name.replace(/\[.*\]/, s.value.toString())}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </button>
                                 <div className="invisible group-hover:visible absolute z-[60] left-full top-0 ml-2 pointer-events-none">
                                     <ItemTooltip item={enriched} />
