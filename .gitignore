@@ -4,6 +4,7 @@ dist/
 .DS_Store
 *.local
 gamedata/
+gamedata.zip
 data/
 palettes/
 public/items/

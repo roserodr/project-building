@@ -1,14 +1,10 @@
-import zipfile
 import csv
-import io
 import json
 
-def read_txt(zip_path, file_path):
-    with zipfile.ZipFile(zip_path, 'r') as z:
-        with z.open(file_path, 'r') as f:
-            content = f.read().decode('utf-8-sig', errors='replace')
-            reader = csv.DictReader(io.StringIO(content), delimiter='\t')
-            return list(reader)
+def read_txt(file_path):
+    with open(file_path, 'r', encoding='utf-8-sig', errors='replace') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        return list(reader)
 
 def calc_damage(min_dam, lev_dam1, lev_dam2, lev_dam3, lev_dam4, lev_dam5, level, shift):
     if min_dam == "" or min_dam is None:
@@ -37,7 +33,7 @@ def calc_damage(min_dam, lev_dam1, lev_dam2, lev_dam3, lev_dam4, lev_dam5, level
 
 def get_skills_data():
     # We will read from existing skillsLevelData.ts and inject our changes over it so we don't destroy other classes.
-    skills = read_txt('gamedata.zip', 'gamedata/pd2data/excel/skills.txt')
+    skills = read_txt('gamedata/pd2data/excel/skills.txt')
 
     skill_name_map = {
         'fire trauma': 'Fire Blast',
