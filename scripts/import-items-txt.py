@@ -1,24 +1,20 @@
-import zipfile
 import csv
-import io
 import json
 import re
 
-def read_txt(zip_path, file_path):
-    with zipfile.ZipFile(zip_path, 'r') as z:
-        with z.open(file_path, 'r') as f:
-            content = f.read().decode('utf-8-sig', errors='replace')
-            reader = csv.DictReader(io.StringIO(content), delimiter='\t')
-            return list(reader)
+def read_txt(file_path):
+    with open(file_path, 'r', encoding='utf-8-sig', errors='replace') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        return list(reader)
 
 def parse_items():
-    armors = read_txt('gamedata.zip', 'gamedata/pd2data/excel/armor.txt')
-    weapons = read_txt('gamedata.zip', 'gamedata/pd2data/excel/weapons.txt')
-    misc = read_txt('gamedata.zip', 'gamedata/pd2data/excel/misc.txt')
-    unique_items = read_txt('gamedata.zip', 'gamedata/pd2data/excel/UniqueItems.txt')
-    set_items = read_txt('gamedata.zip', 'gamedata/pd2data/excel/SetItems.txt')
-    properties = read_txt('gamedata.zip', 'gamedata/pd2data/excel/Properties.txt')
-    item_types = read_txt('gamedata.zip', 'gamedata/pd2data/excel/ItemTypes.txt')
+    armors = read_txt('gamedata/pd2data/excel/armor.txt')
+    weapons = read_txt('gamedata/pd2data/excel/weapons.txt')
+    misc = read_txt('gamedata/pd2data/excel/misc.txt')
+    unique_items = read_txt('gamedata/pd2data/excel/UniqueItems.txt')
+    set_items = read_txt('gamedata/pd2data/excel/SetItems.txt')
+    properties = read_txt('gamedata/pd2data/excel/Properties.txt')
+    item_types = read_txt('gamedata/pd2data/excel/ItemTypes.txt')
 
     prop_map = {p['code']: p for p in properties if p.get('code')}
 

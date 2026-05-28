@@ -1,6 +1,4 @@
-import zipfile
 import csv
-import io
 import json
 import re
 
@@ -89,20 +87,18 @@ def format_stat_name(prop_code, min_val, max_val, param=None):
     # Fallback heuristic
     return f"{prop_code} {'[' + str(min_val) + '-' + str(max_val) + ']' if min_val and max_val and min_val != max_val else '+' + str(min_val)}"
 
-def read_txt(zip_path, file_path):
-    with zipfile.ZipFile(zip_path, 'r') as z:
-        with z.open(file_path, 'r') as f:
-            content = f.read().decode('utf-8-sig', errors='replace')
-            reader = csv.DictReader(io.StringIO(content), delimiter='\t')
-            return list(reader)
+def read_txt(file_path):
+    with open(file_path, 'r', encoding='utf-8-sig', errors='replace') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        return list(reader)
 
 def parse_items():
-    armors = read_txt('gamedata.zip', 'gamedata/pd2data/excel/armor.txt')
-    weapons = read_txt('gamedata.zip', 'gamedata/pd2data/excel/weapons.txt')
-    misc = read_txt('gamedata.zip', 'gamedata/pd2data/excel/misc.txt')
-    unique_items = read_txt('gamedata.zip', 'gamedata/pd2data/excel/UniqueItems.txt')
-    set_items = read_txt('gamedata.zip', 'gamedata/pd2data/excel/SetItems.txt')
-    runes = read_txt('gamedata.zip', 'gamedata/pd2data/excel/Runes.txt')
+    armors = read_txt('gamedata/pd2data/excel/armor.txt')
+    weapons = read_txt('gamedata/pd2data/excel/weapons.txt')
+    misc = read_txt('gamedata/pd2data/excel/misc.txt')
+    unique_items = read_txt('gamedata/pd2data/excel/UniqueItems.txt')
+    set_items = read_txt('gamedata/pd2data/excel/SetItems.txt')
+    runes = read_txt('gamedata/pd2data/excel/Runes.txt')
 
     base_items_by_code = {}
     for item in armors:

@@ -1,19 +1,15 @@
-import zipfile
 import csv
-import io
 import json
 import re
 
-def read_txt(zip_path, file_path):
-    with zipfile.ZipFile(zip_path, 'r') as z:
-        with z.open(file_path, 'r') as f:
-            content = f.read().decode('utf-8-sig', errors='replace')
-            reader = csv.DictReader(io.StringIO(content), delimiter='\t')
-            return list(reader)
+def read_txt(file_path):
+    with open(file_path, 'r', encoding='utf-8-sig', errors='replace') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        return list(reader)
 
 def map_icons():
-    skills = read_txt('gamedata.zip', 'gamedata/pd2data/excel/skills.txt')
-    skilldesc = read_txt('gamedata.zip', 'gamedata/pd2data/excel/Skilldesc.txt')
+    skills = read_txt('gamedata/pd2data/excel/skills.txt')
+    skilldesc = read_txt('gamedata/pd2data/excel/Skilldesc.txt')
 
     skill_name_map = {
         'fire trauma': 'fire_blast',

@@ -27,14 +27,14 @@ def clean_str(s):
 
 def run():
     skilldesc = {}
-    with open('skilldesc.txt', 'r', encoding='utf-8') as f:
+    with open('gamedata/pd2data/excel/Skilldesc.txt', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f, delimiter='\t')
         for row in reader:
             if clean_str(row.get('skilldesc')):
                 skilldesc[clean_str(row.get('skilldesc'))] = row
 
     skills_data = {}
-    with open('skills.txt', 'r', encoding='utf-8') as f:
+    with open('gamedata/pd2data/excel/skills.txt', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f, delimiter='\t')
         for row in reader:
             charclass_code = clean_str(row.get('charclass'))
