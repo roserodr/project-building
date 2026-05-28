@@ -38,8 +38,9 @@ export const CharacterSheet: React.FC = () => {
 
   const { skillPoints } = useCharacterStore();
   const stats = calculateCharacterStats(
+    "Assassin",
     level,
-    { str: strength, dex: dexterity, vit: vitality, enr: energy },
+    { str: strength, dex: dexterity, vit: vitality, energy: energy },
     skillPoints,
     equipment,
     charms
@@ -85,9 +86,9 @@ export const CharacterSheet: React.FC = () => {
 
       <div className="border-t border-diablo-gold/20 pt-4">
         <h3 className="text-[10px] text-gray-500 font-bold uppercase mb-2">Breakpoints</h3>
-        <BreakpointRow label="Faster Cast Rate" value={stats.fcr} breakpoints={FCR_BREAKPOINTS} baseFrames={16} />
-        <BreakpointRow label="Faster Hit Recovery" value={stats.fhr} breakpoints={FHR_BREAKPOINTS} baseFrames={9} />
-        <BreakpointRow label="Faster Block Rate" value={stats.fbr} breakpoints={FBR_BREAKPOINTS} baseFrames={5} />
+        <BreakpointRow label="Faster Cast Rate" value={stats.fcr} breakpoints={FCR_BREAKPOINTS["Assassin"]} baseFrames={16} />
+        <BreakpointRow label="Faster Hit Recovery" value={stats.fhr} breakpoints={FHR_BREAKPOINTS["Assassin"]} baseFrames={9} />
+        <BreakpointRow label="Faster Block Rate" value={stats.fbr} breakpoints={FBR_BREAKPOINTS["Assassin"]} baseFrames={5} />
         {(() => {
           const weaponClass = getAssassinWeaponClass(stats.primaryWeaponType);
           const iasBreakpoints = getIASBreakpoints(stats.wsm, weaponClass.baseFrames, weaponClass.animationSpeed, stats.skillIas);

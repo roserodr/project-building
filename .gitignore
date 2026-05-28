@@ -8,3 +8,6 @@ data/
 palettes/
 public/items/
 public/skills/
+dev_server.log
+playwright-report/
+test-results/
