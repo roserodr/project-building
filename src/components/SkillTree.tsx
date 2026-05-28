@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { allSkills } from '../data/allSkills';
-import type { Skill, SkillTab, CharacterClass } from '../types';
+import type { Skill, SkillTab } from '../types';
 import { getSkillLevel, calculateSkillDamage } from '../utils/calc';
 
 export const SkillTree: React.FC = () => {

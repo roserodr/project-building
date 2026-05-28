@@ -76,16 +76,16 @@ export const calculateSkillDamage = (skill: Skill, skillPoints: Record<string, n
 export const calculateCharacterStats = (
   charClass: CharacterClass,
   level: number,
-  baseStats: { str: number; dex: number; vit: number; enr: number },
+  baseStats: { str: number; dex: number; vit: number; energy: number },
   skillPoints: Record<string, number>,
   equipment: Record<string, Item>,
   charms: Record<string, Item>
 ): CharacterStats => {
   const classStats = CLASS_STATS[charClass];
 
-  let life = classStats.baseLife + (level - 1) * classStats.lifePerLevel + (baseStats.vit - classStats.vit) * classStats.lifePerVit;
-  let mana = classStats.baseMana + (level - 1) * classStats.manaPerLevel + (baseStats.enr - classStats.eng) * classStats.manaPerEng;
-  const stamina = classStats.baseStamina + (level - 1) * classStats.staminaPerLevel + (baseStats.vit - classStats.vit) * classStats.staminaPerVit;
+  let life = classStats.baseLife + (level - 1) * classStats.lifePerLevel + (baseStats.vit - classStats.vitality) * classStats.lifePerVit;
+  let mana = classStats.baseMana + (level - 1) * classStats.manaPerLevel + (baseStats.energy - classStats.energy) * classStats.manaPerEng;
+  const stamina = classStats.baseStamina + (level - 1) * classStats.staminaPerLevel + (baseStats.vit - classStats.vitality) * classStats.staminaPerVit;
 
   let fcr = 0;
   let fhr = 0;
@@ -263,3 +263,37 @@ export const getWeaponClass = (charClass: CharacterClass, weaponType: string) =>
     return { baseFrames: 15, animationSpeed: 256 };
   }
 }
+
+export const FCR_BREAKPOINTS: Record<string, number[]> = {
+  Amazon: [0, 7, 14, 22, 32, 48, 68, 99, 152],
+  Assassin: [0, 8, 16, 27, 42, 65, 102, 174],
+  Necromancer: [0, 9, 18, 30, 48, 75, 125],
+  Barbarian: [0, 9, 20, 37, 63, 105, 200],
+  Paladin: [0, 9, 18, 30, 48, 75, 125],
+  Sorceress: [0, 9, 20, 37, 63, 105, 200],
+  Druid: [0, 4, 10, 19, 30, 46, 68, 99, 163]
+};
+
+export const FHR_BREAKPOINTS: Record<string, number[]> = {
+  Amazon: [0, 6, 13, 20, 32, 52, 86, 174],
+  Assassin: [0, 7, 15, 27, 48, 86, 200],
+  Necromancer: [0, 5, 10, 16, 26, 39, 56, 86, 152],
+  Barbarian: [0, 7, 15, 27, 48, 86, 200],
+  Paladin: [0, 7, 15, 27, 48, 86, 200],
+  Sorceress: [0, 5, 9, 14, 20, 30, 42, 60, 86, 142],
+  Druid: [0, 3, 7, 13, 19, 29, 42, 63, 99, 174]
+};
+
+export const FBR_BREAKPOINTS: Record<string, number[]> = {
+  Amazon: [0, 4, 6, 11, 15, 23, 29, 40, 56, 80, 120],
+  Assassin: [0, 13, 32, 86, 600],
+  Necromancer: [0, 6, 13, 20, 32, 52, 86, 174],
+  Barbarian: [0, 9, 20, 42, 86, 280],
+  Paladin: [0, 13, 32, 86, 600],
+  Sorceress: [0, 7, 15, 27, 48, 86, 200],
+  Druid: [0, 5, 10, 16, 27, 40, 65, 109, 223]
+};
+
+export const getAssassinWeaponClass = (_type: string) => {
+  return { baseFrames: 11, animationSpeed: 256 };
+};
