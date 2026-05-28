@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# Project Diablo 2 — Character Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript app for planning Project Diablo 2 characters: skill trees, equipment, rare item creation, and stat calculations.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Skill Tree** — browse and plan skill points for all classes
+- **Character Sheet** — stat totals updated in real time
+- **Equipment** — slot items and see combined affixes
+- **Rare Item Creator / Editor** — generate and tweak rare items with valid affix combinations
+- **Item Tooltip** — D2-style tooltip preview
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The dev server also runs `scripts/extract_skill_icons.cjs` to unpack skill icons from the game data before starting Vite.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Script | Purpose |
+|---|---|
+| `npm run dev` | Extract icons, start Vite dev server |
+| `npm run build` | Extract icons, type-check, build for production |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Preview production build |
+| `node scripts/check_bases.cjs` | Check for `baseType` values in `projectDiablo2Items.ts` that don't match any name in `itemBases.ts` |
+
+## Tech Stack
+
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/)
+- [Zustand](https://zustand-demo.pmnd.rs/) for state
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Playwright](https://playwright.dev/) for e2e tests
+- [ESLint](https://eslint.org/) with `react-hooks` and `react-refresh` plugins, type-aware rules via `typescript-eslint`
