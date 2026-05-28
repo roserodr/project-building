@@ -2,14 +2,14 @@ import React from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { calculateCharacterStats, FCR_BREAKPOINTS, FHR_BREAKPOINTS, FBR_BREAKPOINTS, getFrameFromBreakpoints, getAssassinWeaponClass, getIASBreakpoints } from '../utils/calc';
 
-const StatRow = ({ label, value, onChange }: { label: string, value: number, onChange?: (v: number) => void }) => (
+const StatRow = ({ label, value, total, onChange }: { label: string, value: number, total?: number, onChange?: (v: number) => void }) => (
   <div className="flex justify-between items-center py-1 border-b border-diablo-gold/10">
     <span className="text-xs text-gray-400 uppercase">{label}</span>
     <div className="flex items-center">
       {onChange && (
           <button onClick={() => onChange(value - 1)} className="px-1 text-diablo-gold hover:text-white">-</button>
       )}
-      <span className="text-sm font-bold w-12 text-center">{value}</span>
+      <span className="text-sm font-bold w-16 text-center whitespace-nowrap">{total !== undefined && total !== value ? `${total} (${value})` : value}</span>
       {onChange && (
           <button onClick={() => onChange(value + 1)} className="px-1 text-diablo-gold hover:text-white">+</button>
       )}
@@ -59,10 +59,10 @@ export const CharacterSheet: React.FC = () => {
       </div>
 
       <div className="space-y-1 mb-8">
-        <StatRow label="Strength" value={strength} onChange={(v) => setStat('strength', v)} />
-        <StatRow label="Dexterity" value={dexterity} onChange={(v) => setStat('dexterity', v)} />
-        <StatRow label="Vitality" value={vitality} onChange={(v) => setStat('vitality', v)} />
-        <StatRow label="Energy" value={energy} onChange={(v) => setStat('energy', v)} />
+        <StatRow label="Strength" value={strength} total={stats.totalStr} onChange={(v) => setStat('strength', v)} />
+        <StatRow label="Dexterity" value={dexterity} total={stats.totalDex} onChange={(v) => setStat('dexterity', v)} />
+        <StatRow label="Vitality" value={vitality} total={stats.totalVit} onChange={(v) => setStat('vitality', v)} />
+        <StatRow label="Energy" value={energy} total={stats.totalEnergy} onChange={(v) => setStat('energy', v)} />
       </div>
 
       <div className="space-y-4 mb-8">

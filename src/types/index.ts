@@ -73,6 +73,10 @@ export interface CharacterStats {
   ias: number;
   wsm: number;
   primaryWeaponType: string;
+  totalStr: number;
+  totalDex: number;
+  totalVit: number;
+  totalEnergy: number;
   skillIas: number;
   fbr: number;
   resistances: {

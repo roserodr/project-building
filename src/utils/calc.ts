@@ -83,6 +83,7 @@ export const calculateCharacterStats = (
 ): CharacterStats => {
   const classStats = CLASS_STATS[charClass];
 
+  // Life/Mana base are calculated first, then item vit/energy are added later
   let life = classStats.baseLife + (level - 1) * classStats.lifePerLevel + (baseStats.vit - classStats.vitality) * classStats.lifePerVit;
   let mana = classStats.baseMana + (level - 1) * classStats.manaPerLevel + (baseStats.energy - classStats.energy) * classStats.manaPerEng;
   const stamina = classStats.baseStamina + (level - 1) * classStats.staminaPerLevel + (baseStats.vit - classStats.vitality) * classStats.staminaPerVit;
@@ -103,6 +104,8 @@ export const calculateCharacterStats = (
   let defense = 0;
   let totalStr = baseStats.str;
   let totalDex = baseStats.dex;
+  let totalVit = baseStats.vit;
+  let totalEnergy = baseStats.energy;
 
   Object.entries(equipment).forEach(([slot, item]) => {
       if (item.defense) defense += item.defense;
@@ -143,8 +146,14 @@ export const calculateCharacterStats = (
       case 'enhanced_damage': offWeaponEd += stat.value; break;
       case 'max_damage': maxDmgFlat += stat.value; break;
       case 'min_damage': minDmgFlat += stat.value; break;
-      case 'strength': totalStr += stat.value; break;
-      case 'dexterity': totalDex += stat.value; break;
+      case 'strength':
+      case 'str': totalStr += stat.value; break;
+      case 'dexterity':
+      case 'dex': totalDex += stat.value; break;
+      case 'vitality':
+      case 'vit': totalVit += stat.value; break;
+      case 'energy':
+      case 'enr': totalEnergy += stat.value; break;
     }
   };
 
@@ -173,10 +182,18 @@ export const calculateCharacterStats = (
     charm.stats.forEach(processStat);
   });
 
+  life += (totalVit - baseStats.vit) * classStats.lifePerVit;
+  mana += (totalEnergy - baseStats.energy) * classStats.manaPerEng;
+  let totalStamina = stamina + (totalVit - baseStats.vit) * classStats.staminaPerVit;
+
   return {
+    totalStr,
+    totalDex,
+    totalVit,
+    totalEnergy,
     life: Math.floor(life),
     mana: Math.floor(mana),
-    stamina: Math.floor(stamina),
+    stamina: Math.floor(totalStamina),
     defense,
     damage: {
        // Note: Ideally we would calculate total str/dex properly before using it here.
