@@ -36,4 +36,4 @@ The dev server also runs `scripts/extract_skill_icons.cjs` to unpack skill icons
 - [Zustand](https://zustand-demo.pmnd.rs/) for state
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Playwright](https://playwright.dev/) for e2e tests
-- [ESLint](https://eslint.org/) with `react-hooks`, `react-refresh`, `react-x`, and `react-dom` plugins
+- [ESLint](https://eslint.org/) with `react-hooks` and `react-refresh` plugins, type-aware rules via `typescript-eslint`
