@@ -7,14 +7,16 @@ def read_txt(file_path):
         reader = csv.DictReader(f, delimiter='\t')
         return list(reader)
 
+EXCEL = 'gamedata/pd2data/data/global/excel'
+
 def parse_items():
-    armors = read_txt('gamedata/pd2data/excel/armor.txt')
-    weapons = read_txt('gamedata/pd2data/excel/weapons.txt')
-    misc = read_txt('gamedata/pd2data/excel/misc.txt')
-    unique_items = read_txt('gamedata/pd2data/excel/UniqueItems.txt')
-    set_items = read_txt('gamedata/pd2data/excel/SetItems.txt')
-    properties = read_txt('gamedata/pd2data/excel/Properties.txt')
-    item_types = read_txt('gamedata/pd2data/excel/ItemTypes.txt')
+    armors = read_txt(f'{EXCEL}/Armor.txt')
+    weapons = read_txt(f'{EXCEL}/Weapons.txt')
+    misc = read_txt(f'{EXCEL}/Misc.txt')
+    unique_items = read_txt(f'{EXCEL}/UniqueItems.txt')
+    set_items = read_txt(f'{EXCEL}/SetItems.txt')
+    properties = read_txt(f'{EXCEL}/Properties.txt')
+    item_types = read_txt(f'{EXCEL}/ItemTypes.txt')
 
     prop_map = {p['code']: p for p in properties if p.get('code')}
 
