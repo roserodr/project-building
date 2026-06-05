@@ -67,20 +67,30 @@ function App() {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden diablo-bg text-diablo-gold font-serif">
-      <header className="fixed top-0 left-0 right-0 h-14 diablo-panel diablo-border border-b flex items-center justify-between px-6 z-50 shadow-[0_25px_35px_rgba(0,0,0,0.55)]">
-        <h1 className="text-2xl font-bold tracking-[0.24em] uppercase">
-          PD2 PLANNER <span className="text-[9px] text-gray-400 font-normal ml-3 align-super">SEASON 13</span>
-        </h1>
+      <header className="fixed top-0 left-0 right-0 h-14 z-50 flex items-center justify-between px-6"
+        style={{
+          background: 'linear-gradient(180deg, #1c1208 0%, #0e0905 60%, #080503 100%)',
+          borderBottom: '1px solid #5a421e',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.8), inset 0 1px 0 rgba(200,160,80,0.07)',
+        }}>
+        <div className="flex items-center gap-3">
+          <div className="w-0.5 h-8 bg-gradient-to-b from-transparent via-[#c8a050] to-transparent opacity-60" />
+          <h1 className="diablo-section-title text-xl tracking-[0.28em] text-glow-gold">
+            PD2 Planner
+          </h1>
+          <span className="text-[8px] text-[#7a6030] font-normal tracking-widest ml-1 mt-1 uppercase">Season 13</span>
+          <div className="w-0.5 h-8 bg-gradient-to-b from-transparent via-[#c8a050] to-transparent opacity-60" />
+        </div>
         <div className="flex gap-3">
             <button
                 onClick={() => setView(activeView === 'planner' ? 'rare-editor' : 'planner')}
-                className={`diablo-button text-xs uppercase tracking-[0.28em] ${activeView === 'rare-editor' ? 'bg-diablo-rare/30 border-diablo-rare text-black' : ''}`}
+                className={`diablo-button text-[10px] ${activeView === 'rare-editor' ? 'border-[#e0e000] text-[#e0e000]' : ''}`}
             >
-                {activeView === 'planner' ? 'Rare Editor' : 'Back to Planner'}
+                {activeView === 'planner' ? 'Rare Editor' : '← Back to Planner'}
             </button>
             <button
                 onClick={handleShare}
-                className="diablo-button text-xs uppercase tracking-[0.28em]"
+                className="diablo-button text-[10px]"
             >
                 Share Build
             </button>
@@ -91,7 +101,7 @@ function App() {
         {activeView === 'planner' ? (
             <>
                 <CharacterSheet />
-                <div className="flex-1 flex justify-center items-center overflow-auto">
+                <div className="flex-1 flex justify-center items-stretch overflow-auto custom-scrollbar">
                     <Equipment />
                 </div>
                 <SkillTree />

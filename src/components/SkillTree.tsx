@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { allSkills } from '../data/allSkills';
 import type { Skill, SkillTab } from '../types';
@@ -11,6 +11,9 @@ export const SkillTree: React.FC = () => {
   // Extract unique tabs for the current class
   const tabs: SkillTab[] = Array.from(new Set(classSkills.map(s => s.tab)));
   const [activeTab, setActiveTab] = useState<SkillTab>(tabs[0] || '');
+
+  // Ref to the tree art container
+  const gridRef = useRef<HTMLDivElement>(null);
 
   // Reset active tab if class changes
   React.useEffect(() => {
@@ -36,21 +39,47 @@ export const SkillTree: React.FC = () => {
 
   const currentTabSkills = classSkills.filter(s => s.tab === activeTab);
 
-  return (
-    <div className="flex flex-col h-full bg-diablo-dark border-l border-diablo-gold/30 p-4 w-[400px] font-serif">
-<div className="flex justify-between mb-4 gap-2">
-        {tabs.map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`diablo-tab text-xs uppercase tracking-[0.28em] ${activeTab === tab ? 'diablo-tab-active' : ''}`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+  // D2 skill budget: 1 per level + 12 quest points (matches store auto-level logic)
+  const totalSpent = classSkills.reduce((sum, s) => sum + (skillPoints[s.id] || 0), 0);
+  const skillsRemaining = Math.max(0, level + 11 - totalSpent);
 
-      <div className="relative flex-grow bg-black/50 border border-diablo-gold/20 p-4 grid grid-cols-3 grid-rows-6 gap-4">
+
+  return (
+    <div className="flex flex-col h-full diablo-panel diablo-panel-ornate border-l border-[#3a2a12] p-4 w-[440px]">
+      <div className="diablo-section-title text-sm tracking-[0.25em] text-glow-gold text-center mb-3">Skills</div>
+
+      <div className="flex flex-row flex-1 min-h-0 items-center justify-center gap-0">
+        {(() => {
+          const treeBg: Record<string, string> = {
+            'Traps': '/ui/tree_traps.png',
+            'Shadow Disciplines': '/ui/tree_shadow.png',
+            'Martial Arts': '/ui/tree_martial.png',
+          };
+          // Per-tree slot-center grids (% of each 250x432 tree art). Each tree's baked
+          // art positions its grid slightly differently, so they're calibrated separately.
+          // Box centers calibrated to the baked PD2 tree art (the recessed boxes the
+          // arrows connect to). Anchored on the lone clean box (blade_shield, col2/row5 =
+          // 189,399 in 256-wide native art) with D2's symmetric uniform grid.
+          // cols ÷250-crop, rows ÷432. All three Assassin trees share the same layout.
+          // Per-column x centers and shared per-row y centers (% of the 250x432 tree art),
+          // calibrated to the baked PD2 box positions (rows are uniform across columns).
+          const COLS = ['15%', '43.3%', '70%'];
+          const COL_DY = [0, 0, 0];                                   // % vertical nudge per column
+          const ROWS = [8.8, 25, 40.1, 56.5, 71.8, 87.8];             // base row centers (%)
+          const slotLeft = (c: number) => COLS[c];
+          const slotTop = (c: number, r: number) => `${ROWS[r] + COL_DY[c]}%`;
+          const bg = treeBg[activeTab as string];
+          return (
+        <div className="flex items-center justify-center h-full min-w-0" style={{ position: 'relative', zIndex: 2 }}>
+        <div ref={gridRef} className="relative"
+          style={{
+            height: '100%',
+            maxWidth: '100%',
+            aspectRatio: '250 / 432',
+            backgroundImage: bg ? `url('${bg}')` : undefined,
+            backgroundSize: '100% 100%',
+            backgroundRepeat: 'no-repeat',
+          }}>
         {currentTabSkills.map(skill => {
           const points = skillPoints[skill.id] || 0;
           const totalLevel = getSkillLevel(skill.id, skillPoints, equipment);
@@ -61,20 +90,30 @@ export const SkillTree: React.FC = () => {
           return (
             <div
               key={skill.id}
-              className="relative skill-slot cursor-pointer group"
-              style={{ gridRow: (skill.row ?? 0) + 1, gridColumn: (skill.col ?? 0) + 1 }}
-              onClick={() => handleSkillClick(skill, false)}
-              onContextMenu={(e) => {
-                e.preventDefault();
-                handleSkillClick(skill, true);
+              className="absolute z-[1] hover:z-[100]"
+              style={{
+                left: slotLeft(skill.col ?? 0),
+                top: slotTop(skill.col ?? 0, skill.row ?? 0),
+                transform: 'translate(-50%, -50%)',
+                width: '18.5%',
+                aspectRatio: '1',
               }}
             >
-              <div className={`flex items-center justify-center h-full w-full ${!isAvailable ? 'opacity-40 grayscale' : ''}`}>
+              <div
+                className="relative cursor-pointer group w-full h-full"
+                onClick={() => handleSkillClick(skill, false)}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  handleSkillClick(skill, true);
+                }}
+              >
+              <div className={`flex items-center justify-center h-full w-full ${!isAvailable ? 'opacity-80 grayscale' : ''}`}>
                 {skill.iconCel !== undefined ? (
                   <img
                     src={`/skills/${characterClass.substring(0,2).toLowerCase()}skillicon_0_${skill.iconCel}.png`}
                     alt={skill.name}
-                    className="w-10 h-10 object-contain filter opacity-80"
+                    className="w-full h-full object-contain"
+                    style={{ filter: isAvailable ? 'none' : 'brightness(0.9)' }}
                     onError={(e) => {
                       const img = e.target as HTMLImageElement;
                       if (!img.dataset.fallback) {
@@ -89,67 +128,201 @@ export const SkillTree: React.FC = () => {
                   />
                 ) : null}
                 <div className={`text-[10px] text-center leading-tight ${skill.iconCel !== undefined ? 'hidden' : ''}`}>{skill.name}</div>
+              </div>
 
-                <div className="absolute -bottom-2 -right-2 bg-black border border-diablo-gold text-[10px] px-1">
+              {/* D2-style skill tooltip */}
+              <div className="invisible group-hover:visible absolute z-50 top-0 left-full lg:left-auto lg:right-full lg:mr-2 ml-2 lg:ml-0 w-72 pointer-events-none select-none"
+                style={{
+                  background: 'linear-gradient(160deg, #0e0905 0%, #070503 100%)',
+                  border: '1px solid #6a5020',
+                  boxShadow: '0 0 0 1px #1a1208, 0 8px 32px rgba(0,0,0,0.95)',
+                  fontFamily: 'Georgia, "Palatino Linotype", serif',
+                }}>
+
+                {/* Skill name banner */}
+                <div className="px-3 py-2 text-center" style={{ borderBottom: '1px solid #3a2a0e', background: 'linear-gradient(180deg, #1a1008 0%, #0e0905 100%)' }}>
+                  <div className="text-sm font-bold tracking-wide" style={{ color: '#c8a050', textShadow: '0 0 8px rgba(200,160,80,0.4)', fontFamily: 'Cinzel, serif' }}>
+                    {skill.name}
+                  </div>
+                </div>
+
+                <div className="px-3 py-2">
+                  {/* Req level + prereqs */}
+                  <div className="text-[10px] mb-1" style={{ color: '#7a6030' }}>
+                    Required Level: <span style={{ color: level >= skill.reqLevel ? '#c8a050' : '#c03030' }}>{skill.reqLevel}</span>
+                  </div>
+                  {skill.dependencies.length > 0 && (
+                    <div className="text-[10px] mb-1" style={{ color: '#7a6030' }}>
+                      Prerequisites:{' '}
+                      {skill.dependencies.map((dep, i) => {
+                        const depSkill = classSkills.find(s => s.id === dep);
+                        const met = (skillPoints[dep] || 0) > 0;
+                        return (
+                          <span key={dep} style={{ color: met ? '#50a050' : '#c03030' }}>
+                            {depSkill?.name || dep}{i < skill.dependencies.length - 1 ? ', ' : ''}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Divider */}
+                  <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, #4a3818, transparent)', margin: '6px 0' }} />
+
+                  {/* Description */}
+                  <div className="text-[11px] leading-relaxed mb-2" style={{ color: '#c8b880', fontStyle: 'italic' }}>
+                    {skill.description}
+                  </div>
+
+                  {/* Divider */}
+                  <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, #4a3818, transparent)', margin: '6px 0' }} />
+
+                  {/* Current level */}
+                  <div className="flex justify-between text-[11px] mb-1">
+                    <span style={{ color: '#a09070' }}>Current Skill Level:</span>
+                    <span style={{ color: points > 0 ? '#c8a050' : '#5a4a30' }}>{points}</span>
+                  </div>
+                  <div className="flex justify-between text-[11px] mb-2">
+                    <span style={{ color: '#a09070' }}>Total (with +skills):</span>
+                    <span style={{ color: totalLevel > points ? '#6090e0' : '#c8a050' }}>{totalLevel}</span>
+                  </div>
+
+                  {/* Damage */}
+                  {damage.max > 0 && (
+                    <>
+                      <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, #4a3818, transparent)', margin: '6px 0' }} />
+                      <div className="flex justify-between text-[11px]">
+                        <span style={{ color: '#a09070' }}>Attack Damage:</span>
+                        <span style={{ color: '#e08858' }}>{damage.min}–{damage.max}</span>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Synergies */}
+                  {skill.synergies && skill.synergies.length > 0 && (
+                    <>
+                      <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, #4a3818, transparent)', margin: '8px 0 6px' }} />
+                      <div className="text-[9px] uppercase tracking-widest mb-1" style={{ color: '#6a5020' }}>Synergies</div>
+                      <div className="space-y-0.5">
+                        {skill.synergies.map(syn => {
+                          const synSkill = classSkills.find(s => s.id === syn.skillId);
+                          const pts = skillPoints[syn.skillId] || 0;
+                          const bonus = pts * syn.valuePerLevel;
+                          return (
+                            <div key={syn.skillId} className="flex justify-between text-[10px]">
+                              <span style={{ color: '#8a7850' }}>{synSkill?.name || syn.skillId}</span>
+                              <span style={{ color: pts > 0 ? '#50c050' : '#3a3020' }}>+{bonus}%</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+              </div>
+              {/* Skill level number — sits in the small darker box baked into the
+                  template art at the node's bottom-right corner. White D2 text. */}
+              {points > 0 && (
+                <div className="font-bold flex items-center justify-center" style={{
+                  position: 'absolute',
+                  left: '88%',
+                  top: '92%',
+                  width: '52%',
+                  height: '34%',
+                  transform: 'translate(-50%, -50%)',
+                  color: '#ffffff',
+                  fontSize: '12px',
+                  lineHeight: 1,
+                  textShadow: '0 0 2px #000, 0 1px 2px #000, 1px 0 2px #000, -1px 0 2px #000',
+                  fontVariantNumeric: 'tabular-nums',
+                  pointerEvents: 'none',
+                  zIndex: 2,
+                }}>
                   {points}
                 </div>
-              </div>
-
-              <div className="invisible group-hover:visible absolute z-50 top-0 left-full lg:left-auto lg:right-full lg:mr-2 ml-2 lg:ml-0 w-72 p-4 diablo-tooltip text-sm pointer-events-none">
-                <div className="text-diablo-gold font-bold mb-1 uppercase tracking-tighter text-base">{skill.name}</div>
-                <div className="text-[10px] text-gray-500 mb-2 uppercase">Required Level: {skill.reqLevel}</div>
-                {skill.dependencies.length > 0 && (
-                  <div className="text-[10px] text-gray-400 mb-2 uppercase">
-                    Prerequisite: {skill.dependencies.map((dep, index) => {
-                      const depSkill = classSkills.find(s => s.id === dep);
-                      const depPoints = skillPoints[dep] || 0;
-                      return (
-                        <span key={dep} className={depPoints > 0 ? 'text-green-400' : 'text-red-400'}>
-                          {depSkill?.name || dep}{index < skill.dependencies.length - 1 ? ', ' : ''}
-                        </span>
-                      );
-                    })}
-                  </div>
-                )}
-                <div className="text-xs mb-3 text-white italic">"{skill.description}"</div>
-
-                <div className="flex justify-between items-center bg-blue-900/20 p-2 mb-3 border border-blue-900/30">
-                    <span className="text-blue-400 text-xs uppercase font-bold">Total Level:</span>
-                    <span className="text-blue-400 font-bold">{totalLevel}</span>
-                </div>
-
-                {damage.max > 0 && (
-                    <div className="bg-red-900/20 p-2 border border-red-900/30 mb-3">
-                        <div className="text-red-500 text-[10px] uppercase font-bold mb-1">Estimated Damage:</div>
-                        <div className="text-red-500 text-lg font-bold">
-                            {damage.min} - {damage.max}
-                        </div>
-                    </div>
-                )}
-
-                {skill.synergies && skill.synergies.length > 0 && (
-                  <div className="mt-2 pt-3 border-t border-diablo-gold/30">
-                    <div className="text-[10px] font-bold text-diablo-gold uppercase mb-2 tracking-widest">Synergies:</div>
-                    <div className="space-y-1">
-                        {skill.synergies.map(syn => {
-                            const synSkill = classSkills.find(s => s.id === syn.skillId);
-                            const currentSynPoints = skillPoints[syn.skillId] || 0;
-                            return (
-                                <div key={syn.skillId} className="text-[10px] flex justify-between items-center">
-                                    <span className="text-gray-400 italic">{synSkill?.name || syn.skillId}:</span>
-                                    <span className={currentSynPoints > 0 ? "text-green-500 font-bold" : "text-gray-600"}>
-                                        +{currentSynPoints * syn.valuePerLevel}%
-                                    </span>
-                                </div>
-                            );
-                        })}
-                    </div>
-                  </div>
-                )}
-              </div>
+              )}
             </div>
           );
         })}
+        </div>
+        </div>
+          );
+        })()}
+
+        {/* Right column: the entire authentic D2 panel-edge art (box + 3 tabs) as one image,
+            with the number and tab labels overlaid as clickable regions.
+            Native art is 94x432; displayed at 1.15x. */}
+        {(() => {
+          // Native art is 94x432. Lay it out by height so it always fits the panel
+          // (fixed-pixel sizing used to overflow and clip the bottom/selected tab).
+          const NW = 94, NH = 432;
+          const pctY = (y: number) => `${(y / NH) * 100}%`;
+          // Native tab bands (top→bottom): Martial Arts, Shadow Disciplines, Traps
+          const orderedTabs = [...tabs].reverse();
+          const bands = [
+            { top: 113, bottom: 210 },
+            { top: 221, bottom: 318 },
+            { top: 329, bottom: 426 },
+          ];
+          return (
+            <div className="flex flex-col items-center flex-shrink-0" style={{ height: '100%', marginLeft: '-28px', position: 'relative', zIndex: 1 }}>
+              <div className="relative" style={{ height: '100%', aspectRatio: `${NW} / ${NH}` }}>
+                {(() => {
+                  const stripByTab: Record<string, string> = {
+                    'Traps': '/ui/tab_traps.png',
+                    'Shadow Disciplines': '/ui/tab_shadow.png',
+                    'Martial Arts': '/ui/tab_martial.png',
+                  };
+                  return (
+                    <img src={stripByTab[activeTab as string] || '/ui/tab_column.png'} alt="" draggable={false}
+                      style={{ width: '100%', height: '100%', imageRendering: 'pixelated' }} />
+                  );
+                })()}
+                {/* "Skill Choices Remaining" label overlaid on the top box of the art */}
+                <div className="absolute text-[7px] uppercase tracking-[0.12em] leading-[1.15] text-center" style={{
+                  left: '8%', right: '8%', top: pctY(14),
+                  color: '#c8b48a', textShadow: '0 1px 2px rgba(0,0,0,1)',
+                }}>
+                  Skill Choices Remaining
+                </div>
+                {/* number in the box recess (native recess center ~y62) */}
+                <span className="absolute font-bold" style={{
+                  left: 0, right: 0, top: pctY(62), textAlign: 'center',
+                  color: skillsRemaining > 0 ? '#8a8aff' : '#6a5828',
+                  fontSize: '15px', textShadow: '0 1px 2px rgba(0,0,0,1)', fontVariantNumeric: 'tabular-nums',
+                }}>
+                  {skillsRemaining}
+                </span>
+                {/* clickable tab regions with labels */}
+                {orderedTabs.map((tab, i) => {
+                  const b = bands[i];
+                  const isActive = activeTab === tab;
+                  return (
+                    <button
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      className="absolute flex items-center justify-center text-center text-[10px] uppercase tracking-[0.18em] leading-tight"
+                      style={{
+                        left: 0, right: 0,
+                        top: pctY(b.top),
+                        height: pctY(b.bottom - b.top),
+                        padding: '0 6px',
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        color: isActive ? '#e8e2d4' : '#9a8a64',
+                        textShadow: isActive
+                          ? '0 0 8px rgba(255,255,255,0.35), 0 1px 3px #000'
+                          : '0 1px 3px #000',
+                      }}
+                    >
+                      <span style={{ position: 'relative' }}>{tab}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </div>
   );
