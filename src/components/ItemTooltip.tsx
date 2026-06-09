@@ -17,26 +17,26 @@ export const ItemTooltip: React.FC<ItemTooltipProps> = ({ item, className }) => 
   const { strength, dexterity, level } = useCharacterStore();
 
   const rarityColors = {
-    Normal: 'text-white',
-    Magic: 'text-blue-400',
-    Rare: 'text-yellow-400',
-    Unique: 'text-diablo-unique',
-    Set: 'text-green-500',
-    Crafted: 'text-orange-500',
-    Runeword: 'text-diablo-unique',
+    Normal:   'text-white',
+    Magic:    'text-[#4070d0]',
+    Rare:     'text-[#e0e000]',
+    Unique:   'text-[#a07840]',
+    Set:      'text-[#00c860]',
+    Crafted:  'text-[#d06020]',
+    Runeword: 'text-[#a07840]',
   };
 
   const nameColor = rarityColors[item.rarity] || 'text-white';
 
   return (
     <div className={cn(
-      "p-3 bg-black border-2 border-gray-700 text-sm shadow-2xl min-w-[200px] flex flex-col items-center text-center font-serif pointer-events-none",
+      "p-3 text-sm shadow-2xl min-w-[200px] flex flex-col items-center text-center pointer-events-none diablo-tooltip",
       className
-    )}>
+    )} style={{ fontFamily: 'Cinzel, Palatino Linotype, serif' }}>
       <div className={cn("font-bold text-base mb-1", nameColor)}>
         {item.name}
       </div>
-      <div className="text-white text-xs mb-1">{item.baseType}</div>
+      <div className="text-[#aaaaaa] text-xs mb-1">{item.baseType}</div>
 
       {item.defense && (
         <div className="text-white text-xs">Defense: <span className="text-blue-400">{item.defense}</span></div>
@@ -84,9 +84,9 @@ export const ItemTooltip: React.FC<ItemTooltipProps> = ({ item, className }) => 
         )}
       </div>
 
-      <div className="mt-2 w-full border-t border-gray-800 pt-2 flex flex-col items-center">
+      <div className="mt-2 w-full pt-2 flex flex-col items-center" style={{ borderTop: '1px solid rgba(90,66,30,0.5)' }}>
         {item.stats.map((s: Stat, i: number) => (
-          <div key={i} className="text-blue-400 text-xs">
+          <div key={i} className="text-[#4070d0] text-xs">
             {s.name.replace(/\[.*\]/, s.value.toString())}
           </div>
         ))}

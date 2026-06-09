@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { allPossibleAffixes } from '../data/affixes';
 import { baseItems } from '../data/items';
-import type { Item, Stat, ItemRarity } from '../types';
+import type { Item, Stat } from '../types';
 import { enrichItemWithBaseStats } from '../utils/itemUtils';
 
 export const RareItemEditor: React.FC = () => {
@@ -29,7 +29,7 @@ export const RareItemEditor: React.FC = () => {
             id: `rare-${Date.now()}`,
             name: name,
             baseType: selectedBase.name,
-            rarity: 'Rare' as ItemRarity,
+            rarity: 'Rare',
             width: selectedBase.width,
             height: selectedBase.height,
             stats: selectedStats,

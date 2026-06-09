@@ -5,7 +5,7 @@ dist/
 *.local
 gamedata/
 gamedata.zip
-data/
+/data/
 palettes/
 public/items/
 public/skills/

@@ -8,7 +8,10 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   globalIgnores(['dist']),
   {
-    files: ['**/*.{ts,tsx}'],
+    // Type-aware linting is scoped to the app source (the files covered by the
+    // tsconfig projects below). Config/test files (playwright.config.ts,
+    // tests/**) aren't part of those projects and don't need type-aware rules.
+    files: ['src/**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
@@ -21,6 +24,14 @@ export default defineConfig([
         project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
       },
+    },
+    rules: {
+      // Allow intentionally-unused identifiers prefixed with an underscore.
+      '@typescript-eslint/no-unused-vars': ['error', {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      }],
     },
   },
 ])

@@ -28,6 +28,8 @@ The dev server also runs `scripts/extract_skill_icons.cjs` to unpack skill icons
 | `npm run lint` | Run ESLint |
 | `npm run preview` | Preview production build |
 | `node scripts/check_bases.cjs` | Check for `baseType` values in `projectDiablo2Items.ts` that don't match any name in `itemBases.ts` |
+| `python scripts/gen-class-skills.py` | Regenerate the non-Assassin class skill data (`src/data/<class>Skills.ts`) from PD2's `Skills.txt`/`Skilldesc.txt` + the bundled wiki snapshot |
+| `python scripts/gen-tree-art.py` | Bake per-class skill-tree backgrounds and tab strips (`public/ui/trees/<Class>/`) from `skltree_<x>_back.dc6` |
 
 ## Tech Stack
 

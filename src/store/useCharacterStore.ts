@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { CharacterClass } from '../types';
+import type { CharacterClass, Item } from '../types';
 
 interface CharacterState {
   characterClass: CharacterClass;
@@ -9,20 +9,20 @@ interface CharacterState {
   vitality: number;
   energy: number;
   skillPoints: Record<string, number>;
-  equipment: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
-  charms: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  equipment: Record<string, Item>;
+  charms: Record<string, Item>;
   activeView: 'planner' | 'rare-editor';
 
   setLevel: (level: number) => void;
   setStat: (stat: 'strength' | 'dexterity' | 'vitality' | 'energy', value: number) => void;
   allocateSkill: (skillId: string, amount: number) => void;
-  equipItem: (slot: string, item: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+  equipItem: (slot: string, item: Item) => void;
   unequipItem: (slot: string) => void;
-  equipCharm: (slot: string, charm: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+  equipCharm: (slot: string, charm: Item) => void;
   unequipCharm: (slot: string) => void;
   setClass: (charClass: CharacterClass, baseStats: { strength: number; dexterity: number; vitality: number; energy: number }) => void;
   setView: (view: 'planner' | 'rare-editor') => void;
-  loadBuild: (data: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+  loadBuild: (data: Partial<CharacterState>) => void;
 }
 
 export const useCharacterStore = create<CharacterState>((set) => ({
