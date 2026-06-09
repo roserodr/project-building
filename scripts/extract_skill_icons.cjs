@@ -42,13 +42,25 @@ function run(cmd) {
 }
 
 // ── Palette check ────────────────────────────────────────────────────────────
+// Icon/item extraction is a dev-time step that needs the game data (gamedata/,
+// which is gitignored and fetched from R2). When it's unavailable — e.g. in CI,
+// which only needs to verify the app compiles — skip gracefully instead of
+// failing the build. The decoded PNGs are referenced by URL at runtime, so the
+// production bundle compiles fine without them.
 if (!fs.existsSync(PAL)) {
   console.log('Palette not found — trying download_pal.cjs...');
-  run(`"${NODE}" scripts/download_pal.cjs`);
+  try {
+    run(`"${NODE}" scripts/download_pal.cjs`);
+  } catch {
+    /* download source unavailable — handled below */
+  }
 }
 if (!fs.existsSync(PAL)) {
-  console.error(`ERROR: palette still missing. Expected one of:\n${PAL_CANDIDATES.join('\n')}`);
-  process.exit(1);
+  console.warn(
+    'Skipping icon/item extraction: palette/game data unavailable (expected ' +
+    'gamedata/). This is expected in CI and does not affect the build.'
+  );
+  process.exit(0);
 }
 console.log(`Using palette: ${PAL}`);
 
