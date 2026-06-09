@@ -16,6 +16,16 @@ const PAL_CANDIDATES = [
   path.join(GAMEDATA, 'd2data', 'data', 'global', 'palette', 'ACT1', 'pal.dat'),
 ];
 const PAL = PAL_CANDIDATES.find(p => fs.existsSync(p)) || PAL_CANDIDATES[0];
+// Skill icons need the ACT1 palette — the default pal.dat maps the skill-icon
+// background indices to a blue cast (R/B differ at those indices), which the
+// game's ACT1 palette renders as the correct warm grey-brown. Items still use
+// the default pal.dat (they render correctly with it).
+const SKILL_PAL_CANDIDATES = [
+  path.join(LOCAL_GAMEDATA, 'pal_act1.dat'),
+  path.join(GAMEDATA, 'd2data', 'data', 'global', 'palette', 'ACT1', 'pal.dat'),
+  PAL,
+];
+const SKILL_PAL = SKILL_PAL_CANDIDATES.find(p => fs.existsSync(p)) || PAL;
 const SKILLS_OUT = path.resolve('public', 'skills');
 const ITEMS_OUT  = path.resolve('public', 'items');
 
@@ -57,6 +67,12 @@ console.log(`Using palette: ${PAL}`);
 //   dr → DrSkillicon  (d2exp)
 //       Skillicon      (d2data) — generic fallback used by SkillTree onError
 
+// Processed in order; the rename pass below overwrites on filename conflict, so
+// later entries win. PD2 reworked several classes' skill trees and added skills,
+// so its pd2assets skillicons have MORE frames than the classic d2data/d2exp DC6s
+// (e.g. Sorc/Necro/Paladin go up to iconCel 66, Druid to 60). We therefore list
+// the classic DC6s first and let the pd2assets overrides win where they exist.
+// The Amazon has no PD2 override, so it stays on the classic d2data icons.
 const SKILL_DC6S = [
   path.join(GAMEDATA, 'd2data',    'data', 'global', 'ui', 'SPELLS', 'AmSkillicon.DC6'),
   path.join(GAMEDATA, 'd2data',    'data', 'global', 'ui', 'SPELLS', 'BaSkillicon.DC6'),
@@ -66,6 +82,13 @@ const SKILL_DC6S = [
   path.join(GAMEDATA, 'd2data',    'data', 'global', 'ui', 'SPELLS', 'Skillicon.DC6'),
   path.join(GAMEDATA, 'd2exp',     'data', 'global', 'ui', 'SPELLS', 'AsSkillicon.DC6'),
   path.join(GAMEDATA, 'd2exp',     'data', 'global', 'ui', 'SPELLS', 'DrSkillicon.DC6'),
+  // PD2 overrides (more frames) — listed last so they win on conflict.
+  path.join(GAMEDATA, 'pd2assets', 'data', 'global', 'ui', 'SPELLS', 'BaSkillicon.DC6'),
+  path.join(GAMEDATA, 'pd2assets', 'data', 'global', 'ui', 'SPELLS', 'NeSkillicon.DC6'),
+  path.join(GAMEDATA, 'pd2assets', 'data', 'global', 'ui', 'SPELLS', 'PaSkillicon.DC6'),
+  path.join(GAMEDATA, 'pd2assets', 'data', 'global', 'ui', 'SPELLS', 'SoSkillicon.DC6'),
+  path.join(GAMEDATA, 'pd2assets', 'data', 'global', 'ui', 'SPELLS', 'AsSkillicon.dc6'),
+  path.join(GAMEDATA, 'pd2assets', 'data', 'global', 'ui', 'SPELLS', 'DrSkillicon.dc6'),
   path.join(GAMEDATA, 'pd2assets', 'data', 'global', 'ui', 'SPELLS', 'CLSSkillicon.dc6'),
 ];
 
@@ -79,7 +102,7 @@ for (const dc6 of SKILL_DC6S) {
     continue;
   }
   console.log(`  ${path.basename(dc6)}`);
-  run(`"${NODE}" "${DC6PNG}" -p "${PAL}" -f "${dc6}" -o "${tmpSkills}"`);
+  run(`"${NODE}" "${DC6PNG}" -p "${SKILL_PAL}" -f "${dc6}" -o "${tmpSkills}"`);
 }
 
 for (const f of fs.readdirSync(tmpSkills)) {

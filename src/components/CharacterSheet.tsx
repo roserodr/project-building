@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { calculateCharacterStats, FCR_BREAKPOINTS, FHR_BREAKPOINTS, FBR_BREAKPOINTS, getFrameFromBreakpoints } from '../utils/calc';
+import { CLASS_STATS } from '../data/classes';
 
 // Authentic PD2 character panel art (char_panel.png, native 320x432).
 const PW = 320, PH = 432;
@@ -45,16 +46,17 @@ const Num = ({ children, color = '#e8e0d0', size = 13 }: { children: React.React
 );
 
 export const CharacterSheet: React.FC = () => {
-  const { level, strength, dexterity, vitality, energy, equipment, charms, setStat, setLevel } = useCharacterStore();
+  const { level, strength, dexterity, vitality, energy, equipment, charms, setStat, setLevel, characterClass } = useCharacterStore();
   const { skillPoints } = useCharacterStore();
   const stats = calculateCharacterStats(
-    "Assassin", level,
+    characterClass, level,
     { str: strength, dex: dexterity, vit: vitality, energy: energy },
     skillPoints, equipment, charms
   );
 
   // stat points: 5 per level after 1 + 15 from quests, minus what's been spent over base
-  const baseStats = { strength: 20, dexterity: 20, vitality: 20, energy: 25 };
+  const classStats = CLASS_STATS[characterClass];
+  const baseStats = { strength: classStats.strength, dexterity: classStats.dexterity, vitality: classStats.vitality, energy: classStats.energy };
   const spent = (strength - baseStats.strength) + (dexterity - baseStats.dexterity) + (vitality - baseStats.vitality) + (energy - baseStats.energy);
   const statPointsRemaining = Math.max(0, (level - 1) * 5 + 15 - spent);
   const stamina = 95 + (level - 1) + vitality; // approximate D2 stamina
@@ -105,10 +107,10 @@ export const CharacterSheet: React.FC = () => {
 
         {/* Name + Class */}
         <div style={px(10, 7, 172, 21)} className="flex items-center justify-center">
-          <span className="text-xs uppercase tracking-[0.18em] font-bold" style={{ color: '#e8c878', textShadow: '0 1px 3px #000', fontFamily: 'Cinzel, serif' }}>Assassin</span>
+          <span className="text-xs uppercase tracking-[0.18em] font-bold" style={{ color: '#e8c878', textShadow: '0 1px 3px #000', fontFamily: 'Cinzel, serif' }}>{characterClass}</span>
         </div>
         <div style={px(190, 7, 120, 21)} className="flex items-center justify-center">
-          <span className="text-xs uppercase tracking-[0.14em] font-bold" style={{ color: '#e8c878', textShadow: '0 1px 3px #000', fontFamily: 'Cinzel, serif' }}>Assassin</span>
+          <span className="text-xs uppercase tracking-[0.14em] font-bold" style={{ color: '#e8c878', textShadow: '0 1px 3px #000', fontFamily: 'Cinzel, serif' }}>{characterClass}</span>
         </div>
 
         {/* Level / Experience / Next Level */}

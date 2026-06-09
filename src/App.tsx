@@ -5,6 +5,10 @@ import { RareItemEditor } from './components/RareItemEditor';
 import { useCharacterStore } from './store/useCharacterStore';
 import { useEffect } from 'react';
 import { wikiUniqueItems } from './data/projectDiablo2Items';
+import { CLASS_STATS } from './data/classes';
+import type { CharacterClass } from './types';
+
+const CHARACTER_CLASSES = Object.keys(CLASS_STATS) as CharacterClass[];
 
 function App() {
   const { activeView, setView, ...state } = useCharacterStore();
@@ -80,6 +84,20 @@ function App() {
           </h1>
           <span className="text-[8px] text-[#7a6030] font-normal tracking-widest ml-1 mt-1 uppercase">Season 13</span>
           <div className="w-0.5 h-8 bg-gradient-to-b from-transparent via-[#c8a050] to-transparent opacity-60" />
+          <select
+            value={state.characterClass}
+            onChange={(e) => {
+              const cls = e.target.value as CharacterClass;
+              state.setClass(cls, CLASS_STATS[cls]);
+            }}
+            className="diablo-button text-[10px] uppercase tracking-[0.18em] bg-transparent cursor-pointer"
+            style={{ color: '#e8c878' }}
+            aria-label="Character class"
+          >
+            {CHARACTER_CLASSES.map((c) => (
+              <option key={c} value={c} style={{ color: '#000' }}>{c}</option>
+            ))}
+          </select>
         </div>
         <div className="flex gap-3">
             <button

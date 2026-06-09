@@ -50,25 +50,71 @@ export const SkillTree: React.FC = () => {
 
       <div className="flex flex-row flex-1 min-h-0 items-center justify-center gap-0">
         {(() => {
-          const treeBg: Record<string, string> = {
-            'Traps': '/ui/tree_traps.png',
-            'Shadow Disciplines': '/ui/tree_shadow.png',
-            'Martial Arts': '/ui/tree_martial.png',
-          };
+          // Every class has baked PD2 tree art (stone + recessed slots + connector
+          // arrows), assembled from skltree_<x>_back.dc6 by scripts/gen-tree-art.py
+          // and keyed by class + tab slug. The generic-tree fallback below only runs
+          // if there is no active tab (a class with no skills loaded).
+          const tabSlug = String(activeTab).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+          const bg = activeTab ? `/ui/trees/${characterClass}/${tabSlug}.png` : undefined;
+          const baked = bg !== undefined;
+
           // Per-tree slot-center grids (% of each 250x432 tree art). Each tree's baked
           // art positions its grid slightly differently, so they're calibrated separately.
           // Box centers calibrated to the baked PD2 tree art (the recessed boxes the
           // arrows connect to). Anchored on the lone clean box (blade_shield, col2/row5 =
           // 189,399 in 256-wide native art) with D2's symmetric uniform grid.
           // cols ÷250-crop, rows ÷432. All three Assassin trees share the same layout.
-          // Per-column x centers and shared per-row y centers (% of the 250x432 tree art),
-          // calibrated to the baked PD2 box positions (rows are uniform across columns).
-          const COLS = ['15%', '43.3%', '70%'];
-          const COL_DY = [0, 0, 0];                                   // % vertical nudge per column
-          const ROWS = [8.8, 25, 40.1, 56.5, 71.8, 87.8];             // base row centers (%)
-          const slotLeft = (c: number) => COLS[c];
-          const slotTop = (c: number, r: number) => `${ROWS[r] + COL_DY[c]}%`;
-          const bg = treeBg[activeTab as string];
+          // The generic grid is an even 3×6 spread used for the non-baked trees.
+          const BAKED_COLS = ['15%', '43.3%', '70%'];
+          const BAKED_ROWS = [8.8, 25, 40.1, 56.5, 71.8, 87.8];       // base row centers (%)
+          const GENERIC_COLS = ['18%', '50%', '82%'];
+          const GENERIC_ROWS = [9.5, 25.8, 42.1, 58.4, 74.7, 91];
+          const COLS = baked ? BAKED_COLS : GENERIC_COLS;
+          const ROWS = baked ? BAKED_ROWS : GENERIC_ROWS;
+          const slotLeft = (c: number) => COLS[c] ?? COLS[COLS.length - 1];
+          const slotTop = (_c: number, r: number) => `${ROWS[r] ?? ROWS[ROWS.length - 1]}%`;
+
+          // D2-style prerequisite arrows for the generic trees, drawn in the art's
+          // native 250×432 space (the container is locked to that aspect, so the SVG
+          // scales uniformly — no stroke/arrowhead distortion). Routes parent→child
+          // orthogonally (vertical then horizontal) with an arrowhead at the child,
+          // mirroring the baked Assassin arrow style but generated from the data.
+          const center = (col: number, row: number) => ({
+            x: (parseFloat(GENERIC_COLS[col] ?? GENERIC_COLS[0]) / 100) * 250,
+            y: (((ROWS[row] ?? ROWS[ROWS.length - 1]) as number) / 100) * 432,
+          });
+          const buildArrows = () => currentTabSkills.flatMap(skill =>
+            skill.dependencies.map(depId => {
+              const dep = currentTabSkills.find(s => s.id === depId);
+              if (!dep) return null;
+              const p = center(dep.col ?? 0, dep.row ?? 0);
+              const c = center(skill.col ?? 0, skill.row ?? 0);
+              const sgnX = Math.sign(c.x - p.x);
+              const sgnY = Math.sign(c.y - p.y) || 1;
+              let dir: { x: number; y: number };
+              let pts: number[][];
+              if (Math.abs(c.x - p.x) < 1) {                 // straight vertical
+                dir = { x: 0, y: sgnY };
+                pts = [[p.x, p.y + 20 * sgnY], [c.x, c.y - 22 * sgnY]];
+              } else if (Math.abs(c.y - p.y) < 1) {          // straight horizontal
+                dir = { x: sgnX, y: 0 };
+                pts = [[p.x + 20 * sgnX, p.y], [c.x - 22 * sgnX, c.y]];
+              } else {                                        // vertical then horizontal
+                dir = { x: sgnX, y: 0 };
+                pts = [[p.x, p.y + 20 * sgnY], [p.x, c.y], [c.x - 22 * sgnX, c.y]];
+              }
+              const perp = { x: -dir.y, y: dir.x };
+              const tip = [c.x - dir.x * 14, c.y - dir.y * 14];
+              const base = [c.x - dir.x * 22, c.y - dir.y * 22];
+              const head = [tip, [base[0] + perp.x * 6, base[1] + perp.y * 6], [base[0] - perp.x * 6, base[1] - perp.y * 6]];
+              return {
+                key: `${skill.id}-${depId}`,
+                line: pts.map(pt => pt.join(',')).join(' '),
+                head: head.map(pt => pt.join(',')).join(' '),
+                met: (skillPoints[depId] || 0) > 0,
+              };
+            })
+          ).filter((a): a is { key: string; line: string; head: string; met: boolean } => a !== null);
           return (
         <div className="flex items-center justify-center h-full min-w-0" style={{ position: 'relative', zIndex: 2 }}>
         <div ref={gridRef} className="relative"
@@ -76,10 +122,24 @@ export const SkillTree: React.FC = () => {
             height: '100%',
             maxWidth: '100%',
             aspectRatio: '250 / 432',
-            backgroundImage: bg ? `url('${bg}')` : undefined,
-            backgroundSize: '100% 100%',
-            backgroundRepeat: 'no-repeat',
+            backgroundImage: baked ? `url('${bg}')` : `url('/ui/stone_tile.png')`,
+            backgroundSize: baked ? '100% 100%' : '128px',
+            backgroundRepeat: baked ? 'no-repeat' : 'repeat',
+            border: baked ? undefined : '2px solid #3a2a12',
+            boxShadow: baked ? undefined : 'inset 0 0 40px rgba(0,0,0,0.8)',
           }}>
+        {/* Prerequisite arrows between skills — baked trees already paint these. */}
+        {!baked && (
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }} preserveAspectRatio="none" viewBox="0 0 250 432">
+            {buildArrows().map(a => (
+              <g key={a.key}>
+                <polyline points={a.line} fill="none" stroke="rgba(18,12,6,0.9)" strokeWidth={6} strokeLinejoin="round" strokeLinecap="round" />
+                <polyline points={a.line} fill="none" stroke={a.met ? '#c8a050' : '#5a4a2a'} strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
+                <polygon points={a.head} fill={a.met ? '#c8a050' : '#5a4a2a'} stroke="rgba(18,12,6,0.9)" strokeWidth={1.5} strokeLinejoin="round" />
+              </g>
+            ))}
+          </svg>
+        )}
         {currentTabSkills.map(skill => {
           const points = skillPoints[skill.id] || 0;
           const totalLevel = getSkillLevel(skill.id, skillPoints, equipment);
@@ -107,7 +167,17 @@ export const SkillTree: React.FC = () => {
                   handleSkillClick(skill, true);
                 }}
               >
-              <div className={`flex items-center justify-center h-full w-full ${!isAvailable ? 'opacity-80 grayscale' : ''}`}>
+              <div className={`flex items-center justify-center h-full w-full ${!isAvailable ? 'opacity-80 grayscale' : ''}`}
+                style={!baked ? {
+                  // Drawn slot frame for the generic (non-baked) trees.
+                  background: 'radial-gradient(circle at 50% 40%, #2a2012 0%, #100b06 100%)',
+                  border: `2px solid ${isAvailable ? '#c8a050' : '#5a4a2a'}`,
+                  borderRadius: '6px',
+                  boxShadow: isAvailable
+                    ? '0 0 6px rgba(200,160,80,0.4), inset 0 0 6px rgba(0,0,0,0.8)'
+                    : 'inset 0 0 6px rgba(0,0,0,0.8)',
+                  padding: '8%',
+                } : undefined}>
                 {skill.iconCel !== undefined ? (
                   <img
                     src={`/skills/${characterClass.substring(0,2).toLowerCase()}skillicon_0_${skill.iconCel}.png`}
@@ -266,16 +336,15 @@ export const SkillTree: React.FC = () => {
             { top: 329, bottom: 426 },
           ];
           return (
-            <div className="flex flex-col items-center flex-shrink-0" style={{ height: '100%', marginLeft: '-28px', position: 'relative', zIndex: 1 }}>
+            <div className="flex flex-col items-center flex-shrink-0" style={{ height: '100%', marginLeft: '-28px', position: 'relative', zIndex: 3 }}>
               <div className="relative" style={{ height: '100%', aspectRatio: `${NW} / ${NH}` }}>
                 {(() => {
-                  const stripByTab: Record<string, string> = {
-                    'Traps': '/ui/tab_traps.png',
-                    'Shadow Disciplines': '/ui/tab_shadow.png',
-                    'Martial Arts': '/ui/tab_martial.png',
-                  };
+                  // Per-class tab column (chrome), baked from each skltree's chrome
+                  // group by scripts/gen-tree-art.py. Fills to the left edge so it
+                  // butts cleanly against the tree art (the generic tab_column.png
+                  // had a black left margin that left a seam).
                   return (
-                    <img src={stripByTab[activeTab as string] || '/ui/tab_column.png'} alt="" draggable={false}
+                    <img src={`/ui/trees/${characterClass}/_tabs.png`} alt="" draggable={false}
                       style={{ width: '100%', height: '100%', imageRendering: 'pixelated' }} />
                   );
                 })()}
