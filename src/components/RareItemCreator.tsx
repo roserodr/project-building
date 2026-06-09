@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Item, Stat, ItemRarity } from '../types';
+import type { Item, Stat } from '../types';
 import { allPossibleAffixes, allowedAffixesPerSlot } from '../data/affixes';
 import { baseItems } from '../data/items';
 import { enrichItemWithBaseStats } from '../utils/itemUtils';
@@ -46,7 +46,7 @@ export const RareItemCreator: React.FC<RareItemCreatorProps> = ({ slotId, onSele
       name: name,
       baseType: base,
       slotType: slotType,
-      rarity: 'Rare' as ItemRarity,
+      rarity: 'Rare',
       width: 2,
       height: 2,
       stats: selectedStats,

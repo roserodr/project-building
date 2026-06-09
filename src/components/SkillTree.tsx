@@ -10,15 +10,14 @@ export const SkillTree: React.FC = () => {
 
   // Extract unique tabs for the current class
   const tabs: SkillTab[] = Array.from(new Set(classSkills.map(s => s.tab)));
-  const [activeTab, setActiveTab] = useState<SkillTab>(tabs[0] || '');
+  const [selectedTab, setSelectedTab] = useState<SkillTab>(tabs[0] || '');
+  // Derive the active tab so a class change (which swaps the tab set) falls back
+  // to the first tab without a setState-in-effect.
+  const activeTab: SkillTab = tabs.includes(selectedTab) ? selectedTab : (tabs[0] || '');
+  const setActiveTab = setSelectedTab;
 
   // Ref to the tree art container
   const gridRef = useRef<HTMLDivElement>(null);
-
-  // Reset active tab if class changes
-  React.useEffect(() => {
-    setActiveTab(tabs[0] || '');
-  }, [characterClass]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSkillClick = (skill: Skill, isRightClick: boolean) => {
     const currentPoints = skillPoints[skill.id] || 0;
@@ -81,7 +80,7 @@ export const SkillTree: React.FC = () => {
           // mirroring the baked Assassin arrow style but generated from the data.
           const center = (col: number, row: number) => ({
             x: (parseFloat(GENERIC_COLS[col] ?? GENERIC_COLS[0]) / 100) * 250,
-            y: (((ROWS[row] ?? ROWS[ROWS.length - 1]) as number) / 100) * 432,
+            y: ((ROWS[row] ?? ROWS[ROWS.length - 1]) / 100) * 432,
           });
           const buildArrows = () => currentTabSkills.flatMap(skill =>
             skill.dependencies.map(depId => {

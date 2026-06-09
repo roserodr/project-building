@@ -205,7 +205,7 @@ export const Equipment: React.FC = () => {
                         return (
                             <div key={item.id} className="relative group">
                                 <button
-                                    onClick={() => handleEquip(activeSlot!, item)}
+                                    onClick={() => handleEquip(activeSlot, item)}
                                     className="w-full text-left p-2 border border-diablo-unique/30 bg-diablo-unique/5 hover:bg-diablo-unique/20 text-diablo-unique text-xs font-serif"
                                 >
                                     <div className="font-bold">{item.name} ({item.baseType})</div>
@@ -243,7 +243,7 @@ export const Equipment: React.FC = () => {
                 </div>
               )}
 
-              <RareItemCreator slotId={activeSlot!} onSelect={(item) => handleEquip(activeSlot!, item)} />
+              <RareItemCreator slotId={activeSlot} onSelect={(item) => handleEquip(activeSlot, item)} />
             </div>
           </div>
         </div>

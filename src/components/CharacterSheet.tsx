@@ -14,7 +14,7 @@ const px = (x: number, y: number, w: number, h: number): React.CSSProperties => 
 // D2 character-screen "+" button (authentic game asset: /ui/btn.png)
 const PlusBtn = ({ onAdd, onSubtract }: { onAdd: (n: number) => void; onSubtract: (n: number) => void }) => (
   <button
-    onClick={(e) => { const n = e.shiftKey ? 5 : 1; e.ctrlKey ? onSubtract(n) : onAdd(n); }}
+    onClick={(e) => { const n = e.shiftKey ? 5 : 1; if (e.ctrlKey) onSubtract(n); else onAdd(n); }}
     title="Click +1 · Shift+Click +5 · Ctrl+Click −1 · Ctrl+Shift+Click −5"
     className="relative flex items-center justify-center active:brightness-75"
     style={{ width: '100%', height: '100%', cursor: 'pointer', background: 'none', border: 'none', padding: 0 }}
@@ -45,6 +45,45 @@ const Num = ({ children, color = '#e8e0d0', size = 13 }: { children: React.React
   <span style={{ color, fontSize: size, fontWeight: 'bold', textShadow: '0 1px 2px #000', fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>{children}</span>
 );
 
+// Attribute row: label box + value box + red plus button
+const AttrRow = ({ y, label, base, total, onChange }: { y: number; label: string; base: number; total: number; onChange: (v: number) => void }) => {
+  const boosted = total !== base;
+  return (
+    <>
+      <div style={px(10, y, 64, 18)} className="flex items-center justify-center">
+        <span className="text-[11px] uppercase tracking-wide font-bold" style={{ color: '#e8e0d0', textShadow: '0 1px 3px #000' }}>{label}</span>
+      </div>
+      <div style={px(76, y, 39, 18)} className="flex items-center justify-center">
+        <Num color={boosted ? '#6cb4ff' : '#8a8aff'} size={15}>{total}</Num>
+      </div>
+      <div style={px(122, y - 4, 26, 26)}><PlusBtn onAdd={(n) => onChange(base + n)} onSubtract={(n) => onChange(base - n)} /></div>
+    </>
+  );
+};
+
+// Single-value right stat (label right-aligned in left cell, value in right cell)
+const RightStat = ({ y, label, value, color }: { y: number; label: string; value: React.ReactNode; color?: string }) => (
+  <>
+    <div style={px(161, y, 88, 18)} className="flex items-center justify-end pr-2">
+      <span className="text-[10px] uppercase tracking-wide font-bold" style={{ color: '#e8e0d0', textShadow: '0 1px 2px #000' }}>{label}</span>
+    </div>
+    <div style={px(251, y, 56, 18)} className="flex items-center justify-center">
+      <Num color={color}>{value}</Num>
+    </div>
+  </>
+);
+
+// Two-value right stat: label + current(blue) + max(white)
+const RightStat2 = ({ y, label, cur, max }: { y: number; label: string; cur: number; max: number }) => (
+  <>
+    <div style={px(161, y, 70, 18)} className="flex items-center justify-end pr-1.5">
+      <span className="text-[10px] uppercase tracking-wide font-bold" style={{ color: '#e8e0d0', textShadow: '0 1px 2px #000' }}>{label}</span>
+    </div>
+    <div style={px(233, y, 40, 18)} className="flex items-center justify-center"><Num color="#8a8aff">{cur}</Num></div>
+    <div style={px(273, y, 34, 18)} className="flex items-center justify-center"><Num>{max}</Num></div>
+  </>
+);
+
 export const CharacterSheet: React.FC = () => {
   const { level, strength, dexterity, vitality, energy, equipment, charms, setStat, setLevel, characterClass } = useCharacterStore();
   const { skillPoints } = useCharacterStore();
@@ -60,45 +99,6 @@ export const CharacterSheet: React.FC = () => {
   const spent = (strength - baseStats.strength) + (dexterity - baseStats.dexterity) + (vitality - baseStats.vitality) + (energy - baseStats.energy);
   const statPointsRemaining = Math.max(0, (level - 1) * 5 + 15 - spent);
   const stamina = 95 + (level - 1) + vitality; // approximate D2 stamina
-
-  // Attribute row: label box + value box + red plus button
-  const AttrRow = ({ y, label, base, total, onChange }: { y: number; label: string; base: number; total: number; onChange: (v: number) => void }) => {
-    const boosted = total !== base;
-    return (
-      <>
-        <div style={px(10, y, 64, 18)} className="flex items-center justify-center">
-          <span className="text-[11px] uppercase tracking-wide font-bold" style={{ color: '#e8e0d0', textShadow: '0 1px 3px #000' }}>{label}</span>
-        </div>
-        <div style={px(76, y, 39, 18)} className="flex items-center justify-center">
-          <Num color={boosted ? '#6cb4ff' : '#8a8aff'} size={15}>{total}</Num>
-        </div>
-        <div style={px(122, y - 4, 26, 26)}><PlusBtn onAdd={(n) => onChange(base + n)} onSubtract={(n) => onChange(base - n)} /></div>
-      </>
-    );
-  };
-
-  // Single-value right stat (label right-aligned in left cell, value in right cell)
-  const RightStat = ({ y, label, value, color }: { y: number; label: string; value: React.ReactNode; color?: string }) => (
-    <>
-      <div style={px(161, y, 88, 18)} className="flex items-center justify-end pr-2">
-        <span className="text-[10px] uppercase tracking-wide font-bold" style={{ color: '#e8e0d0', textShadow: '0 1px 2px #000' }}>{label}</span>
-      </div>
-      <div style={px(251, y, 56, 18)} className="flex items-center justify-center">
-        <Num color={color}>{value}</Num>
-      </div>
-    </>
-  );
-
-  // Two-value right stat: label + current(blue) + max(white)
-  const RightStat2 = ({ y, label, cur, max }: { y: number; label: string; cur: number; max: number }) => (
-    <>
-      <div style={px(161, y, 70, 18)} className="flex items-center justify-end pr-1.5">
-        <span className="text-[10px] uppercase tracking-wide font-bold" style={{ color: '#e8e0d0', textShadow: '0 1px 2px #000' }}>{label}</span>
-      </div>
-      <div style={px(233, y, 40, 18)} className="flex items-center justify-center"><Num color="#8a8aff">{cur}</Num></div>
-      <div style={px(273, y, 34, 18)} className="flex items-center justify-center"><Num>{max}</Num></div>
-    </>
-  );
 
   return (
     <div className="w-[340px] flex flex-col h-full overflow-y-auto custom-scrollbar diablo-panel border-r border-[#3a2a12]">

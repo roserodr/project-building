@@ -184,7 +184,7 @@ export const calculateCharacterStats = (
 
   life += (totalVit - baseStats.vit) * classStats.lifePerVit;
   mana += (totalEnergy - baseStats.energy) * classStats.manaPerEng;
-  let totalStamina = stamina + (totalVit - baseStats.vit) * classStats.staminaPerVit;
+  const totalStamina = stamina + (totalVit - baseStats.vit) * classStats.staminaPerVit;
 
   return {
     totalStr,

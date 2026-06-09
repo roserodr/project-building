@@ -6,9 +6,17 @@ import { useCharacterStore } from './store/useCharacterStore';
 import { useEffect } from 'react';
 import { wikiUniqueItems } from './data/projectDiablo2Items';
 import { CLASS_STATS } from './data/classes';
-import type { CharacterClass } from './types';
+import type { CharacterClass, Item, Stat } from './types';
 
 const CHARACTER_CLASSES = Object.keys(CLASS_STATS) as CharacterClass[];
+
+// Compact shape encoded into the shareable build hash.
+interface SharedBuild {
+  l?: number;
+  s?: { str?: number; dex?: number; vit?: number; enr?: number };
+  sk?: Record<string, number>;
+  eq?: Record<string, { id?: string; c?: Stat; r?: Item; isC?: boolean }>;
+}
 
 function App() {
   const { activeView, setView, ...state } = useCharacterStore();
@@ -35,14 +43,14 @@ function App() {
     const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
         alert("Build URL copied to clipboard!");
-    });
+    }).catch(() => { /* clipboard unavailable */ });
   };
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
     if (hash) {
       try {
-        const decoded = JSON.parse(atob(hash));
+        const decoded = JSON.parse(atob(hash)) as SharedBuild;
         state.loadBuild({
             level: decoded.l || 1,
             strength: decoded.s?.str || 20,
@@ -50,7 +58,7 @@ function App() {
             vitality: decoded.s?.vit || 20,
             energy: decoded.s?.enr || 15,
             skillPoints: decoded.sk || {},
-            equipment: Object.entries(decoded.eq || {}).reduce((acc, [slot, data]: [string, any]) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+            equipment: Object.entries(decoded.eq || {}).reduce<Record<string, Item>>((acc, [slot, data]) => {
                 let item = wikiUniqueItems.find(i => i.id === data.id);
                 if (!item && data.r) item = data.r;
                 if (item) {
